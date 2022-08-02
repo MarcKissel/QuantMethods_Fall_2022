@@ -92,7 +92,18 @@ the arrow shortcut key for a pc is "alt" + "-"". For a mac it is"Option" + "-"
 1.  Can use letters/numbers, But has to start with letter (impt for when you import data).
 2.  no spaces, so use CamelCase or Snake_case
 
-## To store more than one element in an object we need to remember a trick
+# Types of data 
+
+When you assign a value to a variable, it is given a specific class. the class is VERY important and is probably the #1 reason for having troubles with R. it is always good to check the class of an object. to do this, we can use a specific *function* in R called class
+
+```{r}
+x <- 42
+class(x)
+```
+
+We will come back to this soon!
+
+# To store more than one element in an object we need to remember a trick
 
 if you want to make a series of numbers, characters, whatever, you need to use a special sequence. To do this, we must combine the values we want to assign with the c function, which combines values into a vector or list
 
@@ -133,16 +144,18 @@ v2 <- c(1,2)
 v3 <- v1 + v2
 ```
 
-# vector indicies
+# vector indices
 
 ```{r}
 vowels <- c("a", "e", "i", "o", "u")
 vowels[2]
 ```
 
+the homework goes over this a lot. It can be dry and boring. But I want you to get a sort of *muscle memory* for how to do this
+
 # data frame
 
-A data frame acts like a table, w/ data organized into rows and columns (they are techincally lists where each element is a vector of the same length)
+A data frame acts like a table, w/ data organized into rows and columns (they are technically lists where each element is a vector of the same length)
 
 ```{r}
 mtcars
