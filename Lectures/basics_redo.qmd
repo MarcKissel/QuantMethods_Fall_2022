@@ -1,0 +1,339 @@
+---
+title: "day R"
+format:
+  revealjs:
+    slide-number: h/v
+    preview-links: true
+    slide-tone: false
+    chalkboard: true
+editor: visual
+author: Marc
+institute: Appstate
+echo: true
+---
+
+# Why use R
+
+It is more than just a way to run statistics.
+
+::: incremental
+-   You can make nice figures, run computer simulations, create interactive apps, and even make a website!
+
+-   But it involves a lot of effort
+
+    -   Difference between a car and a bus
+:::
+
+::: {.fragment .highlight-red}
+-   No one knows everything about R. I often Google the same issue many times since i forget. A great place to look for help is Stack Overflow
+:::
+
+## Today we are going over week's HW
+
+-   Basics
+
+-   How R thinks
+
+## This week's work
+
+-   first R hw
+
+-   work on getting dataset
+
+-   make comments on articles
+
+# Getting started with R
+
+go to the console and type the following and then hit enter
+
+`7 + 6`
+
+```{r}
+#| eval: false
+#| echo: false
+7 + 6
+```
+
+## You should see something like this
+
+```{r}
+7 + 6
+```
+
+The \[1\], which tells you the line #. This becomes useful later on when your code is long. Also note it told you that 7 + 6 = 13.
+
+::: {.fragment .face-in}
+::: {.fragment .highlight-red}
+Congrats! you just turned your expensive computer into a \$5 calulator
+:::
+:::
+
+# How it all works
+
+-   One way that i think about R that helps me to work it is to remember that everything in R is an "object." we make objects (or assign values to objects) and then do things to these objects.
+
+## for example check out the code below
+
+```{r}
+a <- 4
+
+```
+
+::: incremental
+what this says is that we are going to create the object 'a' and then assign the value '4' to it. if you run the code in R Studio you will see that the 'environment' panel now lists 'a' and gives its value.
+
+the arrow shortcut key for a pc is "alt" + "-"". For a mac it is"Option" + "-"
+:::
+
+## Protip
+
+### When you assign values to objects, be aware that not all names are possible. R reserves some names for special functions. Here are the rules
+
+1.  Can use letters/numbers, But has to start with letter (impt for when you import data).
+2.  no spaces, so use CamelCase or Snake_case
+
+## To store more than one element in an object we need to remember a trick
+
+if you want to make a series of numbers, characters, whatever, you need to use a special sequence. To do this, we must combine the values we want to assign with the c function, which combines values into a vector or list
+
+```{r}
+my_list <- c(1,2,3,4,5)
+my_list_2 <- c("my_name", "my_address", "my_number")
+```
+
+```{r objects}
+b <- "my name"
+c <- FALSE
+d <- c(1,2,3.0,4)
+```
+
+# what's your vector?
+
+The thing you need to know most about vectors is that you are able to index them. Use square brackets to specify that you are indexing. Since a vector is one dimensional, you only need a singe index.
+
+See this weeks homework for more on this
+
+# more on vectors
+
+```{r, eval=FALSE}
+v1 <- c(1,2,3,4)
+v2 <- c(5,6,7,8)
+v1 + v2
+v1 - v2
+v1 * v2
+v1 / v2
+v3 <- v2 + v2
+```
+
+recycling
+
+```{r, eval=FALSE}
+v1 <- c(1,3,5,1,5)
+v2 <- c(1,2)
+v3 <- v1 + v2
+```
+
+# vector indicies
+
+```{r}
+vowels <- c("a", "e", "i", "o", "u")
+vowels[2]
+```
+
+# data frame
+
+A data frame acts like a table, w/ data organized into rows and columns (they are techincally lists where each element is a vector of the same length)
+
+```{r}
+mtcars
+```
+
+## making a dataframe
+
+```{r}
+name <- c("Harper", "Sutton", "Jenna")
+age <- c("10","7", "39")
+favorite_color <- c("green", "pink", "purple")
+favorite_food <- c("chicken", "sushi", "potato")
+my_data <- data.frame(name, age, favorite_color, favorite_food)
+print(my_data)
+```
+
+## looking at dataframe
+
+```{r, eval=FALSE}
+my_data$name
+nrow(my_data)
+ncol(my_data)
+dim(my_data)
+head(my_data)
+View(my_data)
+```
+
+# Functions
+
+once you assign something (e.g., a value, a list of numbers, a character vector) to a object you can interact with that object. We do this by using what is called a function.
+
+```{r functions, eval=FALSE}
+d <- c(1,2,3.0,4)
+sum(d)
+mean(d)
+mean(d, na.rm = FALSE) #doesn't change result since we have no NAs yet
+e <- c(1,2,3,4,NA,5)
+mean(e)
+mean(e, na.rm = TRUE)
+seq(from = 1, to = 10, by =2)
+
+```
+
+if you need help on a function, you can type a question mark before its name like this: ?mean()
+
+# Classes
+
+Once you have an object stored, you can interact with it. but remember that the way you interact with it via functions depends on its class....
+
+the way in which you can interact with the object is based on the *class* of the object. The class of the object is assigned by R based on what it thinks the object is supposed to be.
+
+\[live examples\]
+
+## more on Classes
+
+```{r, eval=FALSE}
+my_list <- c(1,2,3,4,5)
+my_list_2 <- c("my_name", "my_address", "my_number")
+
+length(my_list)
+length(my_list_2)
+sum(my_list)
+my_list[4] #gets the 4 value.
+#sum(my_list_2) #this kicks back an error
+```
+
+## Why is there an error?
+
+::: {#error .incremental style="color: red"}
+-   <div>
+
+    > "Error in sum(my_list_2) : invalid 'type' (character) of argument"
+
+    </div>
+
+-   What this means is that the 'type' or 'class' of the object is not something that the sum function knows what to do with. Learning how to *read* R errors is useful. Copying it & searching Google is a pretty good way to find help.
+
+-   One of the things about R that makes it easier to use is that many of the functions work by first checking out the *class* of the object you are asking it to work on. What this means is that the same function can be applied to different types of classes. This doesn't really affect much now, but as you investigate R more you can see how this works.
+:::
+
+## class types
+
+> lgl stands for logical,
+>
+> vectors that contain only TRUE or FALSE.
+>
+> int stands for integers. can't take decimals
+>
+> dbl stands for doubles, or real numbers.
+>
+> chr stands for character vectors, or strings.
+>
+> factor are categorical data
+
+# packages
+
+R comes with many functions. But what makes it super powerful is that people can add to these functions by writing their own. A bunch of functions bundled together is called a package. To install a package in R we use the function "install.packages," which has the argument the name of the package.
+
+``` r
+install.packages("name_of_package") #install a package 
+```
+
+``` r
+library(name_of_package) #load the package for your session
+```
+
+you only have to install a package once, but **every time you reopen R you have to reload the pacakage with the library function**
+
+## example
+
+```{r}
+#| eval: true
+#| echo: true
+library(tidyverse)
+```
+
+In the case of this package, R tells us what is being loaded and also that there are some conflicts. Basically it just says that some functions from this new package have the same name as functions from the base R package. Good to pay attention to but usually not a huge problem unless you are doing a lot of things in one script
+
+# code example
+
+Here is a short piece of code that might make some sense. It calls a function ggplot (part of the tidyverse package) & then makes a plot. Then ggsave saves the new plot as a pdf
+
+the last line takes the data set that was used (diamonds) and write as CSV file for that.
+
+```{r, eval=FALSE}
+ggplot(diamonds, aes(carat, price)) + 
+  geom_point()
+ggsave("diamondPlot.pdf")
+write_csv(diamonds, "diamonds3.csv")
+```
+
+# getting data into R
+
+Probably the hardest part of starting to use R is getting your data into R and then being able to work with it fluidly. This has gotten easier over time but still can be tricky. For me, the biggest hurdles are 1. getting the file in a good format 2. making sure that when it is read into R all of the data is being read correctly by R
+
+## using readr
+
+the readr package is part of the tidyverse package. One of the points of the tidyverse is to try to make things consistent. here are some of the functions to read data into R
+
+> read_csv #comma separated values
+>
+> read_csv2() #semicolons
+>
+> read_fwf() #fixed width
+
+For all of these the first argument is the file name. Other arguments can be used to if need be. For example col_names = FALSE if no headers to your data (uncommon)
+
+What is nice about read_csv etc is that it tells you what it **thinks** that class of each column is
+
+# The dreaded Factors
+
+One of the biggest problem is dealing with factors. Factors are categorical data. In the old days R used to import any string as a factor. This caused some problems! Now, readr fixes this. But we still need to be aware of how factors work.
+
+## example of factors
+
+```{r}
+#| eval: false
+
+#make vector
+shirt_sizes <- c("small", "medium", "small", "large", "medium", "large")
+#turn into factors
+shirt_sizes_factor <-as.factor(shirt_sizes)
+print(shirt_sizes_factor)
+
+shirt_sizes_factor_leveled <- factor(shirt_sizes, levels = c("small", "medium", "large"))
+
+```
+
+```{r}
+#| output-location: fragment
+#| code-line-numbers: "|1|3|4|5|6"
+#| eval: false
+#| echo: false
+
+
+library(tidyverse)
+
+mtcars %>%  
+  ggplot(aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "loess", formula = "y~x")
+```
+
+## Slide Title {background-color="aquamarine"}
+
+## links
+
+[Preview](https://example.com){preview-link="true"}
+
+[NoPreview](https://example.com){preview-link="false"}
+
+## links based on yaml
+
+[Preview](https://example.com)
