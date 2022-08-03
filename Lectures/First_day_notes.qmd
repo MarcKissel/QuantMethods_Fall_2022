@@ -301,7 +301,7 @@ note: order might change as we work together on this
 
 -   
 
-    {{< fa thumbs-up>}}
+    {{< fa thumbs-up >}}
 
     {{< fa folder >}}
 
