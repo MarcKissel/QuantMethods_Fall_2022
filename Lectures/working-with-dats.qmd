@@ -1,0 +1,186 @@
+---
+title: "Working with data"
+format: revealjs
+editor: visual
+---
+
+# Class overview
+
+##Video on the problems of big data:
+
+<iframe width="645" height="363" src="https://www.youtube.com/embed/_2u_eHHzRto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+# How do we record/store/view data in a way that allows us to use it in the future
+
+-   Best advice I can give you is to think of yourself as your own co-author, looking at the data 1 year from today
+-   No matter what programs you use, make it easy for you and a computer to read!
+
+# Version control
+
+![](https://imgs.xkcd.com/comics/documents.png)
+
+# Spreadsheets
+
+-   Interactive computer application for organization, analysis and storage of data in tabular form. Table of cells arranged into rows and columns. A cell = box that holds data
+
+-   Columns represented by letters, "A", "B", "C" ###- Rows represented by numbers, 1, 2, 3, \### Difference between spreadsheet and a database?
+
+## 
+
+background-image url(images/ss.jpeg) background-size: contain
+
+background-image: url(images/Excel_3.jpg)
+
+## 
+
+## Problems with Spreadsheets
+
+-   Panko (2008) reported that in 13 audits of real-world spreadsheets, an average of 88% contained errors
+-   In general, fine for storing data but not so great for analyzing/visualizing data
+-   Almost everyone uses them, though, and hard to get around it
+
+NY TIMES Piece
+
+## Excel
+
+-   People like to hate on Excel. Yet it is pretty standard in business and research
+
+### Excel horror stories
+
+-   Excel can turn gene names [into dates!](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-5-80)
+
+-   [Problems of dates](http://ecologybits.com/index.php/2016/07/06/beware-this-scary-thing-excel-can-do-to-your-data/)
+
+## [So why do we use them?]{.underline}
+
+### - Solves a lot of practical problems
+
+### - Come preinstalled
+
+### - Does file organization for you
+
+### - Reactive
+
+### - For many, it is totes fine to use. But if you do data analysis it can get annoying
+
+# Data organization
+
+## How can we setup data to be read by both humans *and* computers?
+
+## How can it be setup so co-authors can understand it?
+
+## How can we *avoid* mistakes
+
+## [Data organization in spreadsheets]{.underline}
+
+### be consistent (don't switch how you name things)
+
+## [Data organization in spreadsheets]{.underline}
+
+### write dates like YYYY-MM-DD
+
+-   Excel stores dates as a number that says how many days have passed since a given date. But that *given date* isn't always the same!
+-   ISO 8601
+
+## [Data organization in spreadsheets]{.underline}
+
+### don't leave any cells empty
+
+-   instead, use NA for missing data
+
+## [Data organization in spreadsheets]{.underline}
+
+### put just one thing in a cell
+
+-   for example: don't use "45 grams" but instead put the units in the column name
+
+## [Data organization in spreadsheets]{.underline}
+
+### Organize the data as a single rectangle
+
+-   The first row should contain variable names
+-   Avoid using more than one row for the variable names.
+
+## [Data organization in spreadsheets]{.underline}
+
+### create a *data dictionary*
+
+- A **separate** file that explains what all of the variables are.
+- Don't assume something is obvious 
+
+
+## [Data organization in spreadsheets]{.underline}
+
+
+### Don't include calculations in the raw data files.
+
+- Primary data file should be pristine. Make sure you can't overwrite it and do not touch it.
+- Do analysis in another file
+
+• On a Mac, right-click on the file in Finder and select "Get Info". In the menu
+that opens, there is a section at the bottom on "Sharing & Permissions". Click on
+"Privilege" for yourself and select "Read only".
+
+• In Windows, right-click on the file in Windows Explorer and select "Properties". In
+the "General" tab, there is a section at the bottom with "Attributes". Select the box
+for "Read-only" and click the "OK" button.
+
+## [Data organization in spreadsheets]{.underline}
+
+### Don't use font color or highlighting as data
+
+## [Data organization in spreadsheets]{.underline}
+
+### Choose good names for things
+
+- Names of columns  should make sense, have no spaces, and be consistent
+- CamelCase, snake_case,
+
+SHOW GOOD NAEMS FOR ARITCLE BOWMAN WOO
+
+
+## [Data organization in spreadsheets]{.underline}
+
+### Make backups!
+
+- A good practice is to use the date in the file name: 2020-02-03-My_text_draft
+- Or you can number them: 01_draft, 02_draft, etc.
+
+## [Data organization in spreadsheets]{.underline}
+
+### Use data validation to avoid data entry errors
+
+- This controls the type of data you can enter into a cell.
+
+
+## [Data organization in spreadsheets]{.underline}
+
+### Save the data in plain text files.
+
+- once you are done entering data, save it as a .csv as well...this way you can easily share with others and always have access to it
+
+
+http://phdcomics.com/comics/archive/phd101212s.gif
+
+## another tip: 
+Get used to looking at data though a text editor, which views plain text, rather than a spreadsheet
+
+### I tend to use Notepad, but there are [many other](https://en.wikipedia.org/wiki/Comparison_of_text_editors)
+
+
+
+
+# background readings
+
+https://peerj.com/preprints/3183/
+
+https://matthewlincoln.net/2018/03/26/best-practices-for-using-google-sheets-in-your-data-project.html
+
+https://www.bloomberg.com/news/articles/2013-04-18/faq-reinhart-rogoff-and-the-excel-error-that-changed-history
+
+https://nacnudus.github.io/spreadsheet-munging-strategies/index.html
+
+https://matthewlincoln.net/2018/03/26/best-practices-for-using-google-sheets-in-your-data-project.html
+
