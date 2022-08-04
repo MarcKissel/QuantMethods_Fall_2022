@@ -1,0 +1,557 @@
+---
+title: "Visualzations"
+format:
+  revealjs:
+    slide-number: true
+    preview-links: true
+    slide-tone: false
+    chalkboard: true
+    theme: serif
+    code-fold: true
+    code-tools: true
+    code-link: true 
+editor: visual
+author: Marc Kissel
+institute: Appstate
+echo: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| echo: false
+library(lsr)
+library(tidyverse)
+library(psych)
+load("aflsmall.Rdata")
+```
+
+# Class overview
+
+notes
+
+## Today's class: Descriptive statistics
+
+how to XXXX
+
+#### Goal is to summarise data in easily understood fashion
+
+{{< pagebreak >}}
+
+https://tomfaulkenberry.github.io/JASPbook/chapters/chapter4.pdf
+
+::: notes
+afl.margins variable contains the winning margin (number of points) for all 176 home and away games played during the 2010 season. The afl.finalists variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010. Let's have a look at the afl.margins variable:
+:::
+
+## some data
+
+```{r}
+print(afl.margins)
+```
+
+#### point is that the output isn't very useful. we can't just look at data and figure out what is happening
+
+## sample vs. population
+
+-   A population is the entire group that you want to draw conclusions about, while the sample is the specific group that you will collect data from.
+
+    -   i.e. the *population* can be the undergrads in the US but the *sample* might be 150 students in a GenEd course at AppState
+
+    -   Population: scores on an exam in a class
+
+## Note
+
+-   A **parameter** is a measure that describes the whole population.
+
+-   A **statistic** is a measure that describes the sample.
+
+![](https://statsandr.com/blog/what-is-the-difference-between-population-and-sample_files/population-sample.png){fig-alt="image shows difference between a population (a whole collection) and the sample (a smaller subsection of that population). Inference is about trying to figure something out about the population from the sample"}
+
+## Sampling error
+
+A sampling error is the difference between a *population parameter* and a *sample statistic.* For example, the sampling error is the difference between the mean political attitude rating of your sample and the true mean political attitude rating of all undergraduate students
+
+# Measures of Central Tendency
+
+Attempts to describe a **whole set of data** with a **single value** that represents the middle or centre of its distribution.
+
+-   Mean
+
+-   Median
+
+-   Mode
+
+## The Mean
+
+This is the average as we learned in math class. Take all the values and divide by the total number of values
+
+$$\overline{X} = \frac{1}{n}  \sum_{i=1}^{N} X_i$$
+
+Maybe review for many of you, but these symbols are impt later on
+
+## How to calculate Mean in R
+
+#### lets say we have 4 values: 34,78,56,35
+
+```{r}
+(34 + 78 + 56+35)/4
+```
+
+------------------------------------------------------------------------
+
+## a slighlty more complicated way
+
+```{r}
+a <- c(34, 78, 56, 35)
+sum(a)/length(a)
+```
+
+## practice!
+
+## or.....
+
+::: {.fragment .fade-up}
+Just use the R function!
+
+```{r}
+mean(a)
+```
+:::
+
+## Median -the middle value of a set of observations
+
+::: {style="margin-top: 200px; font-size: 3em; color: black;"}
+12,15,[19]{.fragment .highlight-red},21,23
+:::
+
+#### 
+
+## what is the median now? {auto-animate="true"}
+
+::: {style="margin-top: 200px;"}
+12,15,19,20,21,23
+:::
+
+## what is the median now? {auto-animate="true"}
+
+::: {style="margin-top: 200px; font-size: 3em; color: black;"}
+12,15,19,20,21,23
+:::
+
+## again, pretty easy in R
+
+```{r}
+print(a)
+sort
+(a)
+mean(x =c(35,56))
+```
+
+or
+
+```{r}
+median(a)
+
+```
+
+## image
+
+get this image from files: mages/mean_median.png)
+
+mean = center of gravity median = middle value
+
+An illustration of the difference between how the mean and the median should be interpreted. The mean is basically the \centre of gravity" of the data set: if you imagine that the histogram of the data is a solid object, then the point on which you could balance it (as if on a see-saw) is the mean. In contrast, the median is the middle observation. Half of the observations are smaller, and half of the observations are large
+
+## Some tips
+
+### If data are **nominal (categorical)** then prob not use mean or median
+
+### For income, we tend to use the median rather than the mean.
+
+*why?*
+
+http://www.abc.net.au/news/stories/2010/09/24/3021480.htm
+
+## the trimmed mean
+
+#### what do you do with a *messy* dataset?
+
+> 100; 2; 3; 4; 5; 6; 7; 8; 9; 10
+>
+> 15; 2; 3; 4; 5; 6; 7; 8; 9; 12
+
+#### what is the mean of these?
+
+\-\--
+
+## trimmed mean, continued
+
+[**Problem is the mean is not \*robust\*; it is highly influenced by extreme values**]{.underline}
+
+-   trimmed mean discards a percentage of the observations
+
+-   0% trimmed mean is just the regular mean, and
+
+-   the 50% trimmed mean is the median.
+
+## lets practice trimmed mean
+
+```{r}
+dataset <- c( -15,2,3,4,5,6,7,8,9,12 )
+```
+
+```{r}
+mean(dataset)
+median(dataset)
+```
+
+#lets try a 10% trimmed mean
+
+```{r}
+mean( x = dataset, trim = .1)
+```
+
+## mode
+
+The value that occurs most frequently.
+
+```{r}
+table( afl.finalists )
+```
+
+## which is the mode?
+
+```{r}
+mode(afl.finalists)
+#um, wtf?
+```
+
+```{r}
+library(lsr)
+modeOf(afl.finalists)
+```
+
+# Variability
+
+Here are three different datasets:
+
+| group_1 \<- c(7,6,3,3,1)
+| group_2 \<- c(3,4,4,5,4)
+| group_3 \<- c(4,4,4,4,4)
+
+-   \- These all have same mean but there is something different about them all. *Variability* tells us how different scores are from each other.
+
+-   \- in theory we can ask how different a series of numbers are from *any* number in the group, but it sorta makes sense to pick the mean
+
+## q
+
+```{r}
+group_1 <- c(7,6,3,3,1)
+group_2 <- c(3,4,4,5,4)
+group_3 <- c(4,4,4,4,4)
+```
+
+#### 
+
+## Measures of Variability
+
+#### i.e. How spread out are the data?
+
+1.  Range - the biggest value minus the smallest
+
+2.  Interquartile range
+
+3.  Mean absolute deviation\
+    Variance
+
+4.  Standard deviation
+
+## Interquartile range
+
+### calculates the difference between the 25th quantile & the 75th quantile.
+
+### fun stats fact: The median is the 50% quantile
+
+```{r}
+quantile(afl.margins)
+quantile(afl.margins, probs= .5)
+
+```
+
+how would you get the 25% and 75%?
+
+## visual
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Boxplot_vs_PDF.svg/250px-Boxplot_vs_PDF.svg.png) background-size: contain
+
+The simplest way to think about it is like this: the interquartile range is the range spanned by the \middle half" of the data. That is, one quarter of the data falls below the 25th percentile, one quarter of the data is above the 75th percentile, leaving the \middle half" of the data lying in between the two. And the IQR is the range covered by that middle half.
+
+## Deviations
+
+### These work by selecting a reference point and report a \*\*typical\*\* deviation from that point!
+
+## Mean absolute deviation - steps:
+
+1.  56, 31, 56, 8, 32. \<- mean = 36.6
+
+2.  calculate how much each value deviates from the mean and take the absolute value
+
+    1.  56 - 36.6 = 19.4.
+
+    2.  31- 36.6 = 5.6
+
+    3.  56 - 36.6 = 19.4
+
+    4.  8 - 36.6 = 28.6
+
+    5.  32 - 36.6 = 4.6
+
+3.  then get the mean of these devations. that equals the mean absolute deviation
+
+```{r}
+d <- c(19.4,5.6,19.4,28.6,4.6)
+mean(d)
+
+```
+
+## Variance
+
+Very similar to mean absolute deviation, but instead we square the deviation rather than using the absolute deviation.
+
+#### $$s^2$$
+
+### $$var({X}) = \frac{1}{n}  \sum_{i=1}^{N} (X_i - \overline{x})^2$$
+
+## Lets Find the variance of this dataset
+
+> #### 4, 8, 15, 16, 23, 42
+
+```{r}
+set <- c(4, 8, 15, 16, 23, 42)
+#formula
+(sum((set - mean(set))^2))/6
+#function
+var(set)
+```
+
+## why are the results different!!!
+
+n vs. n-1
+
+::: notes
+However, as we'll discuss in Chapter 10, there's a subtle distinction between \describing a sample" and \making guesses about the population from which the sample came". Up to this point, it's been a distinction without a dierence. Regardless of whether you're describing a sample or drawing inferences about the population, the mean is calculated exactly the same way. Not so for the variance, or the standard deviation, or for many other measures besides. What I outlined to you initially (i.e., take the actual average, and thus divide by N) assumes that you literally intend to calculate the variance of the sample. Most of the time, however, you're not terribly interested in the sample in and of itself. Rather, the sample exists to tell you something about the world. If so, you're actually starting to move away from calculating a \sample statistic", and towards the idea of estimating a \population parameter". However, I'm getting ahead of myself. For now, let's just take it on faith that R knows what it's doing, and we'll revisit the question later on when we talk about estimation in Chapter 10.
+:::
+
+## Problems with Variance
+
+-   it isn't easy to interpret. All the numbers are squared..
+
+-   let's say i have the variance of some measure of how tall a hominin species was. what is the meaning of saying the variance is 256 meters-squared
+
+-   gibberish units...but useful in mathy terms!
+
+## standard deviation
+
+-   The standard deviation pretty much lets us convert variance into *meaningful terms*
+-   In fact, sometimes it is called the root mean squared deviation RMSD
+
+$$s  = \sqrt{  \frac{1}{n}  \sum_{i=1}^{N} (X_i - \overline{x})^2}$$
+
+::: notes
+Because the standard deviation is derived from the variance, and the variance is a quantity that has little to no meaning that makes sense to us humans, the standard deviation doesn't have a simple interpretation. As a consequence, most of us just rely on a simple rule of thumb: in general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations of the mean. This rule tends to work pretty well most of the time, but it's not exact: it's actually calculated based on an assumption that the histogram is symmetric and bell shaped".10 As
+:::
+
+## visual
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/1200px-Standard_deviation_diagram.svg.png) background-size: contain
+
+####in general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations
+
+# summary of dispersion
+
+-   SD and variance both tell us something about the 'spread' of the data
+-   variance is helpful since it makes some math stuff easier!
+-   SD, though, is stated in the original units
+
+CONTINUE ADDING HERE? OR BREAK INTO ANOTHER CLASS
+
+## R tips on dispersion
+
+## summary function
+
+```{r}
+summary(diamonds)
+```
+
+## describe function
+
+needs the psych package. 
+
+
+:::{.callout-note}
+do you remember how to get a package?
+:::
+
+
+```{r}
+#describe(diamonds)
+```
+
+# skewness
+
+background-image: url(https://s3.amazonaws.com/libapps/accounts/73082/images/Skeweness.jpg) background-size: contain
+
+::: notes
+if the data tend to have a lot of extreme small values (i.e., the lower tail is \longer" than the upper tail) and not so many extremely large values (left panel), then we say that the data are negatively skewed. On the other hand, if there are more extremely large values than extremely small ones (right panel) we say that the data are positively skewed. That's the qualitative idea behind skewness. The actual formula for the skewness of a data set is as follows
+
+Many textbooks teach a rule of thumb stating that the mean is right of the median under right skew, and left of the median under left skew. This rule fails with surprising frequency. It can fail in multimodal distributions, or in distributions where one tail is long but the other is heavy. Most commonly, though, the rule fails in discrete distributions where the areas to the left and right of the median are not equal. Such distributions not only contradict the textbook relationship between mean, median, and skew, they also contradict the textbook interpretation of the median. We discuss ways to correct ideas about mean, median, and skew, while enhancing the desired intuition.
+:::
+
+## Kurtosis
+
+the 'pointeness' of the data
+
+background-image: url(https://i.stack.imgur.com/KBQLN.jpg) background-size: contain
+
+# correlation etc
+
+Describes the relationships between variables in the data.
+
+## covariance
+
+$$Cov(X,Y)  = \  \frac{1}{n-1}  \sum_{i=1}^{N} (X_i - \overline{X})(Y_i - \overline{Y})$$
+
+if
+
+#### Cov(X,Y) = 0, then unrealted
+
+#### Cov(X,Y) = +, then positive relationship
+
+#### Cov(X,Y) = -, then negative relationship
+
+But, note what units we are in.....
+
+::: notes
+The covariance between two variables X and Y is a generalisation of the notion of the variance; it's a mathematically simple way of describing the relationship between two variables that isn't terribly informative to humans:
+
+Because we're multiplying (i.e., taking the \product" of) a quantity that depends on X by a quantity that depends on Y and then averaging17, you can think of the formula for the covariance as an \average cross product" between X and Y . The covariance has the nice property that, if X and Y are entirely unrelated, then the covariance is exactly zero. If the relationship between them is positive (in the sense shown in Figure 5.9) then the covariance is also positive; and if the relationship is negative then the covariance is also negative. In other words, the covariance captures the basic qualitative idea of correlation. Unfortunately, the raw magnitude of the covariance isn't easy to interpret: it depends on the units in which X and Y are expressed, and worse yet, the actual units that the covariance itself is expressed in are really weird. For instance, if X refers to the dan.sleep variable (units: hours) and Y refers to the dan.grump variable (units: grumps), then the units for their covariance are \hours  grumps". And I have no freaking idea what that would even mean.
+:::
+
+## Pearson correlation coefficient - *r*
+
+-   This *fixes* covariance by standardizing it.
+-   Measures the strength of the \*\*linear\*relationship between two variables.
+
+$$r_{xy}  =  \frac{Cov(X,Y)}{\sigma_x \sigma_y}$$
+
+-   between -1 (perfect negative relationship) and 1 a perfect positive relationship.
+
+-   Gives a measure of the extent to which the data all tend to fall on a single, perfectly straight line.
+
+-   also tells us how knowing one value gives us info on the other value
+
+::: notes
+However, because we have two variables that contribute to the covariance, the standardisation
+
+only works if we divide by both standard deviations.18 In other words, the correlation between X and Y
+
+can be written as follows:
+
+rXY 
+
+CovpX; Y q
+
+\^X \^Y
+
+By doing this standardisation, not only do we keep all of the nice properties of the covariance discussed
+
+earlier, but the actual values of r are on a meaningful scale: r  1 implies a perfect positive relationship,
+
+and r  1 implies a perfect negative relationship. I'll expand a little more on this point later, in
+
+Section 5.7.5. But before I do, let's look at how to calculate correlations in R
+:::
+
+## Examples of covariance  in R
+
+
+
+
+```{r}
+cov(mtcars)
+```
+
+
+## Examples of correlation  in R
+
+```{r}
+cor(mtcars)
+```
+
+
+## Corrgrams
+
+exploratory visual display and  depicting the patterns of relations among variables 
+
+*need the corrgram package for this*
+
+```{r echo=FALSE}
+library(corrgram)
+vars2 <- c("Assists","Atbat","Errors","Hits","Homer","logSal",
+"Putouts","RBI","Runs","Walks","Years")
+
+corrgram(baseball[,vars2],
+lower.panel=panel.shade, upper.panel=panel.pie)
+
+
+
+```
+
+
+## correlation game
+
+## Anscombe
+
+
+```{r}
+anscombe.1 <- data.frame(x = anscombe[["x1"]], y = anscombe[["y1"]], Set = "Anscombe Set 1")
+anscombe.2 <- data.frame(x = anscombe[["x2"]], y = anscombe[["y2"]], Set = "Anscombe Set 2")
+anscombe.3 <- data.frame(x = anscombe[["x3"]], y = anscombe[["y3"]], Set = "Anscombe Set 3")
+anscombe.4 <- data.frame(x = anscombe[["x4"]], y = anscombe[["y4"]], Set = "Anscombe Set 4")
+
+anscombe.1 %>% ggplot(aes(x=x,y=y)) + geom_point()
+anscombe.2 %>% ggplot(aes(x=x,y=y)) + geom_point()
+anscombe.3 %>% ggplot(aes(x=x,y=y)) + geom_point()
+anscombe.4 %>% ggplot(aes(x=x,y=y)) + geom_point()
+```
+
+
+
+# cartoon project
+
+## TEST
+
+# code animation
+
+##  {auto-animate="true"}
+
+``` r
+# Fill in the spot we created for a plot
+output$phonePlot <- renderPlot({
+  # Render a barplot
+})
+```
+
+##  {auto-animate="true"}
+
+``` r
+# Fill in the spot we created for a plot
+output$phonePlot <- renderPlot({
+  # Render a barplot
+  barplot(WorldPhones[,input$region]*1000, 
+          main=input$region,
+          ylab="Number of Telephones",
+          xlab="Year")
+})
+```

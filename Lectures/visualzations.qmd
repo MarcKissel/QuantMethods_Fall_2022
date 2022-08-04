@@ -1,0 +1,460 @@
+---
+title: "Visualzations"
+
+format:
+  revealjs:
+    slide-number: true
+    preview-links: true
+    slide-tone: false
+    chalkboard: true
+    theme: serif
+    code-fold: true
+    code-tools: true
+    code-link: true 
+editor: visual
+author: Marc Kissel
+institute: Appstate
+echo: true
+execute:
+  freeze: auto  # re-render only when source changes
+---
+
+```{r}
+#| eval: true
+#| echo: false
+
+library(tidyverse)
+
+
+
+```
+
+# Today's class
+
+# homework
+
+1.  For each graph write a short overview of what you think it is trying to say. in other words, use prose to turn the visualzation into words
+
+2.  Do you think it is a **good** visualization? why or why not?
+
+3.  what, if anything, do you think would make it better
+
+4.  Then, work on the second part which talks you through making plots with R and the ggplot package
+
+# why should we visualize data?
+
+## Anscombe's Quartet
+
+![](https://miro.medium.com/max/1166/1*JyDU5qgFA-S2XOFBah9YcQ.png)
+
+# but what does it look like?
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1280px-Anscombe%27s_quartet_3.svg.png)
+
+## datasauraus 
+
+https://rpodcast.shinyapps.io/shinysaurus/_w_d657d913/
+
+
+# major types of plots
+
+think about..
+
+## scatter plot
+### compare the relationship between 2 continuous variables
+
+NEED A BETTER ONE!!!
+
+```{r}
+options(scipen=999)  # turn-off scientific notation like 1e+48
+library(ggplot2)
+theme_set(theme_bw())  # pre-set the bw theme.
+data("midwest", package = "ggplot2")
+# midwest <- read.csv("http://goo.gl/G1K41K")  # bkup data source
+
+# Scatterplot
+gg <- ggplot(midwest, aes(x=area, y=poptotal)) + 
+  geom_point(aes(col=state, size=popdensity)) + 
+  geom_smooth(method="loess", se=F) + 
+  xlim(c(0, 0.1)) + 
+  ylim(c(0, 500000)) + 
+  labs(subtitle="Area Vs Population", 
+       y="Population", 
+       x="Area", 
+       title="Scatterplot", 
+       caption = "Source: midwest")
+
+plot(gg)
+```
+
+## overplotting
+
+
+```{r}
+library(ggplot2)
+data(mpg, package="ggplot2") # alternate source: "http://goo.gl/uEeRGu")
+theme_set(theme_bw())  # pre-set the bw theme.
+
+g <- ggplot(mpg, aes(cty, hwy))
+
+# Scatterplot
+g + geom_point() + 
+  geom_smooth(method="lm", se=F) +
+  labs(subtitle="mpg: city vs highway mileage", 
+       y="hwy", 
+       x="cty", 
+       title="Scatterplot with overlapping points", 
+       caption="Source: midwest")
+```
+
+234 data points but there are many overlapping points appearing as a single dots
+
+## jitter
+
+```{r}
+# load package and data
+library(ggplot2)
+data(mpg, package="ggplot2")
+# mpg <- read.csv("http://goo.gl/uEeRGu")
+
+# Scatterplot
+theme_set(theme_bw())  # pre-set the bw theme.
+g <- ggplot(mpg, aes(cty, hwy))
+g + geom_jitter(width = .5, size=1) +
+  labs(subtitle="mpg: city vs highway mileage", 
+       y="hwy", 
+       x="cty", 
+       title="Jittered Points")
+```
+
+
+## Bubble chart
+
+Understand relationship within groups based on a categorical variable **and** a continuous variable 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# load package and data
+library(ggplot2)
+data(mpg, package="ggplot2")
+# mpg <- read.csv("http://goo.gl/uEeRGu")
+
+mpg_select <- mpg[mpg$manufacturer %in% c("audi", "ford", "honda", "hyundai"), ]
+
+# Scatterplot
+theme_set(theme_bw())  # pre-set the bw theme.
+g <- ggplot(mpg_select, aes(displ, cty)) + 
+  labs(subtitle="mpg: Displacement vs City Mileage",
+       title="Bubble chart")
+
+g + geom_jitter(aes(col=manufacturer, size=hwy)) + 
+  geom_smooth(aes(col=manufacturer), method="lm", se=F)
+```
+
+
+## Deviaiton
+
+Compare variation in values between small number of items with respect to a fixed reference.
+
+```{r}
+library(ggplot2)
+theme_set(theme_bw())  
+
+# Data Prep
+data("mtcars")  # load data
+mtcars$`car name` <- rownames(mtcars)  # create new column for car names
+mtcars$mpg_z <- round((mtcars$mpg - mean(mtcars$mpg))/sd(mtcars$mpg), 2)  # compute normalized mpg
+mtcars$mpg_type <- ifelse(mtcars$mpg_z < 0, "below", "above")  # above / below avg flag
+mtcars <- mtcars[order(mtcars$mpg_z), ]  # sort
+mtcars$`car name` <- factor(mtcars$`car name`, levels = mtcars$`car name`)  # convert to factor to retain sorted order in plot.
+
+# Diverging Barcharts
+ggplot(mtcars, aes(x=`car name`, y=mpg_z, label=mpg_z)) + 
+  geom_bar(stat='identity', aes(fill=mpg_type), width=.5)  +
+  scale_fill_manual(name="Mileage", 
+                    labels = c("Above Average", "Below Average"), 
+                    values = c("above"="#00ba38", "below"="#f8766d")) + 
+  labs(subtitle="Normalised mileage from 'mtcars'", 
+       title= "Diverging Bars") + 
+  coord_flip()
+```
+
+
+## Rankings
+Used to compare the position or performance of multiple items with respect to each other
+
+```{r}
+cty_mpg <- aggregate(mpg$cty, by=list(mpg$manufacturer), FUN=mean)  # aggregate
+colnames(cty_mpg) <- c("make", "mileage")  # change column names
+cty_mpg <- cty_mpg[order(cty_mpg$mileage), ]  # sort
+cty_mpg$make <- factor(cty_mpg$make, levels = cty_mpg$make)  # to retain the order in plot.
+#head(cty_mpg, 4)
+library(ggplot2)
+theme_set(theme_bw())
+
+# Draw plot
+ggplot(cty_mpg, aes(x=make, y=mileage)) + 
+  geom_bar(stat="identity", width=.5, fill="tomato3") + 
+  labs(title="Ordered Bar Chart", 
+       subtitle="Make Vs Avg. Mileage", 
+       caption="source: mpg") + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6))
+```
+
+
+## slope chart
+
+
+```{r}
+library(ggplot2)
+library(scales)
+theme_set(theme_classic())
+
+# prep data
+df <- read.csv("https://raw.githubusercontent.com/selva86/datasets/master/gdppercap.csv")
+colnames(df) <- c("continent", "1952", "1957")
+left_label <- paste(df$continent, round(df$`1952`),sep=", ")
+right_label <- paste(df$continent, round(df$`1957`),sep=", ")
+df$class <- ifelse((df$`1957` - df$`1952`) < 0, "red", "green")
+
+# Plot
+p <- ggplot(df) + geom_segment(aes(x=1, xend=2, y=`1952`, yend=`1957`, col=class), size=.75, show.legend=F) + 
+                  geom_vline(xintercept=1, linetype="dashed", size=.1) + 
+                  geom_vline(xintercept=2, linetype="dashed", size=.1) +
+                  scale_color_manual(labels = c("Up", "Down"), 
+                                     values = c("green"="#00ba38", "red"="#f8766d")) +  # color of lines
+                  labs(x="", y="Mean GdpPerCap") +  # Axis labels
+                  xlim(.5, 2.5) + ylim(0,(1.1*(max(df$`1952`, df$`1957`))))  # X and Y axis limits
+
+# Add texts
+p <- p + geom_text(label=left_label, y=df$`1952`, x=rep(1, NROW(df)), hjust=1.1, size=3.5)
+p <- p + geom_text(label=right_label, y=df$`1957`, x=rep(2, NROW(df)), hjust=-0.1, size=3.5)
+p <- p + geom_text(label="Time 1", x=1, y=1.1*(max(df$`1952`, df$`1957`)), hjust=1.2, size=5)  # title
+p <- p + geom_text(label="Time 2", x=2, y=1.1*(max(df$`1952`, df$`1957`)), hjust=-0.1, size=5)  # title
+
+# Minify theme
+p + theme(panel.background = element_blank(), 
+           panel.grid = element_blank(),
+           axis.ticks = element_blank(),
+           axis.text.x = element_blank(),
+           panel.border = element_blank(),
+           plot.margin = unit(c(1,2,1,2), "cm"))
+```
+
+
+## histogram
+
+- The data of only one statistical variable are presented on the horizontal axis.
+- The data are measured at interval or ratio measurement level
+- The variable is preferably continuous
+- The vertical axis typically displays the class density or frequency.
+
+EXAMPLE
+
+::: {.notes}
+At first sight, histograms may appear easy to understand, but research indicates otherwise (e.g., Lem, Onghena, Verschaffel, & Van
+Dooren, 2014). In fact, many errors, misconceptions and mistakes in interpreting histograms have been documented in the literature
+(e.g., Bruno & Espinel, 2009; Derouet & Parzysz, 2016; Friel et al., 2001; Kaplan, Gabrosek, Curtiss, & Malone, 2014; Lem, Onghena,
+Verschaffel, & Van Dooren, 2013b). However, a systematic overview of these misinterpretations—a term we use as an umbrella for
+the ways in which people interpret histograms incorrectly—has not yet been compiled. Research repeatedly showed the persistence of
+the misinterpretations, despite various attempts to improve statistics education (e.g., Ben-Zvi & Garfield, 2004; Ben-Zvi et al., 2017;
+Chance, del Mas, & Garfield, 2004; Cohen, 1996; Garfield & Ben-Zvi, 2007; Kaplan et al., 2014; Shaughnessy, 2007). Hence there is a
+need to reflect on what conceptual difficulties may lie at the basis of these persistent misinterpretations. The aim of this review is
+therefore to make an inventory of the misinterpretations that occur when people use histograms, as well as to categorise these
+misinterpretations along the conceptual difficulties that become manifest in these misinterpretations. In this review, the word people
+refers to students of all levels, as well as to teachers, researchers, teacher educators and others. The question guiding this review is:
+What are the conceptual difficulties that become manifest in the common misinterpretations people have when constructing or
+interpreting histograms?
+
+:::
+
+##
+
+
+```{r}
+library(ggplot2)
+theme_set(theme_classic())
+
+# Histogram on a Continuous (Numeric) Variable
+g <- ggplot(mpg, aes(displ)) + scale_fill_brewer(palette = "Spectral")
+
+g + geom_histogram(aes(fill=class), 
+                   binwidth = .1, 
+                   col="black", 
+                   size=.1) +  # change binwidth
+  labs(title="Histogram with Auto Binning", 
+       subtitle="Engine Displacement across Vehicle Classes")  
+
+```
+
+
+
+## density
+
+XXXXXXXXXXXXXXXXXXXX
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+theme_set(theme_classic())
+
+# Plot
+g <- ggplot(mpg, aes(cty))
+g + geom_density(aes(fill=factor(cyl)), alpha=0.8) + 
+    labs(title="Density plot", 
+         subtitle="City Mileage Grouped by Number of cylinders",
+         caption="Source: mpg",
+         x="City Mileage",
+         fill="# Cylinders")
+```
+
+
+## boxplot
+
+The dark line inside the box represents the median. The top of box is 75th percentile and bottom of box is 25%ile. The end points of the lines (aka whiskers) is at a distance of 1.5*IQR, where IQR or Inter Quartile Range is the distance between 25th and 75th percentiles. The points outside the whiskers are marked as dots and are normally considered as extreme points.
+
+```{r}
+library(ggplot2)
+theme_set(theme_classic())
+
+# Plot
+g <- ggplot(mpg, aes(class, cty))
+g + geom_boxplot(varwidth=T, fill="plum") + 
+    labs(title="Box plot", 
+         subtitle="City Mileage grouped by Class of vehicle",
+         caption="Source: mpg",
+         x="Class of Vehicle",
+         y="City Mileage")
+```
+
+## nice version of boxplot
+
+```{r}
+library(ggplot2)
+theme_set(theme_bw())
+
+# plot
+g <- ggplot(mpg, aes(manufacturer, cty))
+g + geom_boxplot() + 
+  geom_dotplot(binaxis='y', 
+               stackdir='center', 
+               dotsize = .5, 
+               fill="red") +
+  theme(axis.text.x = element_text(angle=65, vjust=0.6)) + 
+  labs(title="Box plot + Dot plot", 
+       subtitle="City Mileage vs Class: Each dot represents 1 row in source data",
+       caption="Source: mpg",
+       x="Class of Vehicle",
+       y="City Mileage")
+```
+
+
+
+## tufte boxplot
+
+```{r}
+library(ggthemes)
+library(ggplot2)
+theme_set(theme_tufte())  # from ggthemes
+
+# plot
+g <- ggplot(mpg, aes(manufacturer, cty))
+g + geom_tufteboxplot() + 
+      theme(axis.text.x = element_text(angle=65, vjust=0.6)) + 
+      labs(title="Tufte Styled Boxplot", 
+           subtitle="City Mileage grouped by Class of vehicle",
+           caption="Source: mpg",
+           x="Class of Vehicle",
+           y="City Mileage")
+```
+
+# things to think about
+
+## bad taste
+
+1. chart junk examples
+
+- aim to maximize "data-to-ink" ratio
+
+![](https://heapanalytics.com/blog/data-stories/how-to-lie-with-data-visualization)
+
+
+## what might be wrong here?
+
+![](https://miro.medium.com/max/875/1*uI-z9s9_URfjzpQc3FCDxw.png)
+
+::: {.notes}
+The graph shows the number of COVID-19 tests per million people. Flook at those bars: Argentina tests almost as many people as the USA! At least that’s what it seems like until you look at the numbers
+:::
+
+
+## here? 
+
+![](https://storage.ning.com/topology/rest/1.0/file/get/8259702852?profile=RESIZE_710x)
+
+date hopping back and forth along the x-axis to produce a "staircase" effect.
+
+::: {.notes}
+According to the Associated Press [4], The State of Georgia indulged in time travel with date hopping back and forth along the x-axis to produce a "staircase" effect.  27 April comes after 28 April, 1st May comes before 30th April, and the 2nd of May comes after the 6th and 5th of May. The colored bars are also arranged in a different order for each date. Georgia state Rep. Jasmine Clark, a Democrat with a doctorate in microbiology, said the graph  was a “prime example of malfeasance...Sadly it feels like there’s been an attempt to make the data fit the narrative, and that’s not how data works.” Here's AP's recreation of what the data should look like if ordered correctly, date-wise:
+:::
+
+## bad data
+
+
+![](https://socviz.co/assets/ch-01-democracy-nyt-version.png)
+
+::: {.notes}
+It’s an elegant small-multiple that, in addition to the point ranges it identifies, also shows an error range (labeled as such for people who might not know what it is), and the story told across the panels for each country is pretty consistent.
+
+The figure is a little tricky to interpret. As the x-axis label says, the underlying data are from a cross-sectional survey of people of different ages rather than a longitudinal study measuring everyone at different times. Thus, the lines do not show a trend measured each decade from the 1930s, but rather differences in the answers given by people born in different decades, all of whom were asked the question at the same time. Given that, a bar graph might have been a more appropriate to display the results.
+
+e graph reads as though people were asked to say whether they thought it was essential to live in a democracy, and the results plotted show the percentage of respondents who said “Yes”, presumably in contrast to those who said “No”. But in fact the survey question asked respondents to rate the importance of living in a democracy on a ten point scale, with 1 being “Not at all Important” and 10 being “Absolutely Important”. The graph showed the difference across ages of people who had given a score of “10” only, not changes in the average score on the question. As it turns out, while there is some variation by year of birth, most people in these countries tend to rate the importance of living in a democracy very highly, even if they do not all score it as “Absolutely Important”. The political scientist Erik Voeten redrew the figure based using the average response. The results are shown in Figure 1.9.
+:::
+
+## compare to 
+
+![](https://socviz.co/assets/ch-01-democracy-voeten-version-2.png)
+
+::: {.notes}
+The change here is not due to a difference in how the y-axis is drawn. That is a common issue with graphs, and one we will discuss below. In this case both the New York Times graph and Voeten’s alternative have scales that cover the full range of possible values (from zero to 100% in the former case and from 1 to 10 in the latter). Rather, a different measure is being shown. We are now looking at the trend in the average score, rather than the trend for the highest possible answer. Substantively, there does still seem to be a decline in the average score by age cohort, on the order of between half a point to one and a half points on a ten point scale. It could be an early warning sign of a collapse of belief in democracy, or it could be explained by something else. It might even be reasonable (as we will see for a different example shortly) to present the data in Voeten’s verion with the y-axis covering just the range of the decline, rather than the full zero to ten scale. But it seems fair to say that the story not have made the New York Times if the original research article had presented Voeten’s version of the data, rather than the one that appeared in the newspaper.
+:::
+
+
+## bad perceptoion
+
+
+third category of badness lives in the gap between data and aesthetics.
+
+- visualizations encode numbers in lines, shapes, and colors. That means that our interpretation of these encoding are partly conditional on how we perceive geometric shapes and relationships generally. 
+
+- i.e.: needlessly multiplying the number of dimensions shown in a plot. Using an area to represent a length, for example, can make differences between observations look larger than they are.
+
+
+## maybe do this example live
+
+![](https://socviz.co/assets/ch-01-excel-3d-column-chart-values.png)
+
+
+
+::: {.notes}
+Figure 1.10: A 3-D Column Chart created in Microsoft Excel for Mac. Although it may seem hard to believe, the values shown in the bars are 1, 2, 3, and 4
+
+the 3-D columns in combination with the default angle of view for the chart make the values as displayed differ substantially from the ones actually in the cell. Each column appears to be somewhat below its actual value. It is possible to see, if you squint with your mind’s eye, how the columns would line up with the axis guidelines if your angle of view moved so that the bars head-on. But as it stands, anyone asked what values the chart shows would give the wrong answer
+:::
+
+
+## pie charts
+
+Not always bad but need to be careful
+
+
+::: {.notes}
+Pie charts, like this one showing employment breakdown for a region, are notoriously difficult to parse. Notice how hard it is to pull out which employment category is highest or how they rank. The pie chart’s wedges are not organized by size, there are too many categories (11!), the 3D perspective distorts the wedge sizes, and some wedges are separate from others making size comparisons almost impossible.
+:::
+
+## compare
+
+![](https://assets.weforum.org/editor/responsive_large_webp_YTV67G-8DOITOVaf2lOzT03eg_Wa2aEhIwzuhWIIV3w.webp)
+
+## color theory
+
+websites
+
