@@ -92,7 +92,7 @@ the arrow shortcut key for a pc is "alt" + "-"". For a mac it is"Option" + "-"
 1.  Can use letters/numbers, But has to start with letter (impt for when you import data).
 2.  no spaces, so use CamelCase or Snake_case
 
-# Types of data 
+# Types of data
 
 When you assign a value to a variable, it is given a specific class. the class is VERY important and is probably the #1 reason for having troubles with R. it is always good to check the class of an object. to do this, we can use a specific *function* in R called class
 
