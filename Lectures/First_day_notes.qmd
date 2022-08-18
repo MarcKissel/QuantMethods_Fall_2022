@@ -14,6 +14,16 @@ institute: Appstate
 echo: true
 ---
 
+# Today's Class!
+
+-   Overview of the course
+-   Think about your class goals
+-   Plan for the rest of the semester
+
+::: {.callout-important collapse="false" appearance="default" icon="true"}
+hi
+:::
+
 # Course goals {background-color="aquamarine"}
 
 ::: incremental
@@ -42,7 +52,7 @@ echo: true
 
 R studio is an **integrated development** **environment** (IDE) for R that makes it easier to work with R.
 
-It also does a lot of other things like help you \[build websites\]((https://marckissel.netlify.com), create documents, and makes slides like these all with embedded stats and visualizations
+It also does a lot of other things like help you \[build websites\](https://marckissel.netlify.com), create documents, and makes slides like these all with embedded stats and visualizations
 
 [![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/RStudio_IDE_screenshot.png/1200px-RStudio_IDE_screenshot.png){fig-alt="imag shows the main screen of Rstudio with panes open showing data being run and a boxplot shown"}](https://www.rstudio.com)
 
@@ -123,15 +133,33 @@ p <- gapminder %>%
 ggplotly(p)
 ```
 
+## And interactive options....
+
+```{ojs}
+//| echo: false
+viewof temp = Inputs.range([0, 100], {step: 1, value: 34, label: htl.html`Temp &#x2103;`})
+```
+
+Converting temperature from ℃ to ℉ <br>\
+Celsius = \${d3.format(".0f")(temp)}℃ and Fahrenheit = \${d3.format(".1f")(temp \* 9/5 + 32)}℉.
+
+## more
+
 ## You can do fun things in presentations:
 
 ```{r echo=FALSE}
 library(leaflet)
-leaflet() %>% addTiles() %>% setView(-81.680244, 36.214232, zoom =17)
+content <- paste(sep = "<br/>",
+  "<b><a href='https://anthro.appstate.edu'>We are here</a></b>"
+ 
+)
+leaflet() %>% addTiles() %>% setView(-81.680244, 36.214232, zoom =17) %>%  addPopups(-81.680244, 36.2142321, content,
+    options = popupOptions(closeButton = TRUE)
+  )
 
 ```
 
-## Things to keep in mind:
+## Things to keep in mind: {background-color="aquamarine"}
 
 You are going to get frustrated. Learning anything takes time and patience. And often times it isn't your fault, but the fault of the program for not making it easy to use!
 
@@ -151,15 +179,68 @@ You are going to get frustrated. Learning anything takes time and patience. And 
 
 # [Assessments]{.underline}
 
--   Homeworks/labs
--   *Stats in the news* project
+-   [Homeworks/labs]{.underline}
+-   [*Stats in the news* project]{.underline}
     -   find a news story that references stats and do a deep dive into it
--   Data analysis
+-   [*Data analysis*]{.underline}
     -   find/create a dataset and analyze the data
--   weekly readings and side projects
+-   [weekly readings and side projects]{.underline}
     -   various in-class projects
 
     -   readings about the use of stats
+
+# Course Topics
+
+note: order might change as we work together on this
+
+## Overview of R
+
+### How to use/install/work with R
+
+## Some history
+
+## Working with data (data entry/storage)
+
+### This will talk about best practices for recording data. We will work with Excel and other spreadsheets and talk about common problems.
+
+## Data visualization
+
+### How to make useful plots, graphs, etc.
+
+## Exploratory Data Analysis
+
+### How to explore data to get a feel for it
+
+## Descriptive Statistics
+
+### mean, median, SD,
+
+## Statistical theory
+
+### probability, hypothesis testing
+
+## Model building
+
+### Modern methods of testing hypotheses
+
+## Applications
+
+### geostats, interactive graphs
+
+# Course stuff
+
+-   All course materials are linked through AsULearn but please be patient with me {{< fa folder >}}
+
+-   Do the readings before coming to class (or at the very least skim them...) {{< fa thumbs-up >}}
+
+-   As we get better with R, we can also do all this in a different way if you want to learn more about creating and managing online resources
+
+# next class
+
+-   Why do we *need* stats
+-   installing R
+    -   please bring laptop to class. We will install programs we need and troubleshoot any troubles
+-   please read [Matthews 2000 Storks Deliver Babies (P = 0.008](https://asulearn.appstate.edu/mod/lti/view.php?id=2611449))
 
 # Today's class: Why don't scientists just use common sense?
 
@@ -254,55 +335,3 @@ What is the mean class income?
 -   people in the survey were the more wealthy ones
 
 ![](https://o.quizlet.com/3X7JCy1vY6e-lmU4YmLcHQ.png)
-
-# Course Topics
-
-note: order might change as we work together on this
-
-## Overview of R
-
-### How to use/install/work with R
-
-## some history
-
-## Working with data (data entry/storage)
-
-### This will talk about best practices for recording data. We will work with Excel and other spreadsheets and talk about common problems.
-
-## Data visualization
-
-### How to make useful plots, graphs, etc.
-
-## Exploratory Data Analysis
-
-### How to explore data to get a feel for it
-
-## Descriptive Statistics
-
-### mean, median, SD,
-
-## Statistical theory
-
-### probability, hypothesis testing
-
-## Model building
-
-### Modern methods of testing hypotheses
-
-## Applications
-
-### geostats, interactive graphs
-
-# Course stuff
-
--   All course materials are linked through AsULearn but please be patient with me
-
--   Do the readings before coming to class (or at the very least skim them...)
-
--   
-
-    {{< fa thumbs-up >}}
-
-    {{< fa folder >}}
-
--   As we get better with R, we can also do all this in a different way if you want to learn more about creating and managing online resources

@@ -49,18 +49,18 @@ library(tidyverse)
 
 # but what does it look like?
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/1280px-Anscombe%27s_quartet_3.svg.png)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe's_quartet_3.svg/1280px-Anscombe's_quartet_3.svg.png)
 
-## datasauraus 
+## datasauraus
 
-https://rpodcast.shinyapps.io/shinysaurus/_w_d657d913/
-
+https://rpodcast.shinyapps.io/shinysaurus/\_w_d657d913/
 
 # major types of plots
 
 think about..
 
 ## scatter plot
+
 ### compare the relationship between 2 continuous variables
 
 NEED A BETTER ONE!!!
@@ -88,7 +88,6 @@ plot(gg)
 ```
 
 ## overplotting
-
 
 ```{r}
 library(ggplot2)
@@ -127,10 +126,9 @@ g + geom_jitter(width = .5, size=1) +
        title="Jittered Points")
 ```
 
-
 ## Bubble chart
 
-Understand relationship within groups based on a categorical variable **and** a continuous variable 
+Understand relationship within groups based on a categorical variable **and** a continuous variable
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # load package and data
@@ -149,7 +147,6 @@ g <- ggplot(mpg_select, aes(displ, cty)) +
 g + geom_jitter(aes(col=manufacturer, size=hwy)) + 
   geom_smooth(aes(col=manufacturer), method="lm", se=F)
 ```
-
 
 ## Deviaiton
 
@@ -178,8 +175,8 @@ ggplot(mtcars, aes(x=`car name`, y=mpg_z, label=mpg_z)) +
   coord_flip()
 ```
 
-
 ## Rankings
+
 Used to compare the position or performance of multiple items with respect to each other
 
 ```{r}
@@ -200,9 +197,7 @@ ggplot(cty_mpg, aes(x=make, y=mileage)) +
   theme(axis.text.x = element_text(angle=65, vjust=0.6))
 ```
 
-
 ## slope chart
-
 
 ```{r}
 library(ggplot2)
@@ -240,35 +235,20 @@ p + theme(panel.background = element_blank(),
            plot.margin = unit(c(1,2,1,2), "cm"))
 ```
 
-
 ## histogram
 
-- The data of only one statistical variable are presented on the horizontal axis.
-- The data are measured at interval or ratio measurement level
-- The variable is preferably continuous
-- The vertical axis typically displays the class density or frequency.
+-   The data of only one statistical variable are presented on the horizontal axis.
+-   The data are measured at interval or ratio measurement level
+-   The variable is preferably continuous
+-   The vertical axis typically displays the class density or frequency.
 
 EXAMPLE
 
-::: {.notes}
-At first sight, histograms may appear easy to understand, but research indicates otherwise (e.g., Lem, Onghena, Verschaffel, & Van
-Dooren, 2014). In fact, many errors, misconceptions and mistakes in interpreting histograms have been documented in the literature
-(e.g., Bruno & Espinel, 2009; Derouet & Parzysz, 2016; Friel et al., 2001; Kaplan, Gabrosek, Curtiss, & Malone, 2014; Lem, Onghena,
-Verschaffel, & Van Dooren, 2013b). However, a systematic overview of these misinterpretations—a term we use as an umbrella for
-the ways in which people interpret histograms incorrectly—has not yet been compiled. Research repeatedly showed the persistence of
-the misinterpretations, despite various attempts to improve statistics education (e.g., Ben-Zvi & Garfield, 2004; Ben-Zvi et al., 2017;
-Chance, del Mas, & Garfield, 2004; Cohen, 1996; Garfield & Ben-Zvi, 2007; Kaplan et al., 2014; Shaughnessy, 2007). Hence there is a
-need to reflect on what conceptual difficulties may lie at the basis of these persistent misinterpretations. The aim of this review is
-therefore to make an inventory of the misinterpretations that occur when people use histograms, as well as to categorise these
-misinterpretations along the conceptual difficulties that become manifest in these misinterpretations. In this review, the word people
-refers to students of all levels, as well as to teachers, researchers, teacher educators and others. The question guiding this review is:
-What are the conceptual difficulties that become manifest in the common misinterpretations people have when constructing or
-interpreting histograms?
-
+::: notes
+At first sight, histograms may appear easy to understand, but research indicates otherwise (e.g., Lem, Onghena, Verschaffel, & Van Dooren, 2014). In fact, many errors, misconceptions and mistakes in interpreting histograms have been documented in the literature (e.g., Bruno & Espinel, 2009; Derouet & Parzysz, 2016; Friel et al., 2001; Kaplan, Gabrosek, Curtiss, & Malone, 2014; Lem, Onghena, Verschaffel, & Van Dooren, 2013b). However, a systematic overview of these misinterpretations---a term we use as an umbrella for the ways in which people interpret histograms incorrectly---has not yet been compiled. Research repeatedly showed the persistence of the misinterpretations, despite various attempts to improve statistics education (e.g., Ben-Zvi & Garfield, 2004; Ben-Zvi et al., 2017; Chance, del Mas, & Garfield, 2004; Cohen, 1996; Garfield & Ben-Zvi, 2007; Kaplan et al., 2014; Shaughnessy, 2007). Hence there is a need to reflect on what conceptual difficulties may lie at the basis of these persistent misinterpretations. The aim of this review is therefore to make an inventory of the misinterpretations that occur when people use histograms, as well as to categorise these misinterpretations along the conceptual difficulties that become manifest in these misinterpretations. In this review, the word people refers to students of all levels, as well as to teachers, researchers, teacher educators and others. The question guiding this review is: What are the conceptual difficulties that become manifest in the common misinterpretations people have when constructing or interpreting histograms?
 :::
 
-##
-
+## 
 
 ```{r}
 library(ggplot2)
@@ -285,8 +265,6 @@ g + geom_histogram(aes(fill=class),
        subtitle="Engine Displacement across Vehicle Classes")  
 
 ```
-
-
 
 ## density
 
@@ -306,10 +284,9 @@ g + geom_density(aes(fill=factor(cyl)), alpha=0.8) +
          fill="# Cylinders")
 ```
 
-
 ## boxplot
 
-The dark line inside the box represents the median. The top of box is 75th percentile and bottom of box is 25%ile. The end points of the lines (aka whiskers) is at a distance of 1.5*IQR, where IQR or Inter Quartile Range is the distance between 25th and 75th percentiles. The points outside the whiskers are marked as dots and are normally considered as extreme points.
+The dark line inside the box represents the median. The top of box is 75th percentile and bottom of box is 25%ile. The end points of the lines (aka whiskers) is at a distance of 1.5\*IQR, where IQR or Inter Quartile Range is the distance between 25th and 75th percentiles. The points outside the whiskers are marked as dots and are normally considered as extreme points.
 
 ```{r}
 library(ggplot2)
@@ -346,8 +323,6 @@ g + geom_boxplot() +
        y="City Mileage")
 ```
 
-
-
 ## tufte boxplot
 
 ```{r}
@@ -370,84 +345,74 @@ g + geom_tufteboxplot() +
 
 ## bad taste
 
-1. chart junk examples
+1.  chart junk examples
 
-- aim to maximize "data-to-ink" ratio
+-   aim to maximize "data-to-ink" ratio
 
 ![](https://heapanalytics.com/blog/data-stories/how-to-lie-with-data-visualization)
-
 
 ## what might be wrong here?
 
 ![](https://miro.medium.com/max/875/1*uI-z9s9_URfjzpQc3FCDxw.png)
 
-::: {.notes}
-The graph shows the number of COVID-19 tests per million people. Flook at those bars: Argentina tests almost as many people as the USA! At least that’s what it seems like until you look at the numbers
+::: notes
+The graph shows the number of COVID-19 tests per million people. Flook at those bars: Argentina tests almost as many people as the USA! At least that's what it seems like until you look at the numbers
 :::
 
-
-## here? 
+## here?
 
 ![](https://storage.ning.com/topology/rest/1.0/file/get/8259702852?profile=RESIZE_710x)
 
 date hopping back and forth along the x-axis to produce a "staircase" effect.
 
-::: {.notes}
-According to the Associated Press [4], The State of Georgia indulged in time travel with date hopping back and forth along the x-axis to produce a "staircase" effect.  27 April comes after 28 April, 1st May comes before 30th April, and the 2nd of May comes after the 6th and 5th of May. The colored bars are also arranged in a different order for each date. Georgia state Rep. Jasmine Clark, a Democrat with a doctorate in microbiology, said the graph  was a “prime example of malfeasance...Sadly it feels like there’s been an attempt to make the data fit the narrative, and that’s not how data works.” Here's AP's recreation of what the data should look like if ordered correctly, date-wise:
+::: notes
+According to the Associated Press \[4\], The State of Georgia indulged in time travel with date hopping back and forth along the x-axis to produce a "staircase" effect. 27 April comes after 28 April, 1st May comes before 30th April, and the 2nd of May comes after the 6th and 5th of May. The colored bars are also arranged in a different order for each date. Georgia state Rep. Jasmine Clark, a Democrat with a doctorate in microbiology, said the graph was a "prime example of malfeasance...Sadly it feels like there's been an attempt to make the data fit the narrative, and that's not how data works." Here's AP's recreation of what the data should look like if ordered correctly, date-wise:
 :::
 
 ## bad data
 
-
 ![](https://socviz.co/assets/ch-01-democracy-nyt-version.png)
 
-::: {.notes}
-It’s an elegant small-multiple that, in addition to the point ranges it identifies, also shows an error range (labeled as such for people who might not know what it is), and the story told across the panels for each country is pretty consistent.
+::: notes
+It's an elegant small-multiple that, in addition to the point ranges it identifies, also shows an error range (labeled as such for people who might not know what it is), and the story told across the panels for each country is pretty consistent.
 
 The figure is a little tricky to interpret. As the x-axis label says, the underlying data are from a cross-sectional survey of people of different ages rather than a longitudinal study measuring everyone at different times. Thus, the lines do not show a trend measured each decade from the 1930s, but rather differences in the answers given by people born in different decades, all of whom were asked the question at the same time. Given that, a bar graph might have been a more appropriate to display the results.
 
-e graph reads as though people were asked to say whether they thought it was essential to live in a democracy, and the results plotted show the percentage of respondents who said “Yes”, presumably in contrast to those who said “No”. But in fact the survey question asked respondents to rate the importance of living in a democracy on a ten point scale, with 1 being “Not at all Important” and 10 being “Absolutely Important”. The graph showed the difference across ages of people who had given a score of “10” only, not changes in the average score on the question. As it turns out, while there is some variation by year of birth, most people in these countries tend to rate the importance of living in a democracy very highly, even if they do not all score it as “Absolutely Important”. The political scientist Erik Voeten redrew the figure based using the average response. The results are shown in Figure 1.9.
+e graph reads as though people were asked to say whether they thought it was essential to live in a democracy, and the results plotted show the percentage of respondents who said "Yes", presumably in contrast to those who said "No". But in fact the survey question asked respondents to rate the importance of living in a democracy on a ten point scale, with 1 being "Not at all Important" and 10 being "Absolutely Important". The graph showed the difference across ages of people who had given a score of "10" only, not changes in the average score on the question. As it turns out, while there is some variation by year of birth, most people in these countries tend to rate the importance of living in a democracy very highly, even if they do not all score it as "Absolutely Important". The political scientist Erik Voeten redrew the figure based using the average response. The results are shown in Figure 1.9.
 :::
 
-## compare to 
+## compare to
 
 ![](https://socviz.co/assets/ch-01-democracy-voeten-version-2.png)
 
-::: {.notes}
-The change here is not due to a difference in how the y-axis is drawn. That is a common issue with graphs, and one we will discuss below. In this case both the New York Times graph and Voeten’s alternative have scales that cover the full range of possible values (from zero to 100% in the former case and from 1 to 10 in the latter). Rather, a different measure is being shown. We are now looking at the trend in the average score, rather than the trend for the highest possible answer. Substantively, there does still seem to be a decline in the average score by age cohort, on the order of between half a point to one and a half points on a ten point scale. It could be an early warning sign of a collapse of belief in democracy, or it could be explained by something else. It might even be reasonable (as we will see for a different example shortly) to present the data in Voeten’s verion with the y-axis covering just the range of the decline, rather than the full zero to ten scale. But it seems fair to say that the story not have made the New York Times if the original research article had presented Voeten’s version of the data, rather than the one that appeared in the newspaper.
+::: notes
+The change here is not due to a difference in how the y-axis is drawn. That is a common issue with graphs, and one we will discuss below. In this case both the New York Times graph and Voeten's alternative have scales that cover the full range of possible values (from zero to 100% in the former case and from 1 to 10 in the latter). Rather, a different measure is being shown. We are now looking at the trend in the average score, rather than the trend for the highest possible answer. Substantively, there does still seem to be a decline in the average score by age cohort, on the order of between half a point to one and a half points on a ten point scale. It could be an early warning sign of a collapse of belief in democracy, or it could be explained by something else. It might even be reasonable (as we will see for a different example shortly) to present the data in Voeten's verion with the y-axis covering just the range of the decline, rather than the full zero to ten scale. But it seems fair to say that the story not have made the New York Times if the original research article had presented Voeten's version of the data, rather than the one that appeared in the newspaper.
 :::
-
 
 ## bad perceptoion
 
-
 third category of badness lives in the gap between data and aesthetics.
 
-- visualizations encode numbers in lines, shapes, and colors. That means that our interpretation of these encoding are partly conditional on how we perceive geometric shapes and relationships generally. 
+-   visualizations encode numbers in lines, shapes, and colors. That means that our interpretation of these encoding are partly conditional on how we perceive geometric shapes and relationships generally.
 
-- i.e.: needlessly multiplying the number of dimensions shown in a plot. Using an area to represent a length, for example, can make differences between observations look larger than they are.
-
+-   i.e.: needlessly multiplying the number of dimensions shown in a plot. Using an area to represent a length, for example, can make differences between observations look larger than they are.
 
 ## maybe do this example live
 
 ![](https://socviz.co/assets/ch-01-excel-3d-column-chart-values.png)
 
-
-
-::: {.notes}
+::: notes
 Figure 1.10: A 3-D Column Chart created in Microsoft Excel for Mac. Although it may seem hard to believe, the values shown in the bars are 1, 2, 3, and 4
 
-the 3-D columns in combination with the default angle of view for the chart make the values as displayed differ substantially from the ones actually in the cell. Each column appears to be somewhat below its actual value. It is possible to see, if you squint with your mind’s eye, how the columns would line up with the axis guidelines if your angle of view moved so that the bars head-on. But as it stands, anyone asked what values the chart shows would give the wrong answer
+the 3-D columns in combination with the default angle of view for the chart make the values as displayed differ substantially from the ones actually in the cell. Each column appears to be somewhat below its actual value. It is possible to see, if you squint with your mind's eye, how the columns would line up with the axis guidelines if your angle of view moved so that the bars head-on. But as it stands, anyone asked what values the chart shows would give the wrong answer
 :::
-
 
 ## pie charts
 
 Not always bad but need to be careful
 
-
-::: {.notes}
-Pie charts, like this one showing employment breakdown for a region, are notoriously difficult to parse. Notice how hard it is to pull out which employment category is highest or how they rank. The pie chart’s wedges are not organized by size, there are too many categories (11!), the 3D perspective distorts the wedge sizes, and some wedges are separate from others making size comparisons almost impossible.
+::: notes
+Pie charts, like this one showing employment breakdown for a region, are notoriously difficult to parse. Notice how hard it is to pull out which employment category is highest or how they rank. The pie chart's wedges are not organized by size, there are too many categories (11!), the 3D perspective distorts the wedge sizes, and some wedges are separate from others making size comparisons almost impossible.
 :::
 
 ## compare
@@ -458,3 +423,4 @@ Pie charts, like this one showing employment breakdown for a region, are notorio
 
 websites
 
+# next time - ggplot

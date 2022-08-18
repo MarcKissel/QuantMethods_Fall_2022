@@ -1,0 +1,159 @@
+---
+title: "probability"
+format:
+  revealjs:
+    slide-number: h/v
+    preview-links: true
+    slide-tone: false
+    chalkboard: true
+editor: visual
+author: Marc
+institute: Appstate
+echo: true
+---
+
+# today:
+
+# 
+
+## probability, sampling, and confidence interval..
+
+### - Descriptive stats are useful, but not very powerful
+
+### - We want to make *inferences* about data. = *Inferential statistics*
+
+### - Probability theory underpins much of statistics
+
+## Example
+
+### Lets say I ask 1,000 people in the US if they will vote Democrat or Republican in 2022 midterms...but there are \~325 million people in the US.
+
+### Inferential statistics let's us explore these questions...
+
+## probability theory
+
+### tells you how often different kinds of events will happen:
+
+#### - Will i win the lottery?
+
+#### - If i role 5 dice, what are the chances each will land on 4?
+
+#### - What are the chances of a fair coin coming up heads 10 times in a row?
+
+### We start with a model of the world and use that to make calculations. In prob. theory the **model** is known but the data are not.
+
+## for the coin, we know the prob of heads is 50%
+
+# P(heads) = 0.5
+
+we don't have the data (i haven't flipped the coin)
+
+BBBBBBBBBBBB
+
+## In stats it is the other way around! We have data and we want to know something about the world
+
+### • If the lottery commissioner's spouse wins the lottery, how likely is it that the lottery was rigged?
+
+### • If my friend flips a coin 10 times and gets 10 heads, are they using a fake coin?
+
+## I *know* that i saw them flip the coin (i have the data),and i want to *infer* if the coin is real. Thus, I have data:
+
+H H H H H H H H H H
+
+## Two different views on what is meant by probability
+
+## Frequentist view
+
+### probability as a long-run frequency.
+
+-   flip a coin 20 times:
+
+-   T,H,H,H,H,T,T,H,H,H,H,T,H,H,T,T,T,T,T,H
+
+## your turn
+
+1.  flip coin 20 times.
+2.  for each flip keep a running count of
+
+number of flips:
+
+number of heads:
+
+proportion of heads:
+
+#### number of flips: .center\[1, 2, 3 \]
+
+#### number of heads: .center\[0, 1, 1\]
+
+#### proportion : .center\[0, .5, .333\]
+
+### the proportion of heads varies, with increased sample --\> values actually being pretty close to the "right" answer of .50.
+
+### the proportion of observed heads eventually stops fluctuating, and settles down; when it does, the number at which it finally settles is the true probability of heads.
+
+## freak out the frequentists!
+
+#### - infinite sequences don't exist in the real world! Can't flip a coin that many times!
+
+#### - how can someone say probability of rain in Boone tomorrow is 68%?
+
+# #Bayesian View
+
+### probability of an event as the degree of belief that an intelligent and rational agent assigns to that truth of that event. From that perspective, probabilities don't exist in the world, but rather in the thoughts and assumptions of people and other intelligent beings.
+
+### "Bayesian statistics is a mathematical procedure that applies probabilities to statistical problems. It provides people the tools to update their beliefs in the evidence of new data."
+
+![](https://www.lebesgue.fr/sites/default/files/sem2016/archeo/poster_archeo_en.jpg)
+
+??? tom as math or business
+
+Paul Meehl, who suggests that relying on frequentist methods could turn you into "a potent but sterile intellectual rake who leaves in his merry path a long train of ravished maidens but no viable scientific offspring"
+
+# Basics of probability theory
+
+### probability distributions
+
+#### - elementary event
+
+#### - sample space
+
+#### - law of total probability
+
+P(E) = P(X1) + P(X2) + P(X3) + P(X4)
+
+#### - non-elementary events
+
+kinda obvious, huh?
+
+However, from these simple beginnings it's possible to construct some extremely powerful mathematical tool
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+GET IMAGE OF PROBPANTS FROM FILES?
+
+"pants" probability distribution. There are 4 "elementary events", corresponding to the 4 pairs of pants that I own. add up to 1. This is the probability distribution of my pants!
+
+# probability distribution of pants!
+
+| Which pants  | Label | Probability |
+|--------------|-------|-------------|
+| Blue jeans   | X1    | P(X1) = .7  |
+| ripped jeans | X2    | P(X2) = .05 |
+| pajama pants | X3    | P(X3) = .2  |
+| track pants  | X4    | P(X4) = .05 |
+
+sample space: pants! elementary event: each pair P(X) = 1 \<- I will always wear pants :)
+
+\#**types of probability distributions**
+
+There are a lot!
+
+-   *the binomial distribution*
+
+-   *the normal distribution*
+
+-   the t distribution
+
+-   the χ\^2 ("chi-square") distribution
+
+-   the F distribution

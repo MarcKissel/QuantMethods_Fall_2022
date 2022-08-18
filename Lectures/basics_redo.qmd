@@ -1,10 +1,9 @@
 ---
-title: "day R"
+title: "Overview of R"
 format:
   revealjs:
-    slide-number: h/v
+    slide-number: true
     preview-links: true
-    slide-tone: false
     chalkboard: true
 editor: visual
 author: Marc
@@ -22,10 +21,10 @@ It is more than just a way to run statistics.
 -   But it involves a lot of effort
 
     -   Difference between a car and a bus
-:::
 
-::: {.fragment .highlight-red}
+::: highlight-red
 -   No one knows everything about R. I often Google the same issue many times since i forget. A great place to look for help is Stack Overflow
+:::
 :::
 
 ## Today we are going over week's HW
@@ -34,17 +33,37 @@ It is more than just a way to run statistics.
 
 -   How R thinks
 
-## This week's work
-
--   first R hw
-
 -   work on getting dataset
 
--   make comments on articles
+-   comments on reading
 
 # Getting started with R
 
-go to the console and type the following and then hit enter
+-   difference between R and R studio
+
+## R studio layout
+
+When you open RStudio, you\'ll see 5 windows (or panes). Can change the order under RStudio preferences.
+
+[![R studio layout. Source: https://bookdown.org/ndphillips/YaRrr/the-four-rstudio-windows.html](https://bookdown.org/ndphillips/YaRrr/images/RStudio_Screenshot_Labels.png){fig-alt="The four panes of RStudio." fig-align="center"}](https://bookdown.org/ndphillips/YaRrr/the-four-rstudio-windows.html)
+
+## Rstudio continued...
+
+-   Lots of things to play with in the options
+
+-   A working directory which is basically where on the computer R looks for files.
+
+-   RStudio 'defaults' to using your home directory on your computer. You can change this by going to Tools \> Global options \> General \> Basic.
+
+## Rstudio Projects
+
+-   I highly recommend R-studio's Projects feature. Basically, this will not only create a new folder for you within the home directory, but it will set that new folder as your projects working directory. Whenever I do a new analysis, I make a new project folder and then put all the data I am going to use in that folder. This way I can send the final code etc to a colleague and everything should work on their machine
+
+-   To make a new project go to File \> New Project.
+
+## Your first code
+
+go to the *console* and type the following and then hit enter
 
 `7 + 6`
 
@@ -57,6 +76,7 @@ go to the console and type the following and then hit enter
 ## You should see something like this
 
 ```{r}
+#| code-line-numbers: "|1"
 7 + 6
 ```
 
@@ -75,6 +95,7 @@ Congrats! you just turned your expensive computer into a \$5 calulator
 ## for example check out the code below
 
 ```{r}
+#| code-line-numbers: "|1"
 a <- 4
 
 ```
@@ -94,7 +115,7 @@ the arrow shortcut key for a pc is "alt" + "-"". For a mac it is"Option" + "-"
 
 # Types of data
 
-When you assign a value to a variable, it is given a specific class. the class is VERY important and is probably the #1 reason for having troubles with R. it is always good to check the class of an object. to do this, we can use a specific *function* in R called class
+When you assign a value to a variable, it is given a specific *class*. The class is VERY important and is probably the #1 reason for having troubles with R. it is always good to check the class of an object. to do this, we can use a specific *function* in R called class
 
 ```{r}
 x <- 42
@@ -103,7 +124,7 @@ class(x)
 
 We will come back to this soon!
 
-# To store more than one element in an object we need to remember a trick
+# To store more than one element in an object we need to remember a trick {.scrollable}
 
 if you want to make a series of numbers, characters, whatever, you need to use a special sequence. To do this, we must combine the values we want to assign with the c function, which combines values into a vector or list
 
@@ -118,7 +139,7 @@ c <- FALSE
 d <- c(1,2,3.0,4)
 ```
 
-# what's your vector?
+# What's your vector?
 
 The thing you need to know most about vectors is that you are able to index them. Use square brackets to specify that you are indexing. Since a vector is one dimensional, you only need a singe index.
 
@@ -127,6 +148,7 @@ See this weeks homework for more on this
 # more on vectors
 
 ```{r, eval=FALSE}
+#| code-line-numbers: "|1|2|3|4|5|6|7"
 v1 <- c(1,2,3,4)
 v2 <- c(5,6,7,8)
 v1 + v2
@@ -139,6 +161,7 @@ v3 <- v2 + v2
 recycling
 
 ```{r, eval=FALSE}
+#| code-line-numbers: "|1|2|3"
 v1 <- c(1,3,5,1,5)
 v2 <- c(1,2)
 v3 <- v1 + v2
@@ -151,9 +174,9 @@ vowels <- c("a", "e", "i", "o", "u")
 vowels[2]
 ```
 
-the homework goes over this a lot. It can be dry and boring. But I want you to get a sort of *muscle memory* for how to do this
+The homework goes over this a lot. It can be dry and boring. But I want you to get a sort of *muscle memory* for how to do this
 
-# data frame
+# Data frames
 
 A data frame acts like a table, w/ data organized into rows and columns (they are technically lists where each element is a vector of the same length)
 
@@ -161,7 +184,7 @@ A data frame acts like a table, w/ data organized into rows and columns (they ar
 mtcars
 ```
 
-## making a dataframe
+## Making a dataframe
 
 ```{r}
 name <- c("Harper", "Sutton", "Jenna")
@@ -185,7 +208,7 @@ View(my_data)
 
 # Functions
 
-once you assign something (e.g., a value, a list of numbers, a character vector) to a object you can interact with that object. We do this by using what is called a function.
+Once you assign something (e.g., a value, a list of numbers, a character vector) to a object you can interact with that object. We do this by using what is called a *function*, which is a "set of statements organized together to perform a specific task."
 
 ```{r functions, eval=FALSE}
 d <- c(1,2,3.0,4)
@@ -199,17 +222,54 @@ seq(from = 1, to = 10, by =2)
 
 ```
 
-if you need help on a function, you can type a question mark before its name like this: ?mean()
+If you need help on a function, you can type a question mark before its name like this: ?mean()
 
-# Classes
+## More on functions
 
-Once you have an object stored, you can interact with it. but remember that the way you interact with it via functions depends on its class....
+-   functions have *arguments*
 
-the way in which you can interact with the object is based on the *class* of the object. The class of the object is assigned by R based on what it thinks the object is supposed to be.
+    -   *arguments are* parameters provided to a function
+
+    -   arguments are wrapped in parentheses *after* the name of the function
+
+    ```{=html}
+    <!-- -->
+    ```
+        ``` R
+        mean(d, na.rm=TRUE)
+        ```
+
+    -   Here,the function is mean and it is taking 2 arguments: the object, *d*, and the *na.rm=TRUE*, which tells the function "if you see an NA then ignore it"
+
+## Making a function
+
+-   We can even make our own functions!
+
+```{r}
+do_number <- function(x) {
+  x^2
+}
+```
+
+        
+
+## More on functions
+
+-   some functions are simple and others are quite complex
+
+-   In some cases, we use + to add things together into a single line of code...
+
+## Note
+
+::: callout-important
+Once you have an object stored, you can interact with it. But remember that the way you interact with it via functions depends on its class....
+:::
+
+Remember: the way in which you can interact with the object is based on the *class* of the object. The class of the object is assigned by R based on what it *thinks* the object is supposed to be.
 
 \[live examples\]
 
-## more on Classes
+## More on Classes
 
 ```{r, eval=FALSE}
 my_list <- c(1,2,3,4,5)
@@ -231,18 +291,16 @@ my_list[4] #gets the 4 value.
 
     </div>
 
--   What this means is that the 'type' or 'class' of the object is not something that the sum function knows what to do with. Learning how to *read* R errors is useful. Copying it & searching Google is a pretty good way to find help.
+-   What this means is that the 'type' or 'class' of the object is not something that the *sum* function knows what to do with. Learning how to *read* R errors is useful. Copying it & searching Google is a pretty good way to find help.
 
 -   One of the things about R that makes it easier to use is that many of the functions work by first checking out the *class* of the object you are asking it to work on. What this means is that the same function can be applied to different types of classes. This doesn't really affect much now, but as you investigate R more you can see how this works.
 :::
 
-## class types
+## Class types
 
-> lgl stands for logical,
+> lgl stands for logical, vectors that contain only TRUE or FALSE.
 >
-> vectors that contain only TRUE or FALSE.
->
-> int stands for integers. can't take decimals
+> int stands for integers. Can't take decimals
 >
 > dbl stands for doubles, or real numbers.
 >
@@ -262,7 +320,7 @@ install.packages("name_of_package") #install a package
 library(name_of_package) #load the package for your session
 ```
 
-you only have to install a package once, but **every time you reopen R you have to reload the pacakage with the library function**
+You only have to install a package once, but **every time you reopen R you have to reload the pacakage with the library function**
 
 ## example
 
@@ -274,13 +332,15 @@ library(tidyverse)
 
 In the case of this package, R tells us what is being loaded and also that there are some conflicts. Basically it just says that some functions from this new package have the same name as functions from the base R package. Good to pay attention to but usually not a huge problem unless you are doing a lot of things in one script
 
-# code example
+# Code example
 
 Here is a short piece of code that might make some sense. It calls a function ggplot (part of the tidyverse package) & then makes a plot. Then ggsave saves the new plot as a pdf
 
 the last line takes the data set that was used (diamonds) and write as CSV file for that.
 
 ```{r, eval=FALSE}
+#| code-line-numbers: "|1|2|3|4|5"
+library(tidyverse)
 ggplot(diamonds, aes(carat, price)) + 
   geom_point()
 ggsave("diamondPlot.pdf")
@@ -339,6 +399,18 @@ mtcars %>%
   geom_smooth(method = "loess", formula = "y~x")
 ```
 
+# summary
+
+-   Almost everything in R is either an object or a function.
+
+-   R is really just a fancypants calculator
+
+-   basically here is what we are going to do:
+
+    -   1\) Define an objects.
+
+    -    2) Apply functions to those objects.
+
 ## Slide Title {background-color="aquamarine"}
 
 ## links
@@ -350,3 +422,21 @@ mtcars %>%
 ## links based on yaml
 
 [Preview](https://example.com)
+
+# how computer work (different day)
+
+stuff on command lines..
+
+Literate programming is writing out the program logic in a human language with included (separated by a primitive markup) code snippets and macros. - Wikipedia
+
+## more on computers
+
+from: https://bookdown.org/ndphillips/YaRrr/the-command-line-console.html
+
+"R code, on its own, is just text. You can write R code in a new script within R or RStudio, or in any text editor. Hell, you can write R code on Twitter if you want. However, just writing the code won\'t do the whole job -- in order for your code to be executed (aka, interpreted) you need to send it to R\'s *command-line interpreter*. In RStudio, the command-line interpreter is called the Console."
+
+# homework
+
+### lets play a game
+
+Zork
