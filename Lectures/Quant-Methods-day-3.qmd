@@ -14,7 +14,7 @@ author: Marc Kissel
 institute: Appstate
 echo: true
 ---
-
+ hi 
 # today
 
 -   reading
