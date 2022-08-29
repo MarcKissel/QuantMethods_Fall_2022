@@ -44,13 +44,17 @@ echo: true
 
 Five steps: (1) obtaining data, (2) scrubbing data, (3) exploring data, (4) modeling data, and (5) interpreting data. Together, these steps form the OSEMN model (which is pronounced as awesome).
 
+## visualized version
+
 ![](https://datascienceatthecommandline.com/2e/images/dscl_0101.png)
 
 ## getting data
 
-Often times this is a difficult step. Can automate it with code
+Often times this is a difficult step.
 
--   download it, get it from a database, extract it (scrape the data from a website), create it
+-   Download it, get it from a database, extract it (scrape the data from a website), create it
+
+-   Can automate it with code
 
 -   sometimes need to mess with APIs - **Application Programming Interface**, software that allows two applications to talk to each other.
 
@@ -58,17 +62,15 @@ Often times this is a difficult step. Can automate it with code
 
 data comes in different types
 
-CSV,
+-   CSV
 
-JSON,
+-   JSON
 
-HTML,
+-   HTML
 
-XML form
+-   XML
 
-XLS
-
-MORE
+-   XLS
 
 ## scrubbing data
 
@@ -76,46 +78,46 @@ this is about getting data from the 'wild' into a clean version
 
 -   missing data, weird things, stuff you don't need
 
-filter, extract words, convert to different type
+-   we might want to *filter*, *extract words*, *convert*
 
-""80% of the work in any data project is in cleaning the data."
+::: callout-note
+"80% of the work in any data project is in cleaning the data."
+:::
 
 ## scrubbing data, continued
 
-named entities: People who live in New York City might answer: "New York, NY", "NYC", "New York City", "Manhattan, NY", "The City"
+-   named entities: People who live in New York City might say they live in: "New York, NY", "NYC", "New York City", "Manhattan, NY", "The City"
 
-Week 4 will be about avoding some of these issues in the first place
+-   Week 4 will be about avoiding some of these issues in the first place
 
 # exploring
 
 Get to know your data!
 
--   look at it
+-   Visualize your data (week 5-6)
 
     -   Single-feature histograms
     -   scatter plots
     -   Dimensionality reduction
     -   Clustering
 
-example of Dimensionality reduction:
-
-Netflix
-
 -   do some stats on it
 
--   make viz
-
-## modeling
+## Modeling
 
 explain your data or predict what will happen
 
-""all models are wrong, but some are useful"
+::: callout-warning
+"all models are wrong, but some are useful"
+:::
 
-## interpert data
+## interpret data
 
-here, we draw conclusions & communicate results
+-   here, we draw conclusions & communicate results
 
-the predictive power of a model lies in its ability to generalize in the quantitative sense: to make accurate quantitative predictions of data in new experiments.
+-   "The predictive power of a model lies in its ability to generalize in the quantitative sense: to make accurate quantitative predictions of data in new experiments."
+
+    -   But this is not always easy...
 
 # A bit more about programming
 
@@ -127,13 +129,15 @@ https://datascienceatthecommandline.com
 
 ## working at the command line
 
-### you won't have to do this often, but useful to know this stuff for data science
-
 -   sometimes good for installing/downloading things/decompress files/compiling code
 
 -   A shell is text application for working with files. takes commands and passes them on to the operating system
 
     -   everything you do in your computer can be done in theory it the shell but it is much harder
+
+::: callout-warning
+### you won't have to do this often, but useful to know this stuff for data science
+:::
 
 ## The path
 
@@ -141,24 +145,24 @@ https://datascienceatthecommandline.com
 
 the complete location or name of where a file (or something..) is located.
 
-PC:
+## PC:
 
 [![path for DOS](https://www.computerhope.com/jargon/p/path.gif){fig-alt="shows the ms dos path with the root directory, parent, current directoy, file, and file extension"}](https://www.computerhope.com/jargon/p/path.htm)
 
-For Apple/Linux
+## For Apple/Linux
 
 > /home/hope/public_html/
 
-internet path:
+## internet path:
 
     https://www.computerhope.com/jargon/p/path.htm
 
-::: callout-important
+MORE?
 
-You may only have a partial path. For example, the prompt may have "\~/public_html/cgi-bin" in the prompt. The \~ ([tilde](https://www.computerhope.com/jargon/t/tilde.htm)) is a shortcut used to express your [home directory](https://www.computerhope.com/jargon/h/homedir.htm).
-:::
 
 ## more on path
+
+You may only have a partial path. For example, the prompt may have "~/public_html/cgi-bin" in the prompt. The ~ (tilde) is a shortcut used to express your home directory.
 
 to get the working directory
 
@@ -166,9 +170,11 @@ PC: **chdir** at the prompt.
 
 Linux: **pwd** at the prompt
 
+R: getwd()
+
 ## setting the path
 
--   specifies the location where MS-DOS should look when it executes a command
+-   specifies the location where computer should look when it executes a command
 
 If you get an error about the path, i think best thing to do is google the error and see what to do to fix it!
 
@@ -207,7 +213,6 @@ parent child stuff
         -   tells computer where to look for program
 
 ## other things
-
 
 -   MABE
 
