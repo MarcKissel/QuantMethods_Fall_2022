@@ -1,24 +1,153 @@
 ---
-title: "day 3"
-format: revealjs
+title: "Quant Methods-day 3"
+author: "Marc Kissel"
+format:
+  revealjs:
+    slide-number: true
+    preview-links: true
+    slide-tone: false
+    chalkboard: true
+    theme: serif 
 editor: visual
+author: Marc Kissel
+institute: Appstate
+echo: true
 ---
 
-## Quarto
+# today
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+-   reading
 
-## Bullets
+-   homework
 
-When you click the **Render** button a document will be generated that includes:
+-   video
 
--   Content authored with markdown
--   Output from executable code
+## readings
 
-## Code
+## homework questions/do together
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+## video
 
-```{r}
-1 + 1
-```
+# Data science
+
+definition by Hilary Mason and Chris H. Wiggins
+
+https://sites.google.com/a/isim.net.in/datascience_isim/taxonomy
+
+define data science according to the following five steps: (1) obtaining data, (2) scrubbing data, (3) exploring data, (4) modeling data, and (5) interpreting data. Together, these steps form the OSEMN model (which is pronounced as awesome).
+
+![](https://datascienceatthecommandline.com/2e/images/dscl_0101.png)
+
+## getting data
+
+-   download it
+
+-   get it from a database
+
+-   extract it (scrape the data from a website
+
+-   create data
+
+## getting data, 2
+
+data comes in different types
+
+CSV,
+
+JSON,
+
+HTML,
+
+XML form
+
+XLS
+
+MORE
+
+## scrubbing data
+
+this is about getting data from the 'wild' into a clean version
+
+-   missing data, weird things, stuff you don't need
+
+filter, exrtract words, convert to different type
+
+""80% of the work in any data project is in cleaning the data."
+
+# exploring
+
+get to know your data
+
+-   look at get
+
+-   do some stats on it
+
+-   make viz
+
+## modeling
+
+explain your data or predcit what will happen
+
+## interpert data
+
+draw conclusions
+
+communcate your resutls
+
+# in class stuff 
+
+## computer stuff
+
+https://datascienceatthecommandline.com
+
+-   command line work
+
+    -   sometimes good for installing/downlading things/decompress files/complie code
+
+-   shell is text applicato for wrking with files. takes commands and apsses them on to the opearint system
+
+    -   like everytihng youdo in your computer cna bedone in theory int he shell but it is muchharder
+
+-   what is a path?
+
+-   parent child stuff
+
+-   stuff about enviroment
+
+    -   https://www.youtube.com/watch?v=ADh_OFBfdEE
+
+    -   NAME and Value
+
+        -   value is a string
+
+        -   tells a progma how the amchine is setup and contorl behivro of progmras
+
+        -   one useful varibale is the path varibal.
+
+            -   tells computer whrer ot look for progmra
+
+-   stuff about . and \... in directories
+
+    -   .. = move up a direcotry (i.e parent)
+
+    -   . =current direcotry?
+
+    -   dif between static and relative path
+
+        -   realative= fro cirrent move to direcotythat is next to it..in smae folder
+
+        -   abosul path = from root of file system..specfy all the path
+
+-   what is a home directoy
+
+-   MABE
+
+-   bash??
+
+    -   aybe good
+
+-   
+
+-   show the R folders on my computer and ralk about what they are
+
+-   Github?
