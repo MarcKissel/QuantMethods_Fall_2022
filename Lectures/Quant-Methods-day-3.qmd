@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: "Quant Methods-day 3"
 author: "Marc Kissel"
@@ -14,6 +13,8 @@ author: Marc Kissel
 institute: Appstate
 echo: true
 ---
+testing
+
 
 # today
 
