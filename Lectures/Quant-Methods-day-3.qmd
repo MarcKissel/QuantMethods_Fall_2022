@@ -24,29 +24,35 @@ echo: true
 
 ## readings
 
+### Norman - The Design of Everyday Things
+
+-   what was the point of this piece?
+-   can you see it relevant to other courses?
+-   what if anything did you like about it?
+
 ## homework questions/do together
+
+-   Go over R intro together
 
 ## video
 
+[The era of blind faith in big data must end](https://www.youtube.com/watch?v=_2u_eHHzRto&t=1s)
+
 # Data science
 
-definition by Hilary Mason and Chris H. Wiggins
+[definition by Hilary Mason and Chris H. Wiggins](https://sites.google.com/a/isim.net.in/datascience_isim/taxonomy)
 
-https://sites.google.com/a/isim.net.in/datascience_isim/taxonomy
-
-define data science according to the following five steps: (1) obtaining data, (2) scrubbing data, (3) exploring data, (4) modeling data, and (5) interpreting data. Together, these steps form the OSEMN model (which is pronounced as awesome).
+Five steps: (1) obtaining data, (2) scrubbing data, (3) exploring data, (4) modeling data, and (5) interpreting data. Together, these steps form the OSEMN model (which is pronounced as awesome).
 
 ![](https://datascienceatthecommandline.com/2e/images/dscl_0101.png)
 
 ## getting data
 
--   download it
+Often times this is a difficult step. Can automate it with code
 
--   get it from a database
+-   download it, get it from a database, extract it (scrape the data from a website), create it
 
--   extract it (scrape the data from a website
-
--   create data
+-   sometimes need to mess with APIs - **Application Programming Interface**, software that allows two applications to talk to each other.
 
 ## getting data, 2
 
@@ -70,15 +76,30 @@ this is about getting data from the 'wild' into a clean version
 
 -   missing data, weird things, stuff you don't need
 
-filter, exrtract words, convert to different type
+filter, extract words, convert to different type
 
 ""80% of the work in any data project is in cleaning the data."
 
+## scrubbing data, continued
+
+named entities: People who live in New York City might answer: "New York, NY", "NYC", "New York City", "Manhattan, NY", "The City"
+
+Week 4 will be about avoding some of these issues in the first place
+
 # exploring
 
-get to know your data
+Get to know your data!
 
--   look at get
+-   look at it
+
+    -   Single-feature histograms
+    -   scatter plots
+    -   Dimensionality reduction
+    -   Clustering
+
+example of Dimensionality reduction:
+
+Netflix
 
 -   do some stats on it
 
@@ -86,45 +107,76 @@ get to know your data
 
 ## modeling
 
-explain your data or predcit what will happen
+explain your data or predict what will happen
+
+""all models are wrong, but some are useful"
 
 ## interpert data
 
-draw conclusions
+here, we draw conclusions & communicate results
 
-communcate your resutls
+the predictive power of a model lies in its ability to generalize in the quantitative sense: to make accurate quantitative predictions of data in new experiments.
 
-# in class stuff 
+# A bit more about programming
 
-## computer stuff
+::: callout-tip
+if you want to know more:
 
 https://datascienceatthecommandline.com
+:::
 
--   command line work
+## working at the command line
 
-    -   sometimes good for installing/downlading things/decompress files/complie code
+### you won't have to do this often, but useful to know this stuff for data science
 
--   shell is text applicato for wrking with files. takes commands and apsses them on to the opearint system
+-   sometimes good for installing/downloading things/decompress files/compiling code
 
-    -   like everytihng youdo in your computer cna bedone in theory int he shell but it is muchharder
+-   A shell is text application for working with files. takes commands and passes them on to the operating system
+
+    -   everything you do in your computer can be done in theory it the shell but it is much harder
+
+## The path
 
 -   what is a path?
 
--   parent child stuff
+the complete location or name of where a file (or something..) is located.
 
--   stuff about enviroment
+PC:
 
-    -   https://www.youtube.com/watch?v=ADh_OFBfdEE
+[![path for DOS](https://www.computerhope.com/jargon/p/path.gif){fig-alt="shows the ms dos path with the root directory, parent, current directoy, file, and file extension"}](https://www.computerhope.com/jargon/p/path.htm)
 
-    -   NAME and Value
+For Apple/Linux
 
-        -   value is a string
+> /home/hope/public_html/
 
-        -   tells a progma how the amchine is setup and contorl behivro of progmras
+internet path:
 
-        -   one useful varibale is the path varibal.
+    https://www.computerhope.com/jargon/p/path.htm
 
-            -   tells computer whrer ot look for progmra
+::: callout-important
+
+You may only have a partial path. For example, the prompt may have "\~/public_html/cgi-bin" in the prompt. The \~ ([tilde](https://www.computerhope.com/jargon/t/tilde.htm)) is a shortcut used to express your [home directory](https://www.computerhope.com/jargon/h/homedir.htm).
+:::
+
+## more on path
+
+to get the working directory
+
+PC: **chdir** at the prompt.
+
+Linux: **pwd** at the prompt
+
+## setting the path
+
+-   specifies the location where MS-DOS should look when it executes a command
+
+If you get an error about the path, i think best thing to do is google the error and see what to do to fix it!
+
+## 
+
+## directories
+
+parent child stuff
 
 -   stuff about . and \... in directories
 
@@ -138,7 +190,24 @@ https://datascienceatthecommandline.com
 
         -   abosul path = from root of file system..specfy all the path
 
--   what is a home directoy
+-   what is a home directory
+
+## stuff about environment
+
+-   https://www.youtube.com/watch?v=ADh_OFBfdEE
+
+-   NAME and Value
+
+    -   value is a string
+
+    -   tells a program how the machine is setup and control behavior of programs
+
+    -   one useful variable is the path variable.
+
+        -   tells computer where to look for program
+
+## other things
+
 
 -   MABE
 
@@ -150,4 +219,4 @@ https://datascienceatthecommandline.com
 
 -   show the R folders on my computer and ralk about what they are
 
--   Github?
+# Github
