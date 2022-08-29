@@ -31,11 +31,13 @@ It is more than just a way to run statistics.
 
 -   Basics
 
--   How R thinks
+-   How R thinks handout to work on in class
 
 -   work on getting dataset
 
 -   comments on reading
+
+-   handout homework
 
 # Getting started with R
 
@@ -43,7 +45,7 @@ It is more than just a way to run statistics.
 
 ## R studio layout
 
-When you open RStudio, you\'ll see 5 windows (or panes). Can change the order under RStudio preferences.
+When you open RStudio, you'll see 5 windows (or panes). Can change the order under RStudio preferences.
 
 [![R studio layout. Source: https://bookdown.org/ndphillips/YaRrr/the-four-rstudio-windows.html](https://bookdown.org/ndphillips/YaRrr/images/RStudio_Screenshot_Labels.png){fig-alt="The four panes of RStudio." fig-align="center"}](https://bookdown.org/ndphillips/YaRrr/the-four-rstudio-windows.html)
 
@@ -124,16 +126,23 @@ class(x)
 
 We will come back to this soon!
 
+::: callout-tip
+When you store a single value to an object, it is called a *scalar*
+:::
+
 # To store more than one element in an object we need to remember a trick {.scrollable}
 
-if you want to make a series of numbers, characters, whatever, you need to use a special sequence. To do this, we must combine the values we want to assign with the c function, which combines values into a vector or list
+If you want to make a series of numbers, characters, whatever, you need to use a special sequence.
+
+To do this, we must combine the values we want to assign with the c function, which combines values into a *vector.*
+
+::: callout-tip
+A vector is just a combo of scalars, but they need to be of the same class or flavor!
+:::
 
 ```{r}
 my_list <- c(1,2,3,4,5)
 my_list_2 <- c("my_name", "my_address", "my_number")
-```
-
-```{r objects}
 b <- "my name"
 c <- FALSE
 d <- c(1,2,3.0,4)
@@ -178,7 +187,7 @@ The homework goes over this a lot. It can be dry and boring. But I want you to g
 
 # Data frames
 
-A data frame acts like a table, w/ data organized into rows and columns (they are technically lists where each element is a vector of the same length)
+A data frame acts like a table, w/ data organized into rows and columns (they are technically lists where each element is a vector of the same length). They look a lot like a spreadsheet in Excel
 
 ```{r}
 mtcars
@@ -206,6 +215,12 @@ head(my_data)
 View(my_data)
 ```
 
+# Matrices
+
+These are like dataframes but can only store either numbers or characters, not both
+
+If you are doing fancy stats, they are helpful
+
 # Functions
 
 Once you assign something (e.g., a value, a list of numbers, a character vector) to a object you can interact with that object. We do this by using what is called a *function*, which is a "set of statements organized together to perform a specific task."
@@ -232,9 +247,8 @@ If you need help on a function, you can type a question mark before its name lik
 
     -   arguments are wrapped in parentheses *after* the name of the function
 
-    ```{=html}
     <!-- -->
-    ```
+
         ``` R
         mean(d, na.rm=TRUE)
         ```
@@ -251,8 +265,6 @@ do_number <- function(x) {
 }
 ```
 
-        
-
 ## More on functions
 
 -   some functions are simple and others are quite complex
@@ -266,6 +278,8 @@ Once you have an object stored, you can interact with it. But remember that the 
 :::
 
 Remember: the way in which you can interact with the object is based on the *class* of the object. The class of the object is assigned by R based on what it *thinks* the object is supposed to be.
+
+I tend to think of classes as the **flavor** of an object
 
 \[live examples\]
 
@@ -409,7 +423,9 @@ mtcars %>%
 
     -   1\) Define an objects.
 
-    -    2) Apply functions to those objects.
+    -   
+
+        2)  Apply functions to those objects.
 
 ## Slide Title {background-color="aquamarine"}
 
@@ -433,7 +449,7 @@ Literate programming is writing out the program logic in a human language with i
 
 from: https://bookdown.org/ndphillips/YaRrr/the-command-line-console.html
 
-"R code, on its own, is just text. You can write R code in a new script within R or RStudio, or in any text editor. Hell, you can write R code on Twitter if you want. However, just writing the code won\'t do the whole job -- in order for your code to be executed (aka, interpreted) you need to send it to R\'s *command-line interpreter*. In RStudio, the command-line interpreter is called the Console."
+"R code, on its own, is just text. You can write R code in a new script within R or RStudio, or in any text editor. Hell, you can write R code on Twitter if you want. However, just writing the code won't do the whole job -- in order for your code to be executed (aka, interpreted) you need to send it to R's *command-line interpreter*. In RStudio, the command-line interpreter is called the Console."
 
 # homework
 

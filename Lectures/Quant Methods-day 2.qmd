@@ -14,6 +14,21 @@ institute: Appstate
 echo: true
 ---
 
+# Stats in the real world
+
+[![](https://static01.nyt.com/images/2022/08/22/briefing/23morning-vehicle-deaths-race/oakImage-1661199265644-articleLarge.png){fig-alt="graph from NYtimes that shows vehcile deaths by Race. Blacks have rateof 8.21 per 100,000 people, Latino at 6.81 per 100,000, whites at 6.33 per 100,000 and Asians at 1.42 per 100,000"}](https://messaging-custom-newsletters.nytimes.com/template/oakv2?campaign_id=9&emc=edit_nn_20220823&instance_id=70009&nl=the-morning&productCode=NN&regi_id=59794031&segment_id=102121&te=1&uri=nyt%3A%2F%2Fnewsletter%2F71630e4a-6cfe-5097-85e1-cbccb29a7956&user_id=5ab7a67ce4fb0a6b625cfd6af4b3d5ee)
+
+::: notes
+https://messaging-custom-newsletters.nytimes.com/template/oakv2?campaign_id=9&emc=edit_nn_20220823&instance_id=70009&nl=the-morning&productCode=NN&regi_id=59794031&segment_id=102121&te=1&uri=nyt%3A%2F%2Fnewsletter%2F71630e4a-6cfe-5097-85e1-cbccb29a7956&user_id=5ab7a67ce4fb0a6b625cfd6af4b3d5ee
+
+https://www.nytimes.com/2022/02/14/us/pedestrian-deaths-pandemic.html?campaign_id=9&emc=edit_nn_20220823&instance_id=70009&nl=the-morning&regi_id=59794031&segment_id=102121&te=1&user_id=5ab7a67ce4fb0a6b625cfd6af4b3d5ee
+:::
+
+## 
+
+## another example
+
+[compound curse words](https://colinmorris.github.io/blog/compound-curse-words)
 
 # Today's class: Why don't scientists just use common sense?
 
@@ -26,6 +41,8 @@ echo: true
 ## What do you think of this headline?
 
 [![](https://www.callingbullshit.org/case_studies/img/fox_fraud.png){fig-alt="Food stamps fraud at all time high?"}](https://www.callingbullshit.org/case_studies/img/fox_fraud.png)
+
+Example from [Cal](https://www.callingbullshit.org "hi")[ling Bullshit by Carl Bergstrom and Jevin West](https://www.callingbullshit.org "open for text")
 
 ## 
 
@@ -91,7 +108,7 @@ What is the mean class income?
 
 ![](https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg){fig-alt="pic of Jeff Bezos"}
 
-# life expectancy and music
+# 
 
 ![](https://images.theconversation.com/files/74771/original/image-20150313-7070-1jqdccg.jpg){fig-align="center"}
 
@@ -108,3 +125,34 @@ What is the mean class income?
 -   people in the survey were the more wealthy ones
 
 ![](https://o.quizlet.com/3X7JCy1vY6e-lmU4YmLcHQ.png)
+
+# R stuff: rest of the day is getting up-and-running with R
+
+-   Why is it worth the struggle?
+    -   reproducible
+
+## steps for lab:
+
+-   I'll show you some stuff
+-   then you will try to get R working
+-   then we will come back together and see what's happening
+
+## steps
+
+1.  Install R
+
+2.  Install R Studio
+
+3.  Setup Appearance
+
+4.  Take a look around!
+
+## How did we do?
+
+# quick examples of R live!
+
+# homework
+
+Go over the sheet again at home and think about each step and line of code:
+
+play the text based adventure game Zork: https://playclassic.games/games/adventure-dos-games-online/play-zork-great-underground-empire-online/
