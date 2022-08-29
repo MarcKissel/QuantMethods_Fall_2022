@@ -19,9 +19,10 @@ echo: true
 -   Overview of the course
 -   Think about your class goals
 -   Plan for the rest of the semester
+-   might need to end early...
 
 ::: {.callout-important collapse="false" appearance="default" icon="true"}
-hi
+Please brings laptops on Thursday if you have one!
 :::
 
 # Course goals {background-color="aquamarine"}
@@ -46,13 +47,15 @@ hi
 -   There is a lot of online help
 
 -   It makes things **reproducible**
+
+-   It is good on a resume/C.V.
 :::
 
 ## R Studio
 
 R studio is an **integrated development** **environment** (IDE) for R that makes it easier to work with R.
 
-It also does a lot of other things like help you \[build websites\](https://marckissel.netlify.com), create documents, and makes slides like these all with embedded stats and visualizations
+It also does a lot of other things like help you build [websites](https://marckissel.netlify.com "my website"), create documents, and makes slides like these all with embedded stats and visualizations
 
 [![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/RStudio_IDE_screenshot.png/1200px-RStudio_IDE_screenshot.png){fig-alt="imag shows the main screen of Rstudio with panes open showing data being run and a boxplot shown"}](https://www.rstudio.com)
 
@@ -143,7 +146,7 @@ viewof temp = Inputs.range([0, 100], {step: 1, value: 34, label: htl.html`Temp &
 Converting temperature from ℃ to ℉ <br>\
 Celsius = \${d3.format(".0f")(temp)}℃ and Fahrenheit = \${d3.format(".1f")(temp \* 9/5 + 32)}℉.
 
-## more
+## 
 
 ## You can do fun things in presentations:
 
@@ -158,6 +161,16 @@ leaflet() %>% addTiles() %>% setView(-81.680244, 36.214232, zoom =17) %>%  addPo
   )
 
 ```
+
+# stats in the world
+
+**An individual has been described by a neighbor as follows: "Steve is very shy and withdrawn, invariably helpful but with very little interest in people or in the world of reality. A meek and tidy soul, he has a need for order and structure, and a passion for detail." Is Steve more likely to be a librarian or a farmer?**
+
+# stats in the world
+
+**Linda is thirty-one years old, single, outspoken, and very bright. She majored in philosophy. As a student, she was deeply concerned with issues of discrimination and social justice, and also participated in anti-nuclear demonstrations\...The respondents are asked to rank in order of likelihood various scenarios: Linda is (1) an elementary school teacher, (2) active in the feminist movement, (3) a bank teller, (4) an insurance salesperson, or (5) a bank teller also active in the feminist movement.**
+
+# 
 
 ## Things to keep in mind: {background-color="aquamarine"}
 
@@ -176,6 +189,8 @@ You are going to get frustrated. Learning anything takes time and patience. And 
 2.  [Lab time]{.underline}
 
     The only way to learn R is to practice. You should devote time in the week not just to the homework but to 'playing' with R. We will also have lab time in class where we can help each other!
+
+3.  All slides will be linked on AsULearn
 
 # [Assessments]{.underline}
 
@@ -235,9 +250,12 @@ note: order might change as we work together on this
 
 -   As we get better with R, we can also do all this in a different way if you want to learn more about creating and managing online resources
 
-# next class
+# For Thursday
 
 -   Why do we *need* stats
 -   installing R
     -   please bring laptop to class. We will install programs we need and troubleshoot any troubles
+
+::: callout-tip
 -   please read [Matthews 2000 Storks Deliver Babies (P = 0.008](https://asulearn.appstate.edu/mod/lti/view.php?id=2611449))
+:::

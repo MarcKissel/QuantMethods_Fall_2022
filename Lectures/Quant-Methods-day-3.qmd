@@ -14,7 +14,7 @@ author: Marc Kissel
 institute: Appstate
 echo: true
 ---
- hi 
+
 # today
 
 -   reading
@@ -44,6 +44,8 @@ echo: true
 [definition by Hilary Mason and Chris H. Wiggins](https://sites.google.com/a/isim.net.in/datascience_isim/taxonomy)
 
 Five steps: (1) obtaining data, (2) scrubbing data, (3) exploring data, (4) modeling data, and (5) interpreting data. Together, these steps form the OSEMN model (which is pronounced as awesome).
+
+## visualized version
 
 ![](https://datascienceatthecommandline.com/2e/images/dscl_0101.png)
 
