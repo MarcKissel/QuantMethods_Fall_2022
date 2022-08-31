@@ -1,0 +1,35 @@
+---
+title: "Quant-Methods-day-4"
+format: revealjs
+editor: visual
+---
+
+# things
+
+look thorough data feminism
+
+examples to use - the Met name thing - maps - the feeling of a data viz - a bit on eugneics etc
+
+## from data feminism
+
+https://vimeo.com/170201886
+
+::: notes
+A Sort of Joy deploys wholly different tactics to similar ends. The performance starts with a group of white men standing in a circle in the center of the room. They face out toward the audience, which surrounds them. The men are dressed like stereotypical museum visitors: collared shirts, slacks, and so on. Each wears headphones and holds an iPad on which the names of artists in the collection scroll by. "John," the men say together. We see the iPads scrolling through all the names of the artists in the MoMA collection whose first name is John: John Baldessari, John Cage, John Lennon, John Waters, and so on. Three female performers, also wearing headphones and carrying iPads with scrolling names, pace around the circle of men. "Robert," the men say together, and the names scroll through the Roberts alphabetically. The women are silent and keep walking. "David," the men say together. It soon becomes apparent that the artists are sorted by first name, and then ordered by which first name has the most works in the collection. Thus, the Johns and Roberts and Davids come first, because they have the most works in the collection. But Marys have fewer works, and Mohameds and Marías are barely in the register. Several minutes later, after the men say "Michael," "James," "George," "Hans," "Thomas," "Walter," "Edward," "Yan," "Joseph," "Martin," "Mark," "José," "Louis," "Frank," "Otto," "Max," "Steven," "Jack," "Henry," "Henri," "Alfred," "Alexander," "Carl," "Andre," "Harry," "Roger," and "Pierre," "Mary" finally gets her due, spoken by the female performers, the first sound they've made.
+
+For audience members, the experience is slightly confusing at first. Why are the men in a circle? Why do they randomly speak someone's name? And why are those women walking around so intently? But "Mary" becomes a kind of aha moment, highlighting the highly gendered nature of the collection---exactly the same kind of experience of insight that data visualization is so good at producing, according to researcher Martin Wattenberg. From that point on, audience members start to listen differently, eagerly awaiting the next female name. It takes more than three minutes for "Mary" to be spoken, and the next female name, "Joan," doesn't come for a full minute longer. "Barbara" follows immediately after that, and then the men return to reading: "Werner," "Tony," "Marcel," "Jonathan
+:::
+
+## 
+
+## dd
+
+![](https://resize-v3.pubpub.org/eyJidWNrZXQiOiJhc3NldHMucHVicHViLm9yZyIsImtleSI6Imc1OXFxN3VvLzAxNTgzODg3Njg1OTAyLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTYwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfX19)
+
+"
+
+One of the downstream effects of the privilege hazard---the risks incurred when people from dominant groups create most of our data products---is not only that datasets are biased or unrepresentative, but that they never get collected at all. Mimi Onuoha---an artist, designer, and educator---has long been asking *who questions* about data science. Her project, *The Library of Missing Datasets* (figure 1.4), is a list of datasets that one might expect to already exist in the world, because they help to address pressing social issues, but that in reality have never been created. The project exists as a website and as an art object. The latter consists of a file cabinet filled with folders labeled with phrases like: \"People excluded from public housing because of criminal records,\" \"Mobility for older adults with physical disabilities or cognitive impairments,\" and \"Total number of local and state police departments using stingray phone trackers (IMSI-catchers).\" Visitors can tab through the folders and remove any particular folder of interest, only to reveal that it is empty. They all are. The datasets that should be there are \"missing.\"
+
+"
+
+![](https://resize-v3.pubpub.org/eyJidWNrZXQiOiJhc3NldHMucHVicHViLm9yZyIsImtleSI6ImE2M3hvam44LzUxNTgzODg3Njg1ODg3LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTYwMCwiZml0IjoiaW5zaWRlIiwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlfX19)
