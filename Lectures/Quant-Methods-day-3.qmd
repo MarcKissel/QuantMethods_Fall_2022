@@ -14,8 +14,6 @@ institute: Appstate
 echo: true
 ---
 
-fixing this nonsense
-
 # today
 
 -   reading
@@ -44,7 +42,19 @@ fixing this nonsense
 
 [definition by Hilary Mason and Chris H. Wiggins](https://sites.google.com/a/isim.net.in/datascience_isim/taxonomy)
 
-Five steps: (1) obtaining data, (2) scrubbing data, (3) exploring data, (4) modeling data, and (5) interpreting data. Together, these steps form the OSEMN model (which is pronounced as awesome).
+Five steps:
+
+1.  obtaining data
+
+2.  scrubbing data
+
+3.  exploring data
+
+4.  modeling data
+
+5.  interpreting data
+
+Together, these steps form the OSEMN model (which is pronounced as awesome).
 
 ## visualized version
 
@@ -64,15 +74,15 @@ Often times this is a difficult step.
 
 data comes in different types
 
--   CSV
+-   CSV - comma seperated values
 
--   JSON
+-   XLS - excel spreadsheet
 
--   HTML
+-   HTML - data from websites
 
--   XML
+-   XML - data from databases
 
--   XLS
+-   JSON - web-based databases
 
 ## scrubbing data
 
@@ -121,6 +131,8 @@ explain your data or predict what will happen
 
     -   But this is not always easy...
 
+# A short example of this
+
 # A bit more about programming
 
 ::: callout-tip
@@ -133,7 +145,7 @@ https://datascienceatthecommandline.com
 
 -   sometimes good for installing/downloading things/decompress files/compiling code
 
--   A shell is text application for working with files. takes commands and passes them on to the operating system
+-   A shell is text application for working with files. It takes commands and passes them on to the operating system
 
     -   everything you do in your computer can be done in theory it the shell but it is much harder
 
@@ -141,11 +153,21 @@ https://datascienceatthecommandline.com
 ### you won't have to do this often, but useful to know this stuff for data science
 :::
 
+## The environment
+
+-   https://www.youtube.com/watch?v=ADh_OFBfdEE
+
+-   Not really a good idea to mess with this unless you know what you are doing....
+
+-   NAME and Value
+
+    -   tells a program how the machine is setup and control behavior of programs
+
+    -   one very useful variable is the **path** variable, which tells computer where to look for a program
+
 ## The path
 
--   what is a path?
-
-the complete location or name of where a file (or something..) is located.
+#### A path is the complete location or name of where a file (or something..) is located.
 
 ## PC:
 
@@ -157,15 +179,17 @@ the complete location or name of where a file (or something..) is located.
 
 ## internet path:
 
-    https://www.computerhope.com/jargon/p/path.htm
+![](https://miro.medium.com/max/1400/1*O2QB8zBNMs7SN44AhGdPrg.png)
 
-MORE?
+::: notes
+https://medium.com/\@joseph.pyram/9-parts-of-a-url-that-you-should-know-89fea8e11713
+:::
 
-## more on path
+## More on path
 
 You may only have a partial path. For example, the prompt may have "\~/public_html/cgi-bin" in the prompt. The \~ (tilde) is a shortcut used to express your home directory.
 
-to get the working directory
+## To get the working directory
 
 PC: **chdir** at the prompt.
 
@@ -173,56 +197,27 @@ Linux: **pwd** at the prompt
 
 R: getwd()
 
+## directories
+
+-   difference between static and relative path
+
+    -   relative= from current move to directory that is next to it....i.e. in same folder
+
+    -   absolute path = from root of file system..specify all the path
+
 ## setting the path
 
 -   specifies the location where computer should look when it executes a command
+-   *sometimes* this is a problem with using more advance R things, so just wanted to put that out there
 
 If you get an error about the path, i think best thing to do is google the error and see what to do to fix it!
 
 ## 
 
-## directories
-
-parent child stuff
-
--   stuff about . and \... in directories
-
-    -   .. = move up a direcotry (i.e parent)
-
-    -   . =current direcotry?
-
-    -   dif between static and relative path
-
-        -   realative= fro cirrent move to direcotythat is next to it..in smae folder
-
-        -   abosul path = from root of file system..specfy all the path
-
--   what is a home directory
-
-## stuff about environment
-
--   https://www.youtube.com/watch?v=ADh_OFBfdEE
-
--   NAME and Value
-
-    -   value is a string
-
-    -   tells a program how the machine is setup and control behavior of programs
-
-    -   one useful variable is the path variable.
-
-        -   tells computer where to look for program
-
 ## other things
 
--   MABE
+-   R folders
 
--   bash??
+-   setting R in the path?
 
-    -   aybe good
-
--   
-
--   
-
-    # show the R folders on my computer and ralk about what they are
+    # Datasets for class
