@@ -155,7 +155,7 @@ https://datascienceatthecommandline.com
 
 ## The environment
 
--   https://www.youtube.com/watch?v=ADh_OFBfdEE
+-   
 
 -   Not really a good idea to mess with this unless you know what you are doing....
 
@@ -197,27 +197,25 @@ Linux: **pwd** at the prompt
 
 R: getwd()
 
+## setting the path
+
+-   specifies the location where computer should look when it executes a command
+-   *sometimes* this is a problem with using more advanced R things, so just wanted to put that out there
+
+If you get an error about the path, i think best thing to do is google the error and see what to do to fix it!
+
 ## directories
 
 -   difference between static and relative path
 
-    -   relative= from current move to directory that is next to it....i.e. in same folder
+    -   relative= from the current one move to a directory that is next to it....
 
     -   absolute path = from root of file system..specify all the path
-
-## setting the path
-
--   specifies the location where computer should look when it executes a command
--   *sometimes* this is a problem with using more advance R things, so just wanted to put that out there
-
-If you get an error about the path, i think best thing to do is google the error and see what to do to fix it!
-
-## 
 
 ## other things
 
 -   R folders
 
--   setting R in the path?
+# Datasets for class
 
-    # Datasets for class
+<https://docs.google.com/spreadsheets/d/1Kp148KA9G2aa1qBNnn4vz73l1a8_9dpzIApbvCLeEQU/edit?usp=sharing>
