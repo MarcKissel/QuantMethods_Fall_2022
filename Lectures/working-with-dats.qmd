@@ -107,25 +107,19 @@ NY TIMES Piece
 
 ### create a *data dictionary*
 
-- A **separate** file that explains what all of the variables are.
-- Don't assume something is obvious 
-
+-   A **separate** file that explains what all of the variables are.
+-   Don't assume something is obvious
 
 ## [Data organization in spreadsheets]{.underline}
 
-
 ### Don't include calculations in the raw data files.
 
-- Primary data file should be pristine. Make sure you can't overwrite it and do not touch it.
-- Do analysis in another file
+-   Primary data file should be pristine. Make sure you can't overwrite it and do not touch it.
+-   Do analysis in another file
 
-• On a Mac, right-click on the file in Finder and select "Get Info". In the menu
-that opens, there is a section at the bottom on "Sharing & Permissions". Click on
-"Privilege" for yourself and select "Read only".
+• On a Mac, right-click on the file in Finder and select "Get Info". In the menu that opens, there is a section at the bottom on "Sharing & Permissions". Click on "Privilege" for yourself and select "Read only".
 
-• In Windows, right-click on the file in Windows Explorer and select "Properties". In
-the "General" tab, there is a section at the bottom with "Attributes". Select the box
-for "Read-only" and click the "OK" button.
+• In Windows, right-click on the file in Windows Explorer and select "Properties". In the "General" tab, there is a section at the bottom with "Attributes". Select the box for "Read-only" and click the "OK" button.
 
 ## [Data organization in spreadsheets]{.underline}
 
@@ -135,42 +129,37 @@ for "Read-only" and click the "OK" button.
 
 ### Choose good names for things
 
-- Names of columns  should make sense, have no spaces, and be consistent
-- CamelCase, snake_case,
+-   Names of columns should make sense, have no spaces, and be consistent
+-   CamelCase, snake_case,
 
 SHOW GOOD NAEMS FOR ARITCLE BOWMAN WOO
-
 
 ## [Data organization in spreadsheets]{.underline}
 
 ### Make backups!
 
-- A good practice is to use the date in the file name: 2020-02-03-My_text_draft
-- Or you can number them: 01_draft, 02_draft, etc.
+-   A good practice is to use the date in the file name: 2020-02-03-My_text_draft
+-   Or you can number them: 01_draft, 02_draft, etc.
 
 ## [Data organization in spreadsheets]{.underline}
 
 ### Use data validation to avoid data entry errors
 
-- This controls the type of data you can enter into a cell.
-
+-   This controls the type of data you can enter into a cell.
 
 ## [Data organization in spreadsheets]{.underline}
 
 ### Save the data in plain text files.
 
-- once you are done entering data, save it as a .csv as well...this way you can easily share with others and always have access to it
-
+-   once you are done entering data, save it as a .csv as well...this way you can easily share with others and always have access to it
 
 http://phdcomics.com/comics/archive/phd101212s.gif
 
-## another tip: 
+## another tip:
+
 Get used to looking at data though a text editor, which views plain text, rather than a spreadsheet
 
 ### I tend to use Notepad, but there are [many other](https://en.wikipedia.org/wiki/Comparison_of_text_editors)
-
-
-
 
 # background readings
 
@@ -183,4 +172,3 @@ https://www.bloomberg.com/news/articles/2013-04-18/faq-reinhart-rogoff-and-the-e
 https://nacnudus.github.io/spreadsheet-munging-strategies/index.html
 
 https://matthewlincoln.net/2018/03/26/best-practices-for-using-google-sheets-in-your-data-project.html
-
