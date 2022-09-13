@@ -6,32 +6,42 @@ editor: visual
 
 # Class overview
 
-##Video on the problems of big data:
+Today's class: **How can we avoid problems with our data**
+
+# 
 
 <iframe width="645" height="363" src="https://www.youtube.com/embed/_2u_eHHzRto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 
 </iframe>
 
+## short class project
+
+Use seperate slides for this?
+
+Step 1: each of you take 2 plastic eggs... step 2: in either excel, googdle sheets, losselear paper, etc. record the information you have in each egg. you get to choose how you record and what info you record, but don't show anyone else! step 3: then, dispose of the data (i.e. either eat the candy or put it back in egg)
+
+Step 4: XXXX
+
+step 5: now, imagine you want to share your data. partner up withsome and make another spreadsheet pooling your data...i.e. include as much data from both your spreadsheets as you can. did both of you include the same data? if not, how can you best pool your data
+
+step 6: compare orignals to the joint datasets ##Video on the problems of big data:
+
 # How do we record/store/view data in a way that allows us to use it in the future
 
--   Best advice I can give you is to think of yourself as your own co-author, looking at the data 1 year from today
+-   Best advice I can give you is to think of yourself as your **own co-author**, looking at the data one year from today
 -   No matter what programs you use, make it easy for you and a computer to read!
-
-# Version control
-
-![](https://imgs.xkcd.com/comics/documents.png)
 
 # Spreadsheets
 
--   Interactive computer application for organization, analysis and storage of data in tabular form. Table of cells arranged into rows and columns. A cell = box that holds data
+-   Interactive computer application for organization, analysis and storage of data in tabular form.
 
--   Columns represented by letters, "A", "B", "C" ###- Rows represented by numbers, 1, 2, 3, \### Difference between spreadsheet and a database?
+-   A cell is box that holds data. A Spreadsheet is a table of cells arranged into **rows** and **columns**.
 
-## 
+-   Columns often represented by letters, "A", "B", "C"
 
-background-image url(images/ss.jpeg) background-size: contain
+-   Rows often represented by numbers, 1, 2, 3
 
-background-image: url(images/Excel_3.jpg)
+-   Difference between spreadsheet and a database?
 
 ## 
 
@@ -41,19 +51,17 @@ background-image: url(images/Excel_3.jpg)
 -   In general, fine for storing data but not so great for analyzing/visualizing data
 -   Almost everyone uses them, though, and hard to get around it
 
-NY TIMES Piece
-
 ## Excel
 
+-   Excel is probably the most popular one in the US...
 -   People like to hate on Excel. Yet it is pretty standard in business and research
+-   Not cheap so sometimes need other programs
 
 ### Excel horror stories
 
 -   Excel can turn gene names [into dates!](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-5-80)
 
--   [Problems of dates](http://ecologybits.com/index.php/2016/07/06/beware-this-scary-thing-excel-can-do-to-your-data/)
-
-## [So why do we use them?]{.underline}
+## [So why do we use Spreadsheets?]{.underline}
 
 ### - Solves a lot of practical problems
 
@@ -61,17 +69,17 @@ NY TIMES Piece
 
 ### - Does file organization for you
 
-### - Reactive
+### - Reactive!
 
 ### - For many, it is totes fine to use. But if you do data analysis it can get annoying
 
-# Data organization
+## Data organization tips:
 
-## How can we setup data to be read by both humans *and* computers?
+#### How can we setup data to be read by both humans *and* computers?
 
-## How can it be setup so co-authors can understand it?
+#### How can it be setup so co-authors can understand it?
 
-## How can we *avoid* mistakes
+#### How can we *avoid* mistakes
 
 ## [Data organization in spreadsheets]{.underline}
 
@@ -81,8 +89,11 @@ NY TIMES Piece
 
 ### write dates like YYYY-MM-DD
 
--   Excel stores dates as a number that says how many days have passed since a given date. But that *given date* isn't always the same!
+-   Excel stores dates as a number that says *how many days have passed since a given date*. But that *given date* isn't always the same!
 -   ISO 8601
+    -   Date and time values are ordered from the largest to smallest unit of time
+
+    -   four-digit year \[YYYY\], two-digit month of the year (01 through 12), and a two-digit day of that month (01 through 31)
 
 ## [Data organization in spreadsheets]{.underline}
 
@@ -101,7 +112,10 @@ NY TIMES Piece
 ### Organize the data as a single rectangle
 
 -   The first row should contain variable names
--   Avoid using more than one row for the variable names.
+
+    ::: callout-important
+    Avoid using *more than one row* for the variable names.
+    :::
 
 ## [Data organization in spreadsheets]{.underline}
 
@@ -117,22 +131,32 @@ NY TIMES Piece
 -   Primary data file should be pristine. Make sure you can't overwrite it and do not touch it.
 -   Do analysis in another file
 
+## 
+
 • On a Mac, right-click on the file in Finder and select "Get Info". In the menu that opens, there is a section at the bottom on "Sharing & Permissions". Click on "Privilege" for yourself and select "Read only".
 
 • In Windows, right-click on the file in Windows Explorer and select "Properties". In the "General" tab, there is a section at the bottom with "Attributes". Select the box for "Read-only" and click the "OK" button.
 
 ## [Data organization in spreadsheets]{.underline}
 
-### Don't use font color or highlighting as data
+### Don't use [font color]{style="color:#cc0000"} or [highlighting]{style="background: yellow;"} as data
 
 ## [Data organization in spreadsheets]{.underline}
 
 ### Choose good names for things
 
 -   Names of columns should make sense, have no spaces, and be consistent
--   CamelCase, snake_case,
+    -   CamelCase, snake_case,
 
-SHOW GOOD NAEMS FOR ARITCLE BOWMAN WOO
+[![](https://res.cloudinary.com/practicaldev/image/fetch/s--O5Xhkq2A--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/wng0y0ke8i22mjiqokfc.png)](https://res.cloudinary.com/practicaldev/image/fetch/s--O5Xhkq2A--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/wng0y0ke8i22mjiqokfc.png)
+
+## 
+
+| Good             | Alternative       | Avoid             |
+|------------------|-------------------|-------------------|
+| Observation_01   | first_observation | 1st Obs           |
+| Max_temp_C       | MaxTemp           | Maximum Temp (°C) |
+| Precipitation_mm | Precipitation     | precmm            |
 
 ## [Data organization in spreadsheets]{.underline}
 
@@ -161,6 +185,13 @@ Get used to looking at data though a text editor, which views plain text, rather
 
 ### I tend to use Notepad, but there are [many other](https://en.wikipedia.org/wiki/Comparison_of_text_editors)
 
+# For Thursday
+
+-   finish lab
+-   bring in a news story (see handout from last week or AsULearn)
+
+# handout
+
 # background readings
 
 https://peerj.com/preprints/3183/
@@ -172,3 +203,7 @@ https://www.bloomberg.com/news/articles/2013-04-18/faq-reinhart-rogoff-and-the-e
 https://nacnudus.github.io/spreadsheet-munging-strategies/index.html
 
 https://matthewlincoln.net/2018/03/26/best-practices-for-using-google-sheets-in-your-data-project.html
+
+# Version control
+
+![](https://imgs.xkcd.com/comics/documents.png)
