@@ -1,0 +1,195 @@
+---
+title: "TidyTemplate"
+date: 2022-09-14
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# TidyTuesday
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(tidytuesdayR)
+
+```
+
+# Load the weekly Data
+
+Download the weekly data and make available in the `tt` object.
+
+```{r Load}
+
+tt <- tt_load("2022-09-13")
+
+```
+
+
+# Readme
+
+T
+```{r Readme, eval = interactive()}
+
+tt
+
+```
+
+
+# Glimpse Data
+
+Take an initial look at the format of the data available.
+
+```{r Glimpse}
+
+tt %>% 
+  map(glimpse)
+
+```
+
+
+```{r}
+bigfoot <- tt$bigfoot %>% mutate(year = year(date))
+bigfoot %>% count(season)
+```
+
+
+map?
+
+```{r}
+bigfoot %>% ggplot(aes(x=longitude, y= latitude)) + geom_point() + borders("state")
+
+p_small <- bigfoot %>% filter( state != "Alaska") %>% ggplot(aes(x=longitude, y= latitude)) + geom_point() + borders("state")
+
+
+p_small <- bigfoot %>% filter( state != "Alaska",
+                               longitude > -135) %>% ggplot(aes(x=longitude, y= latitude)) + geom_point() + borders("state")
+#belwo for aaniamt
+
+
+p_small + labs(title = 'Year: {current_frame}') +
+  transition_time(year)
+
+
+p_small + labs(title = 'Year: {current_frame}') +
+  transition_manual(year, cumulative = TRUE)
+
+
+```
+
+
+#https://cran.r-project.org/web/packages/usmap/vignettes/mapping.html
+
+
+```{r}
+install.packages("usmap")
+library(usmap)
+
+bigfoot %>% ggplot(aes(x=longitude, y= latitude)) + geom_point() + coord_map()
+bigfoot %>% ggplot(aes(x=longitude, y= latitude)) + geom_point() + coord_map() + theme_void()
+bigfoot %>% ggplot(aes(x=longitude, y= latitude)) + geom_point() + coord_map() + theme_void() + borders("state")
+
+bigfoot %>% ggplot(aes(x=longitude, y= latitude, color=season)) + geom_point() + coord_map() + theme_void() + borders("state")
+
+bigfoot %>% plot_usmap(regions = "states")  %>% ggplot(aes(x=longitude, y= latitude)) + geom_point()
+
+bigfoot %>% plot_usmap(data = statepop, values = "pop_2015")  %>% ggplot(aes(x=longitude, y= latitude)) + geom_point()
+
+transformed_bifoot  <- usmap_transform(bigfoot)
+
+
+
+transformed_bifoot  <- usmap_transform(d1)
+
+plot_usmap() + 
+  geom_point(data = bigfoot, 
+             aes(x = longitude, y = latitude), 
+             color = "red",
+             size = 3)
+
+
+```
+
+
+```{r}
+library(maps)
+library(mapdata)
+usa <- map_data('usa')
+
+ggplot(data=usa, aes(x=long, y=lat, group=group)) + geom_polygon(fill='lightblue')  + 
+  geom_point(data = bigfoot, aes(x=longitude, y= latitude, color=season))
+
+MainStates <- map_data("state")
+
+ggplot() + 
+  geom_polygon( data=MainStates, aes(x=long, y=lat, group=group),
+                color="black", fill="lightblue" )
+
+p <-ggplot() + 
+  geom_polygon( data=MainStates, aes(x=long, y=lat, group=group),
+                color="black", fill="lightblue" )
+
+
+p + geom_point(data=bigfoot, aes(x=longitude, y= latitude, color=season)) 
+```
+
+
+```{r}
+bigfoot %>% count(state, sort=T)
+bigfoot %>% mutate(state = fct_lump(state, 20))  %>% count(state, sort=T)
+bigfoot %>% mutate(state = fct_lump(state, 20))  %>% count(state, sort=T)
+```
+
+is there a trend over time?
+link between popsize?
+
+
+```{r}
+
+
+
+p <-ggplot() + 
+  geom_polygon( data=MainStates, aes(x=long, y=lat, group=group),
+                color="black", fill="lightblue" )
+
+
+p1 <- p + geom_point(data=bigfoot, aes(x=longitude, y= latitude, color=season))
+
+
+# install.packages("gganimate")
+
+library(gganimate)
+# install.packages("gifski")
+
+library(lubridate)
+
+
+ p + geom_point(data=bigfoot, aes(x=longitude, y= latitude, color=season)) +  labs(title = 'Year: {frame_time}') +
+  transition_time(year)
+
+ 
+ 
+p3 <-  p + geom_point(data=bigfoot, aes(x=longitude, y= latitude, color=season)) +  labs(title = 'Year: {frame_time}') +
+  transition_time(year) 
+ 
+ 
+
+p + geom_point(data=bigfoot, aes(x=longitude, y= latitude, color=season)) + coord_map() +   labs(title = 'Year: {round(frame_time,2)}') + transition_time(year) 
+
+
+#remove alaska? 
+#show weird ones
+
+
+
+
+
+```
+
+
+Todo
+
+- tidytext stuff with a wordclurs and then a pairwise corr and m ayeb a network fraph 
