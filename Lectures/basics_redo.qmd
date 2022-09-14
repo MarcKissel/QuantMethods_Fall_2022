@@ -27,17 +27,14 @@ It is more than just a way to run statistics.
 :::
 :::
 
-## Today we are going over week's HW
+## Today we are going to prep for next week's lab
 
 -   Basics
-
--   How R thinks handout to work on in class
-
--   work on getting dataset
+-   How to get data into R
+-   How R *thinks*
 
 -   comments on reading
 
--   handout homework
 
 # Getting started with R
 
@@ -413,32 +410,4 @@ mtcars %>%
 
         2)  Apply functions to those objects.
 
-## Slide Title {background-color="aquamarine"}
-
-## links
-
-[Preview](https://example.com){preview-link="true"}
-
-[NoPreview](https://example.com){preview-link="false"}
-
-## links based on yaml
-
-[Preview](https://example.com)
-
-# how computer work (different day)
-
-stuff on command lines..
-
-Literate programming is writing out the program logic in a human language with included (separated by a primitive markup) code snippets and macros. - Wikipedia
-
-## more on computers
-
-from: https://bookdown.org/ndphillips/YaRrr/the-command-line-console.html
-
-"R code, on its own, is just text. You can write R code in a new script within R or RStudio, or in any text editor. Hell, you can write R code on Twitter if you want. However, just writing the code won't do the whole job -- in order for your code to be executed (aka, interpreted) you need to send it to R's *command-line interpreter*. In RStudio, the command-line interpreter is called the Console."
-
-# homework
-
-### lets play a game
-
-Zork
+##  {background-color="aquamarine"}
