@@ -237,7 +237,7 @@ If you need help on a function, you can type a question mark before its name lik
 
     -   arguments are wrapped in parentheses *after* the name of the function
 
-        ``` R
+        ``` r
         mean(d, na.rm=TRUE)
         ```
 
