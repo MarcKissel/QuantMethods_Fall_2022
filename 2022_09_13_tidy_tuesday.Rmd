@@ -15,6 +15,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(tidytuesdayR)
+library(lubridate)
+library(gganimate)
 
 ```
 
@@ -41,19 +43,13 @@ tt
 
 # Glimpse Data
 
-Take an initial look at the format of the data available.
-
-```{r Glimpse}
-
-tt %>% 
-  map(glimpse)
-
-```
 
 
 ```{r}
 bigfoot <- tt$bigfoot %>% mutate(year = year(date))
 bigfoot %>% count(season)
+bigfoot %>% ggplot(aes(x=year)) + geom_histogram()
+bigfoot %>% filter(year > 1900) %>% ggplot(aes(x=year)) + geom_histogram()
 ```
 
 
@@ -67,18 +63,137 @@ p_small <- bigfoot %>% filter( state != "Alaska") %>% ggplot(aes(x=longitude, y=
 
 p_small <- bigfoot %>% filter( state != "Alaska",
                                longitude > -135) %>% ggplot(aes(x=longitude, y= latitude)) + geom_point() + borders("state")
+
 #belwo for aaniamt
 
 
-p_small + labs(title = 'Year: {current_frame}') +
-  transition_time(year)
+p_small + labs(title = 'Year: {current_frame}') + transition_time(year)
 
+p_small + labs(title = 'Year: {current_frame}') +   transition_manual(year, cumulative = TRUE)
 
-p_small + labs(title = 'Year: {current_frame}') +
-  transition_manual(year, cumulative = TRUE)
 
 
 ```
+
+
+
+
+
+does day of the week effect sightings?
+
+```{r}
+bigfoot %>% mutate(day = wday(date, label = T))
+bigfoot %>% mutate(day = wday(date, label = T)) %>% 
+  count(day, sort=T)
+
+bigfoot %>% mutate(day = wday(date, label = T)) %>%  filter(!is.na(day))  %>% 
+  count(day, sort=T)  %>% ggplot(aes(day, n)) + geom_col()
+
+bigfoot %>% mutate(day = wday(date, label = T)) %>%  filter(!is.na(day))  %>% 
+  count(day, season, sort=T)  %>% ggplot(aes(day, n, fill=season)) + geom_col()
+```
+
+
+is there a trend over time?
+link between popsize?
+
+
+words
+
+```{r}
+library(tidytext)
+bigfoot %>% unnest_tokens(word, observed) %>% count(word, sort=T)
+
+
+word_list <- bigfoot %>% unnest_tokens(word, observed)  %>% anti_join(stop_words) %>% count(word, sort=T)
+
+install.packages("devtools")
+
+devtools::install_github("lchiffon/wordcloud2")
+
+
+
+library(wordcloud2)
+wordcloud2(data = word_list)
+
+# # 
+# install.packages("widyr")
+# library(widyr)
+# install.packages("ggraph")
+# library(ggraph)
+# 
+# word_list %>% 
+#   pairwise_cor(word, id)
+# 
+
+word_list %>% 
+  inner_join(get_sentiments("bing"))
+
+
+word_list %>% 
+  inner_join(get_sentiments("bing")) %>% 
+  count(sentiment)
+
+
+
+word_list %>% 
+  inner_join(get_sentiments("bing")) 
+
+# 
+# word_list %>% 
+#   inner_join(get_sentiments("bing")) %>% 
+# pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) %>%   mutate(sentiment = positive - negative)
+
+
+word_list  %>% 
+ inner_join(get_sentiments("bing")) %>%
+  count(word, sentiment, sort = TRUE) 
+
+
+sent_list <- word_list  %>% 
+ inner_join(get_sentiments("bing")) %>%
+  count(word, sentiment, sort = TRUE)
+
+
+```
+
+
+
+predict
+
+
+```{r}
+library(tidymodels)
+set.seed(1234)
+
+#note doesn't work with 3...
+bigfoot_split <- bigfoot %>% filter(classification != "Class C") %>%  initial_split()
+bigfoot_split
+
+bigfoot_train  <-training(bigfoot_split)
+bigfoot_test <-   testing(bigfoot_split)
+
+bigfoot_train_fold <- bigfoot_train %>% vfold_cv(3)
+
+recipe(classification ~ state, bigfoot_train) %>% 
+  workflow(logistic_reg()) %>% 
+  fit_resamples(bigfoot_train_fold) %>% 
+  collect_metrics()
+
+recipe(classification ~ state + year + season, bigfoot_train) %>% 
+  workflow(logistic_reg()) %>% 
+  fit_resamples(bigfoot_train_fold) %>% 
+  collect_metrics()
+
+
+
+recipe(classification ~ state + year + season, bigfoot_train) %>% 
+  workflow(logistic_reg()) %>% 
+  fit_resamples(bigfoot_train_fold) %>% 
+  collect_metrics()
+
+```
+
 
 
 #https://cran.r-project.org/web/packages/usmap/vignettes/mapping.html
