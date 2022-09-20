@@ -348,7 +348,7 @@ g + geom_tufteboxplot() +
 ![](https://miro.medium.com/max/875/1*uI-z9s9_URfjzpQc3FCDxw.png)
 
 ::: notes
-The graph shows the number of COVID-19 tests per million people. Flook at those bars: Argentina tests almost as many people as the USA! At least that's what it seems like until you look at the numbers
+The graph shows the number of COVID-19 tests per million people. look at those bars: Argentina tests almost as many people as the USA! At least that's what it seems like until you look at the numbers
 :::
 
 ## here?
