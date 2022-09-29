@@ -8,7 +8,7 @@ editor: visual
 
 > To do this part of the homework you can copy and past the code in the 'code blocks' into R and run it. Then when you figure out how to answer the questions just copy and paste your code from R into this document!
 >
-> Rather than a normal handout/lab this one tells a story and has you learning ggplot while you do so. The reading here: <https://r4ds.had.co.nz/data-visualisation.html> can help youdoing this project. If you need more background on how ggplot works check out chpt 3 of <https://socviz.co/makeplot.html#makeplot> "Data Visualization"
+> Rather than a normal handout/lab this one tells a story and has you learning ggplot while you do so. The reading here: <https://r4ds.had.co.nz/data-visualisation.html> can help you doing this project. If you need more background on how ggplot works check out chpt 3 of <https://socviz.co/makeplot.html#makeplot> "Data Visualization"
 >
 > You might not know how to do the things being asked for right away. that is fine and expected. What i want you to learn is how to *find the answers* rather than what the answer is. In other words, I am more concerned with the process than the result. But if you are getting frustrated let me know.
 
@@ -38,7 +38,7 @@ We are going to be simulating the data you collected by creating objects and put
 
 ```{r get data on tails, warning=FALSE, message=FALSE}
 library(tidyverse)
-set.seed(2020) #this sets the randomizer in R
+set.seed(2022) #this sets the randomizer in R
 tail_length <-rnorm(500,57,2) # create a set of 500 random numbers with a mean of 57 and a standard deviation of 2 
 sample_number <-1:500 # create a vector of numbers from 1 to 500
 monkey_pop <- rep(letters[1], 500) # this makes a vector of 500 'a's
@@ -115,7 +115,7 @@ hmmm...that doesn't look right since you can't tell the difference groups. But y
 
 #edit the below code to color by the variable monkey_pop
 
-#all_data %>% ggplot(aes(tail_length, fill=******************** )) + geom_histogram(color="#e9ecef", alpha=0.6, position = 'identity')  
+#all_data %>% ggplot(aes(tail_length, fill=monkey_pop)) + geom_histogram(color="#e9ecef", alpha=0.6, position = 'identity')  
 ```
 
 So you look at this and think to yourself "Hey, they overlap a bit but there are difference at the tails....😀. I am going to send this to my adviser and she will be soooooo happy!"
@@ -132,11 +132,9 @@ A few hours later you get an email with these requests. Your adviser wants you t
 
 -   d\) Give it a title that is meaningful
 
--   e\) Put a credit somewhere that says who made the figure
+-   e\) Put a credit somewhere that says who made the figure (hint: look up the options for ggplot2 labels)
 
 -   f\) Change the legend so that it says "Monkey groups"
-
--   g\) Change the labels from "a" and "b" to "Group one" and "Group 2"
 
 Lets take this step by step. Copy the below R code and use each step to build the new graph. If you need help use the class readings or ask me! Then copy the code you used below. For example, to get the first part of this we would update the code like this
 
@@ -146,7 +144,7 @@ Lets take this step by step. Copy the below R code and use each step to build th
 all_data %>% ggplot(aes(tail_length, fill=monkey_pop )) + geom_histogram(color="#e9ecef", alpha=0.6, position = 'identity', binwidth =  1)
 # new code
 
-all_data %>% ggplot(aes(tail_length, fill=monkey_pop )) + geom_histogram(color="#e9ecef", alpha=0.6, position = 'identity', binwidth =  1) + theme(legend.position = "bottom")
+all_data %>% ggplot(aes(tail_length, fill=monkey_pop )) + geom_histogram(color="#e9ecef", alpha=0.6, position = 'identity', binwidth =  1) + theme(legend.position = "bottom") 
 ```
 
 To figure out how to do this we are going to need to check online. One good source is <https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf>. For example if you look at the right hand column of page 2 you will see a box that talks about how to change the labels...another good source is this site: <https://ggplot2.tidyverse.org/reference/> which i use quite a bit to rejigger figures.
@@ -180,7 +178,7 @@ To figure out how to do this we are going to need to check online. One good sour
 #plot f
 
 
-#plot g
+
 
 
 
@@ -225,15 +223,13 @@ She comes back and asks for the following updates:
 
 ### [Question 5: updating the scatteplot]{.underline}
 
--   Get rid of the legend
+-   a\) Get rid of the legend
 
--   Add a regression line for each group
+-   b\) Add a regression line for each group
 
--   Add a transparency or a jittter to deal with over plotting
+-   c\) Add a transparency or a jittter to deal with over plotting
 
--   Make the 2 groups have a different shape
-
--   Add an ellipse to the groups ( *see "stat_ellipse()" for a hint*)
+-   d\) Make the 2 groups have a different shape
 
 \
 
@@ -253,6 +249,9 @@ She comes back and asks for the following updates:
 
 
 #plot d
+
+
+
 
 ```
 
@@ -291,7 +290,8 @@ she wants the whole dataset sent to her so she can take a look at it herself. yo
 
 ```{r}
 
-#write you answers to question 7 here. as a tip look at this code: write_csv(new_data, "my_monkeydata.csv")
+#write you answers to question 7 here. as a tip look at this code:
+#write_csv(new_data, "my_monkeydata.csv")
 
 
 #part a
