@@ -1,5 +1,5 @@
 ---
-title: "Visualzations"
+title: "Descriptive Stats"
 format:
   revealjs:
     slide-number: true
@@ -20,6 +20,8 @@ editor_options:
 
 ```{r}
 #| echo: false
+
+#might need to install...
 library(lsr)
 library(tidyverse)
 library(psych)
@@ -34,7 +36,7 @@ notes
 
 how to XXXX
 
-#### Goal is to summarise data in easily understood fashion
+#### Goal is to summarize data in easily understood fashion
 
 {{< pagebreak >}}
 
@@ -161,7 +163,7 @@ get this image from files: mages/mean_median.png)
 
 mean = center of gravity median = middle value
 
-An illustration of the difference between how the mean and the median should be interpreted. The mean is basically the \centre of gravity" of the data set: if you imagine that the histogram of the data is a solid object, then the point on which you could balance it (as if on a see-saw) is the mean. In contrast, the median is the middle observation. Half of the observations are smaller, and half of the observations are large
+An illustration of the difference between how the mean and the median should be interpreted. The mean is basically the "centre of gravity" of the data set: if you imagine that the histogram of the data is a solid object, then the point on which you could balance it (as if on a see-saw) is the mean. In contrast, the median is the middle observation. Half of the observations are smaller, and half of the observations are large
 
 ## Some tips
 
@@ -386,13 +388,11 @@ summary(diamonds)
 
 ## describe function
 
-needs the psych package. 
+needs the psych package.
 
-
-:::{.callout-note}
+::: callout-note
 do you remember how to get a package?
 :::
-
 
 ```{r}
 #describe(diamonds)
@@ -473,26 +473,21 @@ and r  1 implies a perfect negative relationship. I'll expand a little more on
 Section 5.7.5. But before I do, let's look at how to calculate correlations in R
 :::
 
-## Examples of covariance  in R
-
-
-
+## Examples of covariance in R
 
 ```{r}
 cov(mtcars)
 ```
 
-
-## Examples of correlation  in R
+## Examples of correlation in R
 
 ```{r}
 cor(mtcars)
 ```
 
-
 ## Corrgrams
 
-exploratory visual display and  depicting the patterns of relations among variables 
+exploratory visual display and depicting the patterns of relations among variables
 
 *need the corrgram package for this*
 
@@ -508,11 +503,9 @@ lower.panel=panel.shade, upper.panel=panel.pie)
 
 ```
 
-
 ## correlation game
 
 ## Anscombe
-
 
 ```{r}
 anscombe.1 <- data.frame(x = anscombe[["x1"]], y = anscombe[["y1"]], Set = "Anscombe Set 1")
@@ -525,8 +518,6 @@ anscombe.2 %>% ggplot(aes(x=x,y=y)) + geom_point()
 anscombe.3 %>% ggplot(aes(x=x,y=y)) + geom_point()
 anscombe.4 %>% ggplot(aes(x=x,y=y)) + geom_point()
 ```
-
-
 
 # cartoon project
 
