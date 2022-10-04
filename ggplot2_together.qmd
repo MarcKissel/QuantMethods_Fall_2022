@@ -1,0 +1,168 @@
+---
+title: "ggplot2_together"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 
+
+# let's work on this together!
+
+
+
+example from: http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html
+
+
+Going to look at some data that comes along with the tidyverse..
+
+
+```{r}
+library(ggplot2)
+data("midwest", package = "ggplot2")  # load the data
+ggplot(midwest, aes(x=area, y=poptotal)) 
+```
+
+
+
+Notice what happens? no points since no geom
+
+-  remember:  **any information that is part of the source dataframe has to be specified inside the aes() function.**
+
+## make a scatterplot
+
+```{r}
+#| code-fold: true
+library(ggplot2)
+ggplot(midwest, aes(x=area, y=poptotal)) + geom_point()
+
+```
+
+-   now, we have points! each point = one county
+
+-   but not very informative!
+
+## how do we add regression line?
+
+```{r}
+#| code-fold: true
+ggplot(midwest, aes(x=area, y=poptotal)) + geom_point() + geom_smooth(method="lm")
+```
+
+ok, what is up now?
+
+-   The line of best fit is in blue.
+
+-   we can change the color?
+
+
+
+```{r}
+#| code-fold: true
+ggplot(midwest, aes(x=area, y=poptotal)) + geom_point() + geom_smooth(method="lm", color="red") 
+
+```
+
+
+but this still looks bad...too many points at the bottom...
+
+
+```{r}
+#| code-fold: true
+ggplot(midwest, aes(x=area, y=poptotal)) + geom_point() + geom_smooth(method="lm", color="red") + scale_y_log10()
+```
+
+
+```{r}
+#| code-fold: true
+g1 <-  ggplot(midwest, aes(x=area, y=poptotal)) + geom_point() + geom_smooth(method="lm", color="red") + scale_y_log10()
+```
+
+# titles?
+
+```{r}
+#| code-fold: true
+g1 + labs(title="Area Vs Population", subtitle="From midwest dataset", y="Population", x="Area", caption="Midwest Demographics")
+
+# or
+
+g1 + ggtitle("Area Vs Population", subtitle="From midwest dataset") + xlab("Area") + ylab("Population")
+```
+
+## change the color and size of points?
+
+-   we need to change the aesthetics of a layer
+
+```{r}
+#| code-fold: true
+
+ggplot(midwest, aes(x=area, y=poptotal)) + 
+  geom_point(col="steelblue", size=3)
+```
+
+## what if we want to color by some other factor?
+
+```{r}
+#| code-fold: true
+ggplot(midwest, aes(x=area, y=poptotal)) + 
+  geom_point(aes(col=state), size=3) + scale_y_log10()
+
+# or 
+
+g2 <- ggplot(midwest, aes(x=area, y=poptotal, color=state)) + 
+  geom_point(size=3)  + scale_y_log10()
+
+```
+
+## remove legend?
+
+```{r}
+#| code-fold: true
+g2 + theme(legend.position="None") 
+```
+
+## color schemes
+
+```{r}
+#| code-fold: true
+g2 + theme(legend.position="None") + scale_colour_brewer(palette = "Set1") 
+```
+
+## other colors
+
+```{r}
+library(RColorBrewer)
+head(brewer.pal.info, 10)
+```
+
+## change axis info
+
+```{r}
+gg <- ggplot(midwest, aes(x=area, y=poptotal)) + 
+  geom_point(aes(col=state), size=3) +  # Set color to vary based on state categories.
+  geom_smooth(method="lm", col="firebrick", size=2) + 
+  coord_cartesian(xlim=c(0, 0.1), ylim=c(0, 1000000)) + 
+  labs(title="Area Vs Population", subtitle="From midwest dataset", y="Population", x="Area", caption="Midwest Demographics")
+
+# Change breaks
+gg + scale_x_continuous(breaks=seq(0, 0.1, 0.01))
+```
+
+## other axis tricks
+
+```{r}
+gg + scale_x_reverse()
+```
+
+## change text angle?
+
+
+# short lab
+
+-   deconstructing a figure
+
+
+
+
+
