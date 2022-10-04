@@ -30,21 +30,17 @@ load("aflsmall.Rdata")
 
 # Class overview
 
-notes
+Today's class: Descriptive statistics
 
-## Today's class: Descriptive statistics
+Goal is to summarize data in easily understood fashion
 
-how to XXXX
-
-#### Goal is to summarize data in easily understood fashion
-
-{{< pagebreak >}}
+more info:
 
 https://tomfaulkenberry.github.io/JASPbook/chapters/chapter4.pdf
 
-::: notes
-afl.margins variable contains the winning margin (number of points) for all 176 home and away games played during the 2010 season. The afl.finalists variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010. Let's have a look at the afl.margins variable:
-:::
+# Project
+
+# 
 
 ## some data
 
@@ -52,7 +48,13 @@ afl.margins variable contains the winning margin (number of points) for all 176 
 print(afl.margins)
 ```
 
-#### point is that the output isn't very useful. we can't just look at data and figure out what is happening
+::: notes
+afl.margins variable contains the winning margin (number of points) for all 176 home and away games played during the 2010 season. The afl.finalists variable contains the names of all 400 teams that played in all 200 finals matches played during the period 1987 to 2010. Let's have a look at the afl.margins variable:
+:::
+
+## 
+
+Point is that the output isn't very useful. We can't just look at data and figure out what is happening
 
 ## sample vs. population
 
@@ -61,6 +63,8 @@ print(afl.margins)
     -   i.e. the *population* can be the undergrads in the US but the *sample* might be 150 students in a GenEd course at AppState
 
     -   Population: scores on an exam in a class
+
+but not always clear...
 
 ## Note
 
@@ -72,7 +76,9 @@ print(afl.margins)
 
 ## Sampling error
 
-A sampling error is the difference between a *population parameter* and a *sample statistic.* For example, the sampling error is the difference between the mean political attitude rating of your sample and the true mean political attitude rating of all undergraduate students
+A sampling error is the difference between a *population parameter* and a *sample statistic.*
+
+-   For example, the sampling error is the difference between the mean political attitude rating of your sample and the true mean political attitude rating of all undergraduate students
 
 # Measures of Central Tendency
 
@@ -102,7 +108,7 @@ Maybe review for many of you, but these symbols are impt later on
 
 ------------------------------------------------------------------------
 
-## a slighlty more complicated way
+## a slightly more complicated way
 
 ```{r}
 a <- c(34, 78, 56, 35)
@@ -113,13 +119,11 @@ sum(a)/length(a)
 
 ## or.....
 
-::: {.fragment .fade-up}
-Just use the R function!
+::: {.fragment .fade-up} Just use the R function!
 
 ```{r}
 mean(a)
 ```
-:::
 
 ## Median -the middle value of a set of observations
 
@@ -145,8 +149,7 @@ mean(a)
 
 ```{r}
 print(a)
-sort
-(a)
+sort (a)
 mean(x =c(35,56))
 ```
 
@@ -159,15 +162,14 @@ median(a)
 
 ## image
 
-get this image from files: mages/mean_median.png)
+![](https://brms-math6.weebly.com/uploads/6/3/3/6/63367701/5411953_orig.jpg)
 
-mean = center of gravity median = middle value
-
-An illustration of the difference between how the mean and the median should be interpreted. The mean is basically the "centre of gravity" of the data set: if you imagine that the histogram of the data is a solid object, then the point on which you could balance it (as if on a see-saw) is the mean. In contrast, the median is the middle observation. Half of the observations are smaller, and half of the observations are large
+-   mean = center of gravity
+-   median = middle value
 
 ## Some tips
 
-### If data are **nominal (categorical)** then prob not use mean or median
+### If data are **nominal (categorical)** then probably not use mean or median
 
 ### For income, we tend to use the median rather than the mean.
 
@@ -189,7 +191,7 @@ http://www.abc.net.au/news/stories/2010/09/24/3021480.htm
 
 ## trimmed mean, continued
 
-[**Problem is the mean is not \*robust\*; it is highly influenced by extreme values**]{.underline}
+[**Problem is the mean is not *robust*; it is highly influenced by extreme values**]{.underline}
 
 -   trimmed mean discards a percentage of the observations
 
@@ -234,6 +236,12 @@ library(lsr)
 modeOf(afl.finalists)
 ```
 
+## or...
+
+```{r}
+
+```
+
 # Variability
 
 Here are three different datasets:
@@ -246,7 +254,9 @@ Here are three different datasets:
 
 -   \- in theory we can ask how different a series of numbers are from *any* number in the group, but it sorta makes sense to pick the mean
 
-## q
+## load the data into R
+
+### reminder on how to do this:
 
 ```{r}
 group_1 <- c(7,6,3,3,1)
@@ -285,13 +295,13 @@ how would you get the 25% and 75%?
 
 ## visual
 
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Boxplot_vs_PDF.svg/250px-Boxplot_vs_PDF.svg.png) background-size: contain
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Boxplot_vs_PDF.svg/250px-Boxplot_vs_PDF.svg.png)
 
-The simplest way to think about it is like this: the interquartile range is the range spanned by the \middle half" of the data. That is, one quarter of the data falls below the 25th percentile, one quarter of the data is above the 75th percentile, leaving the \middle half" of the data lying in between the two. And the IQR is the range covered by that middle half.
+The interquartile range is the range spanned by the "middle half" of the data. That is, one quarter of the data falls *below* the 25th percentile, one quarter of the data is *above* the 75th percentile, leaving the middle half of the data lying in between the two. The IQR is the range covered by that middle half.
 
 ## Deviations
 
-### These work by selecting a reference point and report a \*\*typical\*\* deviation from that point!
+### These work by selecting a reference point and report a **typical** deviation from that point!
 
 ## Mean absolute deviation - steps:
 
@@ -310,6 +320,8 @@ The simplest way to think about it is like this: the interquartile range is the 
     5.  32 - 36.6 = 4.6
 
 3.  then get the mean of these devations. that equals the mean absolute deviation
+
+## 
 
 ```{r}
 d <- c(19.4,5.6,19.4,28.6,4.6)
@@ -349,7 +361,7 @@ However, as we'll discuss in Chapter 10, there's a subtle distinction between \d
 
 -   it isn't easy to interpret. All the numbers are squared..
 
--   let's say i have the variance of some measure of how tall a hominin species was. what is the meaning of saying the variance is 256 meters-squared
+-   let's say I have the variance of some measure of how tall a hominin species was. What is the meaning of saying the variance is 256 meters-squared
 
 -   gibberish units...but useful in mathy terms!
 
@@ -366,15 +378,17 @@ Because the standard deviation is derived from the variance, and the variance is
 
 ## visual
 
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/1200px-Standard_deviation_diagram.svg.png) background-size: contain
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/1200px-Standard_deviation_diagram.svg.png)
 
-####in general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations
+In general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations
 
 # summary of dispersion
 
 -   SD and variance both tell us something about the 'spread' of the data
 -   variance is helpful since it makes some math stuff easier!
 -   SD, though, is stated in the original units
+
+## 
 
 CONTINUE ADDING HERE? OR BREAK INTO ANOTHER CLASS
 
@@ -400,7 +414,7 @@ do you remember how to get a package?
 
 # skewness
 
-background-image: url(https://s3.amazonaws.com/libapps/accounts/73082/images/Skeweness.jpg) background-size: contain
+![](https://s3.amazonaws.com/libapps/accounts/73082/images/Skeweness.jpg)
 
 ::: notes
 if the data tend to have a lot of extreme small values (i.e., the lower tail is \longer" than the upper tail) and not so many extremely large values (left panel), then we say that the data are negatively skewed. On the other hand, if there are more extremely large values than extremely small ones (right panel) we say that the data are positively skewed. That's the qualitative idea behind skewness. The actual formula for the skewness of a data set is as follows
@@ -412,7 +426,7 @@ Many textbooks teach a rule of thumb stating that the mean is right of the media
 
 the 'pointeness' of the data
 
-background-image: url(https://i.stack.imgur.com/KBQLN.jpg) background-size: contain
+![](https://i.stack.imgur.com/KBQLN.jpg) background-size: contain
 
 # correlation etc
 
