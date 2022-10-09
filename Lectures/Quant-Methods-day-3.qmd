@@ -148,6 +148,7 @@ https://datascienceatthecommandline.com
 -   A shell is text application for working with files. It takes commands and passes them on to the operating system
 
     -   everything you do in your computer can be done in theory it the shell but it is much harder
+    -   no mouse clicking. instead need to use arrow keys to move left or right
 
 ::: callout-warning
 ### you won't have to do this often, but useful to know this stuff for data science
@@ -169,6 +170,8 @@ https://datascienceatthecommandline.com
 
 #### A path is the complete location or name of where a file (or something..) is located.
 
+e.g. it is "how you get to that file," or the list of folders you need to go through
+
 ## PC:
 
 [![path for DOS](https://www.computerhope.com/jargon/p/path.gif){fig-alt="shows the ms dos path with the root directory, parent, current directoy, file, and file extension"}](https://www.computerhope.com/jargon/p/path.htm)
@@ -176,6 +179,10 @@ https://datascienceatthecommandline.com
 ## For Apple/Linux
 
 > /home/hope/public_html/
+
+::: callout-important
+note that windows uses backslash (**\\** )while Apple (and urls...) uses forwardslash (**/)**
+:::
 
 ## internet path:
 
@@ -212,7 +219,26 @@ If you get an error about the path, i think best thing to do is google the error
 
     -   absolute path = from root of file system..specify all the path
 
+-   oftentimes, default for absolute path is to have a slash in front
+
+**`D: \documents\mydocument.doc`**
+
+**`mydocument.doc`**
+
+## setting the path
+
+-   specifies the location where computer should look when it executes a command
+
+-   *sometimes* this is a problem with using more advance R things, so just wanted to put that out there
+
+If you get an error about the path, i think best thing to do is google the error and see what to do to fix it!
+
+## 
+
+
 ## other things
+
+-   you can in theory run R from the Command line, but there is no good reason to do this...
 
 -   R folders
 

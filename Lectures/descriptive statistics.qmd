@@ -36,7 +36,7 @@ Goal is to summarize data in easily understood fashion
 
 more info:
 
-https://tomfaulkenberry.github.io/JASPbook/chapters/chapter4.pdf
+https://tomfaulkenberry.github.io/JASPbook/chapters/chapter4.pdf and https://learningstatisticswithr.com/lsr-0.6.pdf
 
 # Project
 
@@ -175,13 +175,13 @@ median(a)
 
 *why?*
 
-http://www.abc.net.au/news/stories/2010/09/24/3021480.htm
+<http://www.abc.net.au/news/stories/2010/09/24/3021480.htm>
 
 ## the trimmed mean
 
 #### what do you do with a *messy* dataset?
 
-> 100; 2; 3; 4; 5; 6; 7; 8; 9; 10
+> 100, 2, 3, 4, 5, 6, 7, 8, 9, 10
 >
 > 15; 2; 3; 4; 5; 6; 7; 8; 9; 12
 
@@ -234,12 +234,6 @@ mode(afl.finalists)
 ```{r}
 library(lsr)
 modeOf(afl.finalists)
-```
-
-## or...
-
-```{r}
-
 ```
 
 # Variability
@@ -303,35 +297,9 @@ The interquartile range is the range spanned by the "middle half" of the data. T
 
 ### These work by selecting a reference point and report a **typical** deviation from that point!
 
-## Mean absolute deviation - steps:
-
-1.  56, 31, 56, 8, 32. \<- mean = 36.6
-
-2.  calculate how much each value deviates from the mean and take the absolute value
-
-    1.  56 - 36.6 = 19.4.
-
-    2.  31- 36.6 = 5.6
-
-    3.  56 - 36.6 = 19.4
-
-    4.  8 - 36.6 = 28.6
-
-    5.  32 - 36.6 = 4.6
-
-3.  then get the mean of these devations. that equals the mean absolute deviation
-
-## 
-
-```{r}
-d <- c(19.4,5.6,19.4,28.6,4.6)
-mean(d)
-
-```
-
 ## Variance
 
-Very similar to mean absolute deviation, but instead we square the deviation rather than using the absolute deviation.
+We square the deviation of each variable from the mean and then divide the sum of those numbers by the sample size - 1 .
 
 #### $$s^2$$
 
@@ -376,6 +344,8 @@ $$s  = \sqrt{  \frac{1}{n}  \sum_{i=1}^{N} (X_i - \overline{x})^2}$$
 Because the standard deviation is derived from the variance, and the variance is a quantity that has little to no meaning that makes sense to us humans, the standard deviation doesn't have a simple interpretation. As a consequence, most of us just rely on a simple rule of thumb: in general, you should expect 68% of the data to fall within 1 standard deviation of the mean, 95% of the data to fall within 2 standard deviation of the mean, and 99.7% of the data to fall within 3 standard deviations of the mean. This rule tends to work pretty well most of the time, but it's not exact: it's actually calculated based on an assumption that the histogram is symmetric and bell shaped".10 As
 :::
 
+# table
+
 ## visual
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/1200px-Standard_deviation_diagram.svg.png)
@@ -390,7 +360,7 @@ In general, you should expect 68% of the data to fall within 1 standard deviatio
 
 ## 
 
-CONTINUE ADDING HERE? OR BREAK INTO ANOTHER CLASS
+check
 
 ## R tips on dispersion
 
@@ -532,6 +502,34 @@ anscombe.2 %>% ggplot(aes(x=x,y=y)) + geom_point()
 anscombe.3 %>% ggplot(aes(x=x,y=y)) + geom_point()
 anscombe.4 %>% ggplot(aes(x=x,y=y)) + geom_point()
 ```
+
+## Mean absolute deviation - steps:
+
+1.  56, 31, 56, 8, 32. \<- mean = 36.6
+
+2.  calculate how much each value deviates from the mean and take the absolute value
+
+    1.  56 - 36.6 = 19.4.
+
+    2.  31- 36.6 = 5.6
+
+    3.  56 - 36.6 = 19.4
+
+    4.  8 - 36.6 = 28.6
+
+    5.  32 - 36.6 = 4.6
+
+3.  then get the mean of these deviations. that equals the mean absolute deviation
+
+## 
+
+```{r}
+d <- c(19.4,5.6,19.4,28.6,4.6)
+mean(d)
+
+```
+
+## V
 
 # cartoon project
 

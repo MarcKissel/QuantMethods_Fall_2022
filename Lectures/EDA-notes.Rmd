@@ -1,0 +1,522 @@
+---
+title: "EDA_Tidy_Notes"
+author: "Marc Kissel"
+date: ""
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# today we are going to start with how to explore data. 
+
+1. i will do a quick demo of how someone might apporach a dataset.
+2. then,  will talk more on data transformation
+
+
+
+
+Pro-tip: good solutions and good code comes from starting with bad code and working though it!
+
+# Live data analysis via TidyTuesday
+
+
+# 2. Data transformation
+
+## ok, so how do we take our data and explore it!
+
+Data transformation is the key to R. we are going to take data in from a worksheet/csv/whatever and transform it.
+
+There are a number of ways to do this. for me, the method that gives us the most options is using a package called *dplyr.* This is part of a larger group of packages known as the *Tidyverse.*
+we are also going to use a packaged called nycflights13
+
+```{r load tidyverse}
+#install.packages("nycflights13")
+library(tidyverse)
+library(nycflights13)
+#you could load  the dplyr library by itself
+```
+
+Lets start by looking at the data we want to explore. to do this we can simply write the name of the object
+
+```{r}
+flights
+```
+
+*Question 1*
+
+a. how many observations are there in the flights dataset?
+
+b. how many columns?
+
+
+If you want to just look at the data quickly, the *head* and *print* function works well
+
+```{r}
+head(flights)
+print(flights)
+```
+
+
+
+*question 2*
+
+a) how many rows does the print function give by default? how would you update the function call to make it  give you the first 32 rows?
+
+
+Finally, we can use the built-in dataviewer:
+
+```{r}
+View(flights) #note that View is  capatilzed
+```
+
+
+### ok, so what can we do with dplyr?
+
+pick observations, reorder the rows, pick a variable by its name, create new variables, and summarise
+
+###this is not that easy. takes some practice to get used to the different **verbs**
+
+all verbs work the same
+1. first argument is a dataframe
+2. the next ones talk about what to do to the dataframe
+
+# Filter
+
+filter selects rows based on an arguement. it looks for when somethign is TRUE
+
+```{r}
+#lets say i want the first of jan flights 
+filter(flights, month ==1, day == 1)
+
+
+
+
+```
+
+**Question **
+
+How would you find all the flights that left at 6:00am? 
+how many flights were dealyed more than 30 mins
+
+
+
+but, this isn't saved...it isn’t changing anything  but rather subsetting data. to save we need to make new dataframe
+
+```{r}
+may3 <- filter(flights, month == 5, day == 3) 
+```
+
+also useful is a fun fuctnion called near, which has built in tolerance to variation
+
+```{r}
+sqrt(2) ^ 2 == 2
+near(sqrt(2) ^ 2, 2)
+```
+
+
+## ok, but what if we want something or something else
+##boolean 
+
+& = and
+| = or
+
+```{r}
+filter(flights, carrier == "UA" | carrier == "AA")
+```
+
+
+**Question **
+
+How would you find all the flights that left at 6:00am? 
+how many flights were dealyed more than 30 mins
+: Find all flights that flew to Atlanta
+
+
+#Select
+this verb keeps only the vars we name
+
+
+```{r}
+select(flights, dest, month, day)
+```
+
+fun!
+
+**Question**
+
+a) Select has a lot of options. take a look at the help. how would you
+- select only the vars that start with prefix 'dep'
+
+
+### say we want flights that flew to Atlanta, and to view the airlines that flew there
+
+A good way is to *chain* arguments together using a *pipe* : %>%
+This pipe is read as "then". so do one thing and then do another
+
+```{r}
+flights %>% select(carrier, dest) %>% filter(dest == "ATL") 
+flights %>% select(carrier, arr_delay) %>% arrange(desc(arr_delay))     
+```
+
+#arrange
+
+Like with many spreadsheets we can sort the rows with this verb
+
+
+```{r}
+arrange(flights, month)
+arrange(flights, desc(dep_delay)) 
+```
+
+#mutate
+
+add new stuff with mutate
+it takes a vector of values as the input and returns a new vector...can do almost anything to the data. good way to explore and play with data. i.e. log your data, cumulate sum (cumsum)
+
+
+```{r}
+flights_sml <- select(flights, 
+                      year:day, 
+                      ends_with("delay"), 
+                      distance, 
+                      air_time)
+
+```
+
+what did the above code do?
+
+
+```{r}
+
+View(flights_sml)
+mutate (flights_sml, hours = air_time/60) 
+```
+
+
+What does the code below do? try to figure out before you run it to see how 
+
+flights %>% select(distance, air_time) %>% mutate(speed = distance/air_time*60) %>% arrange(speed)
+
+#summarise 
+llets say we want to know the avg depature delay from the NYC airports
+
+this can get tricky due to the defaults
+
+```{r}
+summarise(flights, delay = mean(dep_delay))
+```
+
+hmmm...that isn't right...
+
+ah, the mean function keeps nas by default
+
+```{r}
+summarise(flights, delay = mean(dep_delay, na.rm = T))
+```
+
+
+#group_by
+
+this verb changes the unit of analysis from the complete dataset to individual groups.
+
+**trick: if you are thinking "I want data for each site/airline/population" then group_by is way to **
+
+```{r}
+flights %>% group_by(dest) %>% summarise(average_delay = mean(dep_delay, na.rm=TRUE)) %>% View()
+
+
+by_day <- group_by(flights, year, month, day)
+summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
+
+
+
+```
+
+```{r}
+by_dest <- group_by(flights, dest)  # group flight by dest. how many destinations are there?
+
+delay <- summarise(by_dest,
+                   count = n(),
+                   dist = mean(distance, na.rm = TRUE),
+                   delay = mean(arr_delay, na.rm = TRUE))   # use summerize to compute distance, avg dely, and # of flight
+
+#question: what if i want only places that had more than 20 flithts to an airport
+delay <- filter(delay, count > 20, dest != "HNL") #not HNL
+
+
+
+```
+
+
+*questions*
+
+
+ok, so how would you figure out all the flights that are going to Atlanta, grouped by airline, and seeing the avg. time it take to get there
+
+next, find all flights where the carrier is DL and then make a new column that lists the sched_arr_time in hours rather than minutes 
+then take this new data set and save it to a new variable. 
+
+there is another paackae in tidyverse called readr. view the help and figure out how to export your new dataset!
+
+
+# next section: Tidy data
+
+What is tidy data?
+___________________________
+
+it is a way of having the data set so that R can work on it well. the 'oddest' part about tidy data is the way it is set up is often counter to how we normally think of spreadsheets
+
+for data to be **Tidy**
+
+1. each variable gets its own column
+2. each observation has its own row
+3. each value has its own cell
+
+* from my experience, 1&2 are the ones that we need to work on
+
+##first, a quick example to show you how it works in *real world*
+
+```{r}
+library(tidyverse)
+My_data <- read_csv("TempUSUkUSSR.csv")
+
+View(My_data)
+
+```
+
+
+Why is this not Tidy?
+well, the USA/UK/Russia cols are not variables, but values of a variable
+
+#show image
+
+how to make it  Tidy?
+- first, we need a new column with a varibale name. lets call this 'country'. this new varibale name is called the *Key*
+- then, we need to know the name of the cases. in this example, those values are the ratioed DCI.  i'm going to call it DCI_scaled. this is called the *value*
+
+
+```{r}
+My_data %>% gather(USA:Russia, key = country, value = DCI)
+```
+
+
+#as a reminder, we can now dplyr this
+
+lets divide the year into mil, cent, and year
+
+```{r}
+My_data %>% separate(Year,  into =c("mi", "century", "year"), sep = c(1, 2))
+```
+
+
+#ok, but lets use a easy exaple we can walk through
+From: http://r4ds.had.co.nz/tidy-data.html
+
+https://r4ds.had.co.nz/tidy-data.html#fig:tidy-structure
+
+why?
+
+There’s a general advantage to picking one consistent way of storing data. If you have a consistent data structure, it’s easier to learn the tools that work with it because they have an underlying uniformity.
+
+There’s a specific advantage to placing variables in columns because it allows R’s vectorised nature to shine. As you learned in mutate and summary functions, most built-in R functions work with vectors of values. That makes transforming tidy data feel particularly natural
+
+
+Tidy Steps:
+1. figure out what the variables and observations are
+2. resolve one of two common problems:
+  One *variable* might be spread across multiple columns.
+  One *observation* might be scattered across multiple rows.
+
+to fix this we can use *gather* and *spread*
+
+
+## GAthering 
+
+lets say the col names are not names of varibales, but the values of a varibabel: like with the dci example.
+
+#>   country     `1999` `2000`
+#> * <chr>        <int>  <int>
+#> 1 Afghanistan    745   2666
+#> 2 Brazil       37737  80488
+#> 3 China       212258 213766
+
+
+The set of columns that represent values, not variables. In this example, those are the columns 1999 and 2000.
+
+The name of the variable whose values form the column names. I call that the key, and here it is year.
+
+The name of the variable whose values are spread over the cells. I call that value, and here it’s the number of cases.
+
+
+ gather(`1999`, `2000`, key = "year", value = "cases")
+
+https://d33wubrfki0l68.cloudfront.net/3aea19108d39606bbe49981acda07696c0c7fcd8/2de65/images/tidy-9.png
+
+
+
+##spreading
+
+this is kinda the oppoise of gather
+
+when an observation is scattered across multiple rows. For example, take table2: an observation is a country in a year, but each observation is spread across two rows.
+
+
+#> # A tibble: 12 x 4
+#>   country      year type           count
+#>   <chr>       <int> <chr>          <int>
+#> 1 Afghanistan  1999 cases            745
+#> 2 Afghanistan  1999 population  19987071
+#> 3 Afghanistan  2000 cases           2666
+#> 4 Afghanistan  2000 population  20595360
+#> 5 Brazil       1999 cases          37737
+#> 6 Brazil       1999 population 172006362
+#> # … with 6 more rows
+
+
+
+table2 %>%
+    spread(key = type, value = count)
+    
+
+#> # A tibble: 6 x 4
+#>   country      year  cases population
+#>   <chr>       <int>  <int>      <int>
+#> 1 Afghanistan  1999    745   19987071
+#> 2 Afghanistan  2000   2666   20595360
+#> 3 Brazil       1999  37737  172006362
+#> 4 Brazil       2000  80488  174504898
+#> 5 China        1999 212258 1272915272
+#> 6 China        2000 213766 1280428583
+
+https://d33wubrfki0l68.cloudfront.net/8350f0dda414629b9d6c354f87acf5c5f722be43/bcb84/images/tidy-8.png
+
+
+
+more examples:
+
+mini_iris <- iris[c(1, 51, 101), ]
+mini_iris %>% gather(key="flower_measurments", value = "metric")
+
+gather(mini_iris, key = "flower_att", value = "measurement",
+       Sepal.Length, Sepal.Width, Petal.Length, Petal.Width)
+
+mini_iris %>% gather(key="flower_measurments", value = "metric", -Species)
+
+
+###anthoer example
+
+this time lets build a data set
+
+
+
+```{r}
+non_tidy <- data.frame(
+  box = c("one", "two", "three"),
+  male = c(56,78,90),
+  female = c(59,34,23)
+  
+
+    
+  
+)
+```
+
+ non_tidy %>% gather(key = "sex", value = 'number', male, female)
+
+
+
+messy <- data.frame(
+  name = c("Wilbur", "Petunia", "Gregory"),
+  a = c(67, 80, 64),
+  b = c(56, 90, 50)
+)
+m
+
+#live example
+
+
+# 3. EDA
+____________________
+
+#### much of this comes from examples from R4DS
+
+##What is  EDA?
+- idea is to generate questions about the data
+  -- such as what types of variation do i see
+  -- how do the varibles covary 
+- search for answers (by visualizing, transforming, and modeling)
+- then, use what we learn to refine our questions
+
+## first step is often looking a the data. we will do this more in a few weeks but for now some basics
+
+
+```{r libraries needed}
+#install.packages("tidyverse")
+#install.packages("modelr")
+library(tidyverse)
+library(modelr)
+```
+
+one part of the **Tidyverse** is a package called ggplot2. we are going  to use this to explore the diamonds dataset.
+
+First, lets look at the info that comes with the dataset
+
+```{r}
+?diamonds
+```
+
+take a minute and read the help. what info is here?
+
+Now we want to take a look at the actual dataset.
+there are a few ways we can do this, each with their  own pros/cons
+
+1. str
+
+
+```{r}
+str(diamonds)
+```
+
+
+2. glimpse
+
+```{r}
+glimpse(diamonds)
+```
+
+3. print
+
+```{r}
+print(diamonds)
+```
+
+
+4. head
+
+```{r}
+head(diamonds) #note default is n = 10
+```
+
+
+**Question 1:**
+
+What are the differences between the different ways to see the data
+
+
+ok, so lets start by making a plot
+
+here is some code
+
+```{r}
+ggplot(data = diamonds) + geom_bar(mapping = aes(x = cut))
+```
+
+how does this code work?
+it calls a function called ggplot and tells it that the data we want to use is in the diamonds dataset. we then use a + sign to add a *geom* onto this plot. for now, we can think of a geom as the grammar of the type of plot we want. here i want a bar chart since im looking at categorical data. i set the geom_bar function and tell it to work on the object that has the X-axis as 'cut'. Because we already told R that the data was in diamonds  it knows where to look. 
+
+**congrats! you just made your first plot**
+

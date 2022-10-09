@@ -14,22 +14,24 @@ Today's class: **How can we avoid problems with our data**
 
 </iframe>
 
-## short class project
-
-Use seperate slides for this?
-
-Step 1: each of you take 2 plastic eggs... step 2: in either excel, googdle sheets, losselear paper, etc. record the information you have in each egg. you get to choose how you record and what info you record, but don't show anyone else! step 3: then, dispose of the data (i.e. either eat the candy or put it back in egg)
-
-Step 4: XXXX
-
-step 5: now, imagine you want to share your data. partner up withsome and make another spreadsheet pooling your data...i.e. include as much data from both your spreadsheets as you can. did both of you include the same data? if not, how can you best pool your data
-
-step 6: compare orignals to the joint datasets ##Video on the problems of big data:
-
 # How do we record/store/view data in a way that allows us to use it in the future
 
 -   Best advice I can give you is to think of yourself as your **own co-author**, looking at the data one year from today
 -   No matter what programs you use, make it easy for you and a computer to read!
+
+# background readings
+
+sources used today:
+
+https://peerj.com/preprints/3183/
+
+https://matthewlincoln.net/2018/03/26/best-practices-for-using-google-sheets-in-your-data-project.html
+
+https://www.bloomberg.com/news/articles/2013-04-18/faq-reinhart-rogoff-and-the-excel-error-that-changed-history
+
+https://nacnudus.github.io/spreadsheet-munging-strategies/index.html
+
+https://matthewlincoln.net/2018/03/26/best-practices-for-using-google-sheets-in-your-data-project.html
 
 # Spreadsheets
 
@@ -73,13 +75,21 @@ step 6: compare orignals to the joint datasets ##Video on the problems of big da
 
 ### - For many, it is totes fine to use. But if you do data analysis it can get annoying
 
+## in-class project
+
+Step 1: each of you take 2 plastic eggs.
+
+step 2: in either excel, Google sheets, notebook, etc. record the information you have in each egg. You get to choose how you record and what info you record, but don't show anyone else!
+
+Step 3: dispose of the data (i.e. either eat the candy or put it back in egg)
+
 ## Data organization tips:
 
 #### How can we setup data to be read by both humans *and* computers?
 
 #### How can it be setup so co-authors can understand it?
 
-#### How can we *avoid* mistakes
+#### How can we *avoid* mistakes?
 
 ## [Data organization in spreadsheets]{.underline}
 
@@ -87,9 +97,10 @@ step 6: compare orignals to the joint datasets ##Video on the problems of big da
 
 ## [Data organization in spreadsheets]{.underline}
 
-### write dates like YYYY-MM-DD
+#### write dates like YYYY-MM-DD
 
 -   Excel stores dates as a number that says *how many days have passed since a given date*. But that *given date* isn't always the same!
+-   **1900 vs. 1904**
 -   ISO 8601
     -   Date and time values are ordered from the largest to smallest unit of time
 
@@ -177,8 +188,6 @@ step 6: compare orignals to the joint datasets ##Video on the problems of big da
 
 -   once you are done entering data, save it as a .csv as well...this way you can easily share with others and always have access to it
 
-http://phdcomics.com/comics/archive/phd101212s.gif
-
 ## another tip:
 
 Get used to looking at data though a text editor, which views plain text, rather than a spreadsheet
@@ -190,20 +199,22 @@ Get used to looking at data though a text editor, which views plain text, rather
 -   finish lab
 -   bring in a news story (see handout from last week or AsULearn)
 
-# handout
+# part 2 of class
 
-# background readings
+How did you do with the spreadsheet lab
 
-https://peerj.com/preprints/3183/
+## news article
 
-https://matthewlincoln.net/2018/03/26/best-practices-for-using-google-sheets-in-your-data-project.html
+My example
 
-https://www.bloomberg.com/news/articles/2013-04-18/faq-reinhart-rogoff-and-the-excel-error-that-changed-history
+[Scientists find out the best way to soothe a crying baby](https://www.theguardian.com/lifeandstyle/2022/sep/13/scientists-find-out-the-best-way-to-soothe-a-crying-baby)
 
-https://nacnudus.github.io/spreadsheet-munging-strategies/index.html
+[the scientific article](https://www.cell.com/current-biology/pdf/S0960-9822(22)01363-X.pdf)
 
-https://matthewlincoln.net/2018/03/26/best-practices-for-using-google-sheets-in-your-data-project.html
+## ok, but what does spreadsheet management look like in real life?
+
+I'm going to show you an example of this, and then y'all will try to do it on your own (following handout) and see how it goes...
 
 # Version control
 
-![](https://imgs.xkcd.com/comics/documents.png)
+![](https://imgs.xkcd.com/comics/documents.png) http://phdcomics.com/comics/archive/phd101212s.gif

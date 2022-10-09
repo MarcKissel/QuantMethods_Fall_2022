@@ -31,15 +31,7 @@ library(tidyverse)
 
 # Today's class
 
-# Lab
-
-1.  For each graph write a short overview of what you think it is trying to say. In other words, use prose to turn the visualzation into words
-
-2.  Do you think it is a **good** visualization? why or why not?
-
-3.  What, if anything, do you think would make it better
-
-4.  Then, work on the second part which talks you through making plots with R and the ggplot package
+# 
 
 # why should we visualize data?
 
@@ -53,7 +45,7 @@ library(tidyverse)
 
 ## datasauraus
 
-https://rpodcast.shinyapps.io/shinysaurus/\_w_d657d913/
+https://www.autodesk.com/research/publications/same-stats-different-graphs
 
 # major types of plots
 
@@ -403,25 +395,28 @@ the 3-D columns in combination with the default angle of view for the chart make
 
 Not always bad but need to be careful
 
-
-
 ::: notes
 Pie charts, like this one showing employment breakdown for a region, are notoriously difficult to parse. Notice how hard it is to pull out which employment category is highest or how they rank. The pie chart's wedges are not organized by size, there are too many categories (11!), the 3D perspective distorts the wedge sizes, and some wedges are separate from others making size comparisons almost impossible.
 :::
-
-
 
 ## compare
 
 ![](https://assets.weforum.org/editor/responsive_large_webp_YTV67G-8DOITOVaf2lOzT03eg_Wa2aEhIwzuhWIIV3w.webp)
 
+## 
 
-##
+![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/270aca55-d6bd-4420-8ac6-fea2ebd93144/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%252F20220919%252Fus-west-2%252Fs3%252Faws4_request&X-Amz-Date=20220919T145016Z&X-Amz-Expires=86400&X-Amz-Signature=3067fa25098dfbe34dc0225d6c5bb669fdaf7588fb1a7eb27e4765b15292c660&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%253D%22Untitled.png%22&x-id=GetObject)
 
-![](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/270aca55-d6bd-4420-8ac6-fea2ebd93144/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220919%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220919T145016Z&X-Amz-Expires=86400&X-Amz-Signature=3067fa25098dfbe34dc0225d6c5bb669fdaf7588fb1a7eb27e4765b15292c660&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D"Untitled.png"&x-id=GetObject)
+# Lab
+
+1.  For each graph write a short overview of what you think it is trying to say. In other words, use prose to turn the visualzation into words
+
+2.  Do you think it is a **good** visualization? why or why not?
+
+3.  What, if anything, do you think would make it better
+
+4.  Then, work on the second part which talks you through making plots with R and the ggplot package
 
 ## color theory
-
-
 
 # next time - ggplot examples....

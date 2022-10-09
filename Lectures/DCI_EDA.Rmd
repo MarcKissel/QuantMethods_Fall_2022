@@ -1,0 +1,208 @@
+---
+title: "DCI_Data_analysis"
+author: "Marc Kissel"
+date: "January 14, 2018"
+output: html_document
+---
+
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE) #note echo = false unless otherwise said
+library(tidyverse)
+library(ggridges)
+library(DT)
+library(plotly)
+library(knitr)
+library(kableExtra)
+library(grid)
+library(gridExtra)
+
+###note might not need all of these in the end
+```
+
+
+##Examining DCI
+
+```{r data for interactive DCI, message=FALSE}
+DCI <- read_csv("X_Factor_Dataset.csv")
+
+#setup data
+DCI_2 <-  read_csv("DCI_edited.csv")
+
+```
+
+
+Demographic Conflict Investment (DCI) is a relative measure of the number of individuals involved in conflict accounting, for scale in group population. Our data suggests that there is no difference in DCI between small-scale societies observed during times of conflict and contemporary or recent state-level societies preparing for or engaged in active conflict. 
+
+Even more interesting, it is seen as a measure of conflict investment. It is strongly correlated
+with the most commonly used measure of investment in conflict, the global militarization index, but can be applied to any population or social system. It thus can be used to track changes in conflict
+investment over time for any geographic or temporal context provided that population and war group size can be reliably measured or estimated.
+
+
+
+Below is an interactive version of the DCI plots.
+double-click on a country to isolate its trace and then click on another country to compare how the DCI changes over time. 
+
+```{r interactive plot, message=FALSE}
+
+#setup data
+
+DCI_interact <-  DCI %>% gather(value = X, key = country, Belgium:Iraq)
+
+
+plot_DCI <- ggplot(DCI_interact, aes( x=Year, y = X, group=country, color = country)) + geom_line() + ylab("DCI")
+plot_DCI <- ggplotly(plot_DCI, height = 600, width = 800)
+#p
+
+#plot_DCI %>% layout(autosize = F, width = 800, height = 800)
+
+plot_DCI
+```
+
+#what about doing a motion plot for the DCI?
+
+
+```{r motion plot DCI, message=FALSE, warning=FALSE}
+DCI_motion <-ggplot(DCI_interact, aes(x= Year, y = X, group =country, frame = Year, color = country)) + geom_point() 
+                     
+
+```
+
+
+```{r, message=FALSE, warning=FALSE}
+
+ggplotly(DCI_motion, height = 600, width = 800)
+
+
+#ggplotly(DCI_motion, height = 600, width = 800)
+```
+
+###adding size
+
+```{r motion plot DCI with size, message=FALSE, warning=FALSE}
+DCI_motion <-ggplot(DCI_interact, aes(x= Year, y = X, group =country, frame = Year, color = country, label=country, size = X)) + geom_point() + geom_label(aes(Year, X, label=country)) 
+                     
+
+```
+
+
+```{r, message=FALSE, warning=FALSE}
+
+ggplotly(DCI_motion, height = 600, width = 800)
+
+
+#ggplotly(DCI_motion, height = 600, width = 800)
+```
+
+
+###CAn i get the lable to work?
+
+```{r motion plot DCI with size and label, message=FALSE, warning=FALSE}
+DCI_motion <-ggplot(DCI_interact, aes(x= Year, y = X, group =country, frame = Year, color = country, label=country, size = X)) + geom_point() + geom_label(aes(Year, X, label=country)) 
+                     
+
+```
+
+p + add_text(textfont = t, textposition = "top right") %>%
+  layout(xaxis = list(range = c(1.6, 3.2)),
+         showlegend = FALSE)
+
+```{r}
+p <- ggplotly(DCI_motion, height = 600, width = 800)
+
+p + add_text(textfont = t, textposition = "top right") %>%
+  layout(xaxis = list(range = c(1.6, 3.2)),
+         showlegend = FALSE)
+```
+
+
+
+```{r tempy}
+DCI_motion <-ggplot(DCI_interact, aes(x= Year, y = X, group =country, frame = Year, color = country, text= country, size = X)) + geom_point() 
+
+p <- ggplotly(DCI_motion)
+p %>% add_text(textfont = t, textposition = "top right")
+```
+
+
+```{r, message=FALSE, warning=FALSE}
+
+ggplotly(DCI_motion, height = 600, width = 800)
+
+
+#ggplotly(DCI_motion, height = 600, width = 800)
+```
+
+
+
+
+
+## boxplot of DCI values
+
+```{r}
+datatable(DCI_interact)
+```
+
+```{r}
+p <- ggplot(data=DCI_interact, aes(x= country, y = X))
+p + geom_boxplot() + coord_flip() #flip cord to make easier to read
+```
+
+Lets now put it in order of the mean of the DCI and give it better labels and color it
+```{r}
+p <- ggplot(data=DCI_interact, aes(x=reorder(country, X, na.rm=TRUE), y = X, fill= country))
+DCI_box <- p + geom_boxplot() +labs(x=NULL, y = "DCI values", title = "boxplot of DCI") +coord_flip() + guides(fill=FALSE) #last argument is so that the legend doesn't show up
+DCI_box
+            
+```
+
+
+Now lets see interactive version of above
+
+```{r}
+ggplotly(DCI_box)
+```
+
+
+
+We also can do this with points...
+
+
+
+
+```{r}
+p <- ggplot(data=DCI_interact, aes(x=reorder(country, X, na.rm=TRUE), y = X, color= country))
+p + geom_point() +labs(x=NULL, y = "DCI values", title = "points of DCI") +coord_flip() + guides(color=FALSE) + geom_jitter(width = .15)
+DCI_points <- p + geom_point() +labs(x=NULL, y = "DCI values", title = "points of DCI") +coord_flip() + guides(color=FALSE) + geom_jitter(width = .15)
+```
+interactive
+
+```{r}
+ggplotly(DCI_points)
+```
+
+###some basic stats:
+
+lets look at the mean
+
+```{r}
+DCI_summary <- DCI_interact %>% group_by(country) %>% summarise(DCI_mean = mean(X, na.rm = TRUE), DCI_sd = sd(X, na.rm = TRUE))
+datatable(DCI_summary)
+```
+
+The DCI mean for the whole dataset is `mean(DCI_summary$DCI_mean)'
+
+
+what would this look like graphed
+
+```{r}
+p <- ggplot(data = DCI_summary, aes(x = reorder(country, DCI_mean), y = DCI_mean) )
+p + geom_pointrange(aes(ymin = DCI_mean - DCI_sd, ymax = DCI_mean + DCI_sd)) +coord_flip() + labs(title= "DCI range mean +/- sd")
+```
+
+make look nicer
+
+```{r}
+p <- ggplot(data = DCI_summary, aes(x = reorder(country, DCI_mean), y = DCI_mean, color = country) )
+p + geom_pointrange(aes(ymin = DCI_mean - DCI_sd, ymax = DCI_mean + DCI_sd)) +coord_flip() + labs(title= "DCI range mean +/- sd", y="DCI range", x = NULL) + guides(color = FALSE)
+```
