@@ -159,3 +159,387 @@ There are a lot!
 -   the χ\^2 ("chi-square") distribution
 
 -   the F distribution
+
+
+## the binomial distribution
+
+I roll twenty dice. What is the prob that four of them land on *3*
+
+.center[
+##N =   size parameter. (N = 20)
+
+##θ  = success probability.  (here 1/6)
+
+##x = random variable (x = 4). n.b: it is called random variable cause actual value of X is due to chance
+]
+
+
+
+**in this case, x = 4, N = 20, and θ  = .167**
+
+P (X | θ , N)
+
+##there is a formula for doing this math, but don't need to learn it since R does it for us
+
+
+
+## binomial in R
+
+###x = the outcomes whos probability you’re trying to calculate.
+
+###size = size of experiment
+
+###prob = success prob
+
+```{r}
+dbinom( x = 4, size = 20, prob = 1/6)
+```
+
+
+R notes
+
+### • The d form: specify a particular outcome *x*, &amp; the output is the prob. of obtaining **exactly** that outcome
+
+
+### • The r form is a *random number generator*.  Generates n random outcomes from the distribution.
+  
+
+### • The p form calculates the *cumulative probability*. You specify a particular quantile *q*, and it tells you the probability of obtaining an outcome &lt; or = to that.
+
+e.g. prob of 4 *or less* dice landing on 3
+
+### • The q form calculates the quantiles of the distribution. You specify a probability value *p*, and gives you the corresponding percentile. 
+
+
+##
+
+| what it does                | prefix   | normal distribution | binomial distribution |
+|-----------------------------|----------|---------------------|-----------------------|
+| probability (density) of    | d        | dnorm()             | dbinom()              |
+| cumulative probability of   | p        | pnorm()             | pbinom()              |
+| generate random number from | r        | rnorm()             | rbinom()              |
+| quantile of                 | q        | qnorm()             | qbinom()              |
+
+
+
+
+## random isn't totally random
+
+
+
+```{r}
+normal.a <- rnorm( n=1000, mean=0, sd=1 )
+normal.a[1]
+```
+
+
+```{r}
+normal.a <- rnorm( n=1000, mean=0, sd=1 )
+normal.a[1]
+```
+
+```{r}
+set.seed(100)
+```
+
+
+
+
+### the normal distribution (“the bell curve” or a “Gaussian distribution)
+
+### - described using two parameters, the mean of the distribution µ and the standard deviation of the distribution σ. 
+
+#### .center[
+X ~ Normal(µ, σ)
+]
+
+
+### Arguments are mean and sd
+
+
+### - it is continuous rather than discrete (like the binomial)...i..e in binomial i cant get 2.3 4s
+### - fun fact, even if it isn't discrete, often times we can act like something is. 
+
+##
+
+```{r}
+library(tidyverse)
+set.seed(3000)
+xseq<-seq(-4,4,.01)
+densities<-dnorm(x = xseq,mean=  0, sd =1)
+ggplot(mapping = aes(x = xseq, y = densities)) + geom_line() + labs(title = "normal")
+```
+
+
+
+
+
+## your turn
+
+enter this code
+
+```{r}
+library(tidyverse)
+set.seed(3000)
+xseq<- seq(-4,4,.01)
+densities<-dnorm(x = xseq,mean=  0, sd =1)
+ggplot(mapping = aes(x = xseq, y = densities)) + geom_line()
+```
+
+
+Play around with the mean and the sd. how does the curve change as you change the variables
+
+## 
+
+## note how these values change the shape of the dist
+
+## if you can picture in your mind you will be much better at stats at large
+
+https://www.intmath.com/counting-probability/normal-distribution-graph-interactive.php
+
+???
+in the same way that the heights of the bars that we used to draw a discrete binomial distribution have
+to sum to 1, the total area under the curve for the normal distribution must equal 1. Before moving
+on, I want to point out one important characteristic of the normal distribution. Irrespective of what
+the actual mean and standard deviation are, 68.3% of the area falls within 1 standard deviation of the
+mean. Similarly, 95.4% of the distribution falls within 2 standard deviations of the mean, and 99.7% of
+the distribution is within 3 standard deviations. This idea is illustrated in Figure 
+
+---
+
+![](https://res.cloudinary.com/teepublic/image/private/s--ONs8msn---/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1519899416/production/designs/2408176_0.jpg)
+
+
+
+
+## T-distribution
+
+Continuous distribution that looks very similar to a normal distribution, but has heavier tails:
+
+![](https://www.dummies.com/wp-content/uploads/360214.image0.jpg)
+
+##
+
+```{r}
+t.values <-  seq(-4,4,.1)
+ggplot(mapping = aes(x = t.values,y = dt(t.values,3) )) + geom_line()
+```
+
+
+
+
+
+![](slides_prob_sampling_updated_files/figure-html/unnamed-chunk-5-1.png)
+
+
+
+
+ Note that the “tails” of the t distribution are “heavier” (i.e., extend further outwards) than the tails of the normal distribution
+
+
+
+## χ^2 distribution 
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Chi-square_pdf.svg/1200px-Chi-square_pdf.svg.png)
+
+???
+The situation
+in which we’ll see it is when doing categorical data analysis (Chapter 12), but it’s one of those
+things that actually pops up all over the place. When you dig into the maths (and who doesn’t love
+doing that?), it turns out that the main reason why the χ
+2 distribution turns up all over the place
+is that, if you have a bunch of variables that are normally distributed, square their values and then
+add them up (a procedure referred to as taking a “sum of squares”), this sum has a χ
+2 distribution.
+You’d be amazed how often this fact turns out to be useful. Anyway, here’s what a χ
+2 distribution
+looks like: Figure 9.11. Once again, the R commands for this one are pretty predictable: dchisq(),
+pchisq(), qchisq(), rchisq().
+
+
+## F distribution
+
+???
+whenever you need to compare
+two χ
+2 distributions to one another. Admittedly, this doesn’t exactly sound like something that
+any sane person would want to do, but it turns out to be very important in real world data analysis.
+Remember when I said that χ
+2
+turns out to be the key distribution when we’re taking a “sum of
+squares”? Well, what that means is if you want to compare two different “sums of squares”, you’re
+probably talking about something that has an F distribution. Of course, as yet I still haven’t given
+you an example of anything that involves a sum of squares, but I will... in Chapter 14. And that’s
+where we’ll run into the F distribution. Oh, and here’s a picture: Figure 9.12. And of course we
+can get R to do things with F distributions just by using the commands df(), pf(), qf() and rf().
+
+
+
+
+# sampling!
+
+
+
+## terminology &amp; notation
+____
+### Population - collection of individuals or observations about which we are interested, *N*. But it isn't always easy to think what this is. A sample is concrete; a population is often abstract.
+
+### Population parameter - summary quantity about the population that is unknown, but you wish you knew. population mean = μ.
+
+
+###Sampling -   collecting a sample from the population when we don’t have the means to perform a census. n. in most cases n &lt;&lt;&lt; N
+
+impt how the sampling is done.
+
+
+
+### Point estimate(AKA sample statistic) - summary statistic computed from the *sample* that *estimates* the unknown *population parameter*. if *P* is  population proportion,  p̂ is the  sample proportion; it is an estimate of the unknown population proportion p
+
+### Representative sampling - representative of the population. Are the sample’s characteristics a good representation of the population’s characteristics?
+
+## Generalizability - results based on the sample can generalize to the population.  is p̂ a “good guess” of  p?
+
+
+
+## Bias -  certain individuals or observations in a population have a higher chance of being included in a sample than others. 
+
+## Random sampling -  sampling procedure is random if we sample **randomly** from the population in an unbiased fashion
+
+sampling issues
+
+- sampling with or without replacement
+- dealing with biased samples (born on Monday vs born in Australia 
+
+
+# accuracy and precision
+
+**Accuracy** relates to how “on target” our estimates are whereas **precision** relates to how “consistent” our estimates are.
+
+--
+![](https://d33wubrfki0l68.cloudfront.net/f4888889a26d4a0b28107d56fb92ee99ea54943a/20c16/images/accuracy_vs_precision.jpg)
+
+
+## Sampling examples:
+
+
+
+## 1. take sample of 40 white and blue beads from the bowl  in front and calculate the proporiton of white
+## 2. draw/add to a histogram that shows this percentage
+## 3  return your sample and mix it up
+## 4. while you are waiting, follow other directions on the handout.
+
+---
+
+## Why do we have these differences in proportions red? Because of sampling variation
+
+
+##sampling variation example:
+
+###now, lets do that as a **simulation**
+
+###- an approximate imitation of the operation of a process or system
+
+### The purpose of these simulations is to develop an understanding of two key concepts relating to sampling:
+
+##1. concept of sampling variation 
+##2. the role that sample size plays in this variation. 
+
+
+---
+
+
+what if we did it 1000 times?
+
+
+
+what if we changed the number we look at in each replication?
+
+#take some time to look at the info and figure out how to do this
+---
+## notes
+
+# as sample size increases, the spread of the 1000 replicates of the proportion red decreases. There are less differences due to sampling variation &amp;  the distribution centers more tightly around the same value.
+
+
+# as the sample size increases ourmeasure of spread decreases; there is less variation in our proportions. i.e., as the sample size increases, our guesses at the true proportion of the bowl’s balls that are red get more consistent and precise.
+
+---
+
+
+#law of large numbers
+
+As the sample size “approaches” infinity  the sample mean approaches the population mean (X¯ Ñ µ).3
+
+
+
+.center[
+### "For even the most stupid of men, by some instinct of nature, by himself and without any instruction (which is a remarkable thing), is convinced that the more observations have been made, the less danger there is of wandering from one’s goal" - Jacob Bernoulli, 1713]
+
+
+---
+
+## 1. If the sampling  is done at random, then the sample is unbiased and representative of the population 
+## 2. the results based on the sample can generalize to the population and the point estimate is a “good guess” of the unknown population parameter
+## 3. ...so instead of performing a census, we can infer about the population using sampling.
+
+
+---
+
+##In a real-life scenario, we won’t know what the true value of the population parameter is and furthermore we won’t take repeated/replicated samples but rather a single sample that’s as large as we can afford. 
+
+
+---
+#confidence intervals
+
+## "Statistics means never having to say you’re certain"
+
+##  We know that if we sample at random we can have an unbiased representative sample of the population and get *point estimates*
+
+## - usually we don't  have the larger population, just a sample of it. the range of plausible values we can infer from a sample is called the **confidence interval**, which gives a range of plausible values for a parameter.
+
+???
+
+ (You can think of a confidence interval as playing the role of a net when fishing. Instead of just trying to catch a fish with a single spear (estimating an unknown parameter by using a single point estimate/statistic), we can use a net to try to provide a range of possible locations for the fish (use a range of possible values based around our statistic to make a plausible guess as to the location of the parameter).)
+ 
+ 
+ 
+these are very impt. and also often misinterpreted
+examples:
+
+
+---
+CI in R
+
+
+
+---
+
+![](https://d33wubrfki0l68.cloudfront.net/97aa4611f065d4b0ff72d26e42c91903f5cb41f2/db9ed/ismaykim_files/figure-html/unnamed-chunk-301-1.png)
+
+
+---
+# Interpreting the confidence interval
+
+
+
+https://d33wubrfki0l68.cloudfront.net/97aa4611f065d4b0ff72d26e42c91903f5cb41f2/db9ed/ismaykim_files/figure-html/unnamed-chunk-301-1.png
+
+Of the 100 confidence intervals based on samples of size  
+n=40 , 96 of them captured the population mean  
+μ = 21.152 , whereas 4 of them did not include it. If we repeated this process of building confidence intervals more times with more samples, we’d expect 95% of them to contain the population mean. In other words, the procedure we have used to generate confidence intervals is “95% reliable” in that we can expect it to include the true population parameter 95% of the time if the process is repeated.
+
+---
+
+
+### https://rpsychologist.com/d3/CI/
+
+
+
+
+## In frequentist terms the CI either contains the population mean or it does not. It’s just one from the dance of CIs to cite Geoff Cumming.
+
+
+
+
+---
+
