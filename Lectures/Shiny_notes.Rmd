@@ -1,0 +1,81 @@
+---
+title: "Untitled"
+author: "marc"
+date: "4/12/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+notes from programming  sklls for data science by Freeman and Ross
+
+Shiny app is made of 2 parts
+
+User interface UI: 
+- how the app is displayed. it makes a webpage that renders R content (graphs etc)
+- folks can interact with it via Control Widgets
+- UI also has a layout allowing us to to organize content in panels or across different tabs
+
+Server
+- this defines and processes the data that will be shown on the UI!
+- it receives 'requests' and provides 'Server' content based on the request
+- it is sorta like an interactive R session that user is running but often they dont know it...it takes inputs from used and runs functions to get outputs
+- these functions are different in that they are REACTIVE. this means they rerun when the input changes
+
+other things:
+control widget - thing that lets user give input to the server.
+
+reactive output- this is part of the UI that displays the content  that the serve produces...so it could be a map that is created behing the scenes  and then the user sees
+
+Render functions - function that give us outputs that the UI understands.  cool thing is that it always updates itself when the input changes
+
+reactivity - updating some component of the UI cause other components to change. think of how using excel you can change a number in one cell and it changes everything...
+
+#  strcure
+
+UI - defines how the application is displayed in the browser. UI is defined as a  value. this is almost always one returned from calling one of shinys's LAYOUT FUNCTION. so the UI can define a FLUID PAGE (content fludily flows down the page based on the browser settings)
+
+Server - this defines and processes the data that will be displayed in the UI. Server for shiny app is defined as a function (in contrast to the UI which is a value)..function needs to take 2 lists of arguments, input and ouput. the input comes from the user via user inference and are used to create content. This content is saved in the output list so that it can be sent back to the UI to be used in the browser....the server uses RENDER FUNTIONS to asing these values to output so that the content will automatically be recalculated whenever the input list changes
+
+
+
+WHEN we hit run, shiny combines the UI and Serve componet into a webpage
+
+
+```{r}
+library(shiny)
+
+library(shiny)
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+    h2("hi"),
+    textInput(inputId = "username", label = "what is your name?"),
+    textOutput(outputId = "message")
+
+    
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+    output$message <- renderText({
+        message_str <- paste0("hello ", input$username, "!")
+        message_str
+        
+    })
+
+  
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+
+what is up with this example?
+
+simple but can get complex

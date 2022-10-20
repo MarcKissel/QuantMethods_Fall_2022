@@ -87,6 +87,8 @@ proportion of heads:
 
 #### proportion : .center\[0, .5, .333\]
 
+##
+
 ### the proportion of heads varies, with increased sample --\> values actually being pretty close to the "right" answer of .50.
 
 ### the proportion of observed heads eventually stops fluctuating, and settles down; when it does, the number at which it finally settles is the true probability of heads.
@@ -97,7 +99,7 @@ proportion of heads:
 
 #### - how can someone say probability of rain in Boone tomorrow is 68%?
 
-# #Bayesian View
+## Bayesian View
 
 ### probability of an event as the degree of belief that an intelligent and rational agent assigns to that truth of that event. From that perspective, probabilities don't exist in the world, but rather in the thoughts and assumptions of people and other intelligent beings.
 
