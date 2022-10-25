@@ -2,7 +2,7 @@
 title: "probability"
 format:
   revealjs:
-    
+    slide-number: true
     preview-links: true
     slide-tone: false
     chalkboard: true
@@ -12,11 +12,11 @@ institute: Appstate
 echo: true
 ---
 
-## today's class: probability, sampling, and confidence interval..
+## This week: probability, sampling, and confidence interval..
 
-### - Descriptive stats are useful, but not very powerful
+### - Descriptive stats are useful, but not very *powerful*
 
-### - We want to make *inferences* about data. = *Inferential statistics*
+### - We want to make *inferences* about data = *Inferential statistics*
 
 ### - Probability theory underpins much of statistics
 
@@ -26,29 +26,31 @@ echo: true
 
 ### - Inferential statistics let's us explore these questions...
 
-## probability theory tells you how often different kinds of events will happen:
+## Probability theory tells you how often different kinds of events will happen:
 
 #### - Will I win the lottery?
 
-#### - If i role 5 dice, what are the chances each will land on 4?
+#### - If I role 5 dice, what are the chances each will land on 4 spots?
 
 #### - What are the chances of a fair coin coming up heads 10 times in a row?
 
-### In other words, we start with a model of the world & use that to make calculations.The **model** is known but the data are not.
+### In other words, we *start* with a **model** of the world & use that to make calculations. The [***model***]{.underline} is known but the data are not.
 
-## for the coin, we know the probability of heads is 50%
+## For the coin, we know the probability of heads is 50%
 
 P(heads) = 0.5
 
 we don't have the data (i haven't flipped the coin)
 
-## In stats it is the other way around! We have data and we want to know something about the world
+![](https://thumbs.gfycat.com/BabyishShrillKomododragon-max-1mb.gif)
+
+## In stats it is the other way around! We have *data* and we want to know *something* about the world
 
 ### • If the lottery commissioner's spouse wins the lottery, how likely is it that the lottery was rigged?
 
 ### • If my friend flips a coin 10 times and gets 10 heads, are they using a fake coin?
 
-## I *know* that i saw them flip the coin (i have the data),and i want to *infer* if the coin is real. Thus, I have data:
+## I *know* that i saw them flip the coin (i have the data),and i want to *infer* if the coin is real. 
 
 H H H H H H H H H H
 
@@ -85,7 +87,7 @@ proportion of heads:
 
 ### the proportion of heads varies, with increased sample size values closer to the "right" answer of .50.
 
-### the proportion of observed heads eventually stops fluctuating, and settles down; when it does, the number at which it finally settles is the true **probability** of heads.
+### The proportion of observed heads eventually stops fluctuating, and settles down. When it does, the number at which it finally settles is the true **probability** of heads.
 
 ## freak out the frequentists!
 
@@ -95,35 +97,31 @@ proportion of heads:
 
 ## Bayesian View
 
-### probability of an event as the "degree of belief that an intelligent and rational agent assigns to that truth of that event." Probabilities don't exist in the world, but rather in the thoughts and assumptions of people and other intelligent beings.
+probability of an event as the "degree of belief that an intelligent and rational agent assigns to that truth of that event." Probabilities don't exist in the world, but rather in the thoughts and assumptions of people and other intelligent beings.
 
-### "Bayesian statistics is a mathematical procedure that applies probabilities to statistical problems. It provides people the tools to update their beliefs in the evidence of new data."
+"Bayesian statistics is a mathematical procedure that applies probabilities to statistical problems. It provides people the tools to update their beliefs in the evidence of new data."
+
+Will come back to this on Thursday....
 
 ![](https://www.lebesgue.fr/sites/default/files/sem2016/archeo/poster_archeo_en.jpg)
-
-??? tom as math or business
-
-Paul Meehl, who suggests that relying on frequentist methods could turn you into "a potent but sterile intellectual rake who leaves in his merry path a long train of ravished maidens but no viable scientific offspring"
 
 # Basics of probability theory
 
 probability distributions
 
--   elementary event
+-   elementary event - only one result (roll a six)
 
--   sample space
+-   sample space - the total set of outcomes
 
 -   law of total probability
 
 P(E) = P(X1) + P(X2) + P(X3) + P(X4)
 
--   non-elementary events
+-   non-elementary events - roll an even number
 
-## kinda obvious, huh?
+## 
 
-However, from these simple beginnings it's possible to construct some extremely powerful mathematical tool
-
-# probability distribution of pants!
+###### probability distribution of pants!
 
 | Which pants  | Label | Probability |
 |--------------|-------|-------------|
@@ -132,15 +130,23 @@ However, from these simple beginnings it's possible to construct some extremely 
 | pajama pants | X3    | P(X3) = .2  |
 | track pants  | X4    | P(X4) = .05 |
 
-sample space: pants! elementary event: each pair P(X) = 1 \<- I will always wear pants :)
+sample space: pants!
 
-"pants" probability distribution. There are 4 "elementary events", corresponding to the 4 pairs of pants that I own. add up to 1. This is the probability distribution of my pants!
+elementary event: each pair
+
+P(X) = 1 \<- I will always wear pants :)
+
+"pants" probability distribution: There are 4 "elementary events", corresponding to the 4 pairs of pants that I own. add up to 1. This is the probability distribution of my pants!
+
+## kinda obvious, huh?
+
+However, from these simple beginnings it's possible to construct some extremely powerful mathematical tool
 
 ## **types of probability distributions**
 
 There are a lot!
 
--   *the binomial distribution*
+-   the binomial distribution
 
 -   *the normal distribution*
 
@@ -149,6 +155,161 @@ There are a lot!
 -   the χ\^2 ("chi-square") distribution
 
 -   the F distribution
+
+## the normal distribution ("the bell curve" or a "Gaussian distribution)
+
+### - described using two parameters, the mean of the distribution (µ) and the standard deviation of the distribution (σ).
+
+### - it is continuous rather than discrete (like the binomial)...i..e in binomial i can't get 2.3 4s
+
+### - fun fact, even if it isn't discrete, often times we can act like something is.
+
+## 
+
+```{r}
+
+# library(tidyverse)
+# set.seed(3000)
+# xseq<-seq(-4,4,.01)
+# densities<-dnorm(x = xseq,mean=  0, sd =1)
+# ggplot(mapping = aes(x = xseq, y = densities)) + geom_line() + labs(title = "normal")
+```
+
+## your turn
+
+enter this code
+
+```{r}
+# library(tidyverse)
+# set.seed(3000)
+# xseq<- seq(-10,10,.01)
+# densities<-dnorm(x = xseq,mean=  0, sd =1)
+# ggplot(mapping = aes(x = xseq, y = densities)) + geom_line()
+```
+
+Play around with the mean and the sd. how does the curve change as you change the variables
+
+note how these values change the shape of the dist
+
+## if you can picture in your mind you will be much better at stats at large
+
+<https://www.intmath.com/counting-probability/normal-distribution-graph-interactive.php>
+
+## [sampling: terminology & notation]{.underline}
+
+**Population** (*N*)- collection of individuals or observations about which we are interested. A *sample* is concrete; a *population* is often abstract.
+
+**Population paramete**r - Summary quantity about the population that you wish you knew. Population mean = μ.
+
+**Sampling** (*n)*- collecting a sample from the population when we don't have the means to perform a census.
+
+::: callout-tip
+in most cases n \<\<\< N
+:::
+
+## 
+
+### [terminology & notation, part 2]{.underline}
+
+**Point estimate (AKA sample statistic)** - summary statistic computed from the *sample* that *estimates* the unknown *population parameter*. If *P* is population proportion, p̂ is the sample proportion; then p̂ is an *estimate* of the unknown population proportion P
+
+**Representative sampling** - representative of the population. Are the sample's characteristics a good representation of the population's characteristics?
+
+**Generalizability** - results based on the sample can generalize to the population. Is p̂ a "good guess" of p?
+
+## 
+
+### [terminology & notation, part 3]{.underline}
+
+**Bias** - certain individuals or observations in a population have a higher chance of being included in a sample than others.
+
+**Random sampling** - sampling procedure is random if we sample **randomly** from the population in an unbiased fashion
+
+## sampling issues
+
+-   sampling with or without replacement
+-   dealing with biased samples (born on Monday vs born in Australia)
+
+# accuracy and precision
+
+**Accuracy** relates to how "on target" our estimates are whereas **precision** relates to how "consistent" our estimates are.
+
+![](https://d33wubrfki0l68.cloudfront.net/f4888889a26d4a0b28107d56fb92ee99ea54943a/20c16/images/accuracy_vs_precision.jpg)
+
+## Law of large numbers
+
+As the sample size "approaches" infinity the sample mean approaches the population mean (X¯ Ñ µ).3
+
+::: callout-note
+#### "For even the most stupid of \[people\]...is convinced that the more observations have been made, the less danger there is of wandering from one's goal" - Jacob Bernoulli, 1713
+:::
+
+## notes:
+
+-   *If* the sampling is done at random, then the sample is unbiased and representative of the population.
+
+-   Then results based on the sample can generalize to the population and the point estimate is a "good guess" of the unknown population parameter ...so instead of performing a census, we can infer about the population using sampling.
+
+-   in a real-life scenario, we won't know what the **true** value of the population parameter is and furthermore we won't take repeated/replicated samples but rather a *single sample* that's as large as we can afford.
+
+## 
+
+#### confidence intervals: "Statistics means never having to say you're certain"
+
+-   We know that if we sample at random we can have an unbiased representative sample of the population and get *point estimates*
+
+-   Usually we don't have the larger population, just a sample of it. *The range of plausible values we can infer from a sample i*s called the **confidence interval**, which gives a range of plausible values for a parameter.
+
+## these are very impt. and also often misinterpreted 
+
+You can think of a confidence interval as playing the role of a net when fishing. Instead of just trying to catch a fish with a single spear (estimating an unknown parameter by using a single point estimate/statistic), we can use a net to try to provide a range of possible locations for the fish (use a range of possible values based around our statistic to make a plausible guess as to the location of the parameter).
+
+## CI example
+
+------------------------------------------------------------------------
+
+![](https://d33wubrfki0l68.cloudfront.net/97aa4611f065d4b0ff72d26e42c91903f5cb41f2/db9ed/ismaykim_files/figure-html/unnamed-chunk-301-1.png)
+
+## 
+
+Of the 100 confidence intervals based on samples of size n=40 , 96 of them captured the population mean (μ = 21.152 )....4 of them did not include it.
+
+If we repeated this process of building confidence intervals **more times** with **more samples**, we'd expect **95% of them to contain the population mean**.
+
+The procedure we have used to generate confidence intervals is "95% reliable" in that we can expect it to include the true population parameter 95% of the time if the process is repeated.
+
+### https://rpsychologist.com/d3/CI/
+
+## In frequentest terms the CI either contains the population mean or it does not. 
+
+## "It's just one from the dance of CIs" - Geoff Cumming.
+
+## lets check how we are doing:
+
+\##
+
+## Sampling examples:
+
+1.  Take sample of 40 white and blue beads from the bowl in front and calculate the proportion of white
+2.  Draw/add to a histogram that shows this percentage
+3.  Return your sample and mix it up
+4.  while you are waiting, follow other directions on the handout.
+
+Why do we have these differences in proportions that are white? Because of sampling variation
+
+## now, lets do that as a **simulation**
+
+###- an approximate imitation of the operation of a process or system
+
+### The purpose of these simulations is to develop an understanding of two key concepts relating to sampling:
+
+###. concept of sampling variation ##2. the role that sample size plays in this variation.
+
+what if we did it 1000 times?
+
+what if we changed the number we look at in each replication?
+
+------------------------------------------------------------------------
 
 ## the binomial distribution
 
@@ -189,7 +350,7 @@ e.g. prob of 4 *or less* dice landing on 3
 ## 
 
 | what it does                | prefix | normal distribution | binomial distribution |
-|----------------------|-----------------|-----------------|-----------------|
+|---------------------|-----------------|-----------------|-----------------|
 | probability (density) of    | d      | dnorm()             | dbinom()              |
 | cumulative probability of   | p      | pnorm()             | pbinom()              |
 | generate random number from | r      | rnorm()             | rbinom()              |
@@ -211,152 +372,6 @@ normal.a[1]
 set.seed(100)
 ```
 
-## the normal distribution ("the bell curve" or a "Gaussian distribution)
-
-### - described using two parameters, the mean of the distribution (µ) and the standard deviation of the distribution (σ).
-
-### - it is continuous rather than discrete (like the binomial)...i..e in binomial i can't get 2.3 4s
-
-### - fun fact, even if it isn't discrete, often times we can act like something is.
-
 ## 
 
-```{r}
-# library(tidyverse)
-# set.seed(3000)
-# xseq<-seq(-4,4,.01)
-# densities<-dnorm(x = xseq,mean=  0, sd =1)
-# ggplot(mapping = aes(x = xseq, y = densities)) + geom_line() + labs(title = "normal")
-```
-
-## your turn
-
-enter this code
-
-```{r}
-# library(tidyverse)
-# set.seed(3000)
-# xseq<- seq(-10,10,.01)
-# densities<-dnorm(x = xseq,mean=  0, sd =1)
-# ggplot(mapping = aes(x = xseq, y = densities)) + geom_line()
-```
-
-Play around with the mean and the sd. how does the curve change as you change the variables
-
-note how these values change the shape of the dist
-
-## if you can picture in your mind you will be much better at stats at large
-
-<https://www.intmath.com/counting-probability/normal-distribution-graph-interactive.php>
-
-??? in the same way that the heights of the bars that we used to draw a discrete binomial distribution have to sum to 1, the total area under the curve for the normal distribution must equal 1. Before moving on, I want to point out one important characteristic of the normal distribution. Irrespective of what the actual mean and standard deviation are, 68.3% of the area falls within 1 standard deviation of the mean. Similarly, 95.4% of the distribution falls within 2 standard deviations of the mean, and 99.7% of the distribution is within 3 standard deviations. This idea is illustrated in Figure
-
-## sampling: terminology & notation
-
-**Population** (*N*)- collection of individuals or observations about which we are interested, . But it isn't always easy to think what this is. A *sample* is concrete; a *population* is often abstract.
-
-**Population paramete**r - summary quantity about the population that is unknown, but you wish you knew. population mean = μ.
-
-**Sampling** (*n)*- collecting a sample from the population when we don't have the means to perform a census.
-
-::: callout-tip
-in most cases n \<\<\< N
-:::
-
 ## 
-
-### terminology & notation, part 2
-
-Point estimate (AKA sample statistic) - summary statistic computed from the *sample* that *estimates* the unknown *population parameter*. If *P* is population proportion, p̂ is the sample proportion; p̂ is an *estimate* of the unknown population proportion P
-
-Representative sampling - representative of the population. Are the sample's characteristics a good representation of the population's characteristics?
-
-Generalizability - results based on the sample can generalize to the population. Is p̂ a "good guess" of p?
-
-## 
-
-### terminology & notation, part 2
-
-Bias - certain individuals or observations in a population have a higher chance of being included in a sample than others.
-
-Random sampling - sampling procedure is random if we sample **randomly** from the population in an unbiased fashion
-
-## sampling issues
-
--   sampling with or without replacement
--   dealing with biased samples (born on Monday vs born in Australia)
-
-# accuracy and precision
-
-**Accuracy** relates to how "on target" our estimates are whereas **precision** relates to how "consistent" our estimates are.
-
-![](https://d33wubrfki0l68.cloudfront.net/f4888889a26d4a0b28107d56fb92ee99ea54943a/20c16/images/accuracy_vs_precision.jpg)
-
-## Sampling examples:
-
-1.  Take sample of 40 white and blue beads from the bowl in front and calculate the proportion of white
-2.  Draw/add to a histogram that shows this percentage
-3.  Return your sample and mix it up
-4.  while you are waiting, follow other directions on the handout.
-
-Why do we have these differences in proportions that are white? Because of sampling variation
-
-## now, lets do that as a **simulation**
-
-###- an approximate imitation of the operation of a process or system
-
-### The purpose of these simulations is to develop an understanding of two key concepts relating to sampling:
-
-###. concept of sampling variation ##2. the role that sample size plays in this variation.
-
-what if we did it 1000 times?
-
-what if we changed the number we look at in each replication?
-
-## Law of large numbers
-
-As the sample size "approaches" infinity the sample mean approaches the population mean (X¯ Ñ µ).3
-
-::: callout-note
-::: callout-note
-"For even the most stupid of men, by some instinct of nature, by himself and without any instruction (which is a remarkable thing), is convinced that the more observations have been made, the less danger there is of wandering from one's goal" - Jacob Bernoulli, 1713
-:::
-:::
-
-## notes:
-
-### 1. *If* the sampling is done at random, then the sample is unbiased and representative of the population. The results based on the sample can generalize to the population and the point estimate is a "good guess" of the unknown population parameter ...so instead of performing a census, we can infer about the population using sampling.
-
-in a real-life scenario, we won't know what the **true** value of the population parameter is and furthermore we won't take repeated/replicated samples but rather a *single sample* that's as large as we can afford.
-
-## confidence intervals
-
-"Statistics means never having to say you're certain"
-
--   We know that if we sample at random we can have an unbiased representative sample of the population and get *point estimates*
-
--   Usually we don't have the larger population, just a sample of it. *The range of plausible values we can infer from a sample i*s called the **confidence interval**, which gives a range of plausible values for a parameter.
-
-(You can think of a confidence interval as playing the role of a net when fishing. Instead of just trying to catch a fish with a single spear (estimating an unknown parameter by using a single point estimate/statistic), we can use a net to try to provide a range of possible locations for the fish (use a range of possible values based around our statistic to make a plausible guess as to the location of the parameter).
-
-## these are very impt. and also often misinterpreted examples
-
-CI in R
-
-------------------------------------------------------------------------
-
-![](https://d33wubrfki0l68.cloudfront.net/97aa4611f065d4b0ff72d26e42c91903f5cb41f2/db9ed/ismaykim_files/figure-html/unnamed-chunk-301-1.png)
-
-Of the 100 confidence intervals based on samples of size n=40 , 96 of them captured the population mean (μ = 21.152 )....4 of them did not include it.
-
-If we repeated this process of building confidence intervals **more times** with **more samples**, we'd expect **95% of them to contain the population mean**.
-
-The procedure we have used to generate confidence intervals is "95% reliable" in that we can expect it to include the true population parameter 95% of the time if the process is repeated.
-
-### https://rpsychologist.com/d3/CI/
-
-## In frequentest terms the CI either contains the population mean or it does not. 
-
-## "It's just one from the dance of CIs" - Geoff Cumming.
-
-------------------------------------------------------------------------
