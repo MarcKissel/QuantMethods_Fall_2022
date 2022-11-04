@@ -56,7 +56,8 @@ to model
 ```{r}
 
 
-nc_fayet <- nc_fayet %>% mutate(arrest_made2 = factor(arrest_made)) 
+nc_fayet <- nc_fayet %>% mutate(arrest_made = factor(arrest_made),
+                                w_day = wday(date, label=TRUE)) 
 
 set.seed(2022)
 split <- initial_split(nc_fayet) #might want to strata later?
@@ -103,14 +104,48 @@ rec_result_2 %>% collect_metrics()
 
 
 rec <- recipe(arrest_made ~ subject_race + reason_for_stop + frisk_performed + county_name,  train) 
-rec %>% 
+
+rec_3 <- rec %>% 
    workflow(logistic_reg()) %>% 
-     fit_resamples(folds) %>% collect_metrics()
+     fit_resamples(folds)
+
+rec_3 %>% collect_metrics()
+
 #roc is .726
 
 # wonder about weekday
 
+
+rec <- recipe(arrest_made ~ subject_race + reason_for_stop + frisk_performed + county_name + w_day,  train) 
+
+rec_4 <- rec %>% 
+   workflow(logistic_reg()) %>% 
+     fit_resamples(folds)
+
+rec_4 %>% collect_metrics()
+
+#roc is .727 
 ```
 
+
+
+```{r}
+
+rec <- recipe(arrest_made ~ subject_race + reason_for_stop + frisk_performed + county_name,  train) 
+
+
+rec_3 <- rec %>% 
+   workflow(logistic_reg()) %>% 
+     fit_resamples(folds, control = control_resamples(save_pred = TRUE))
+  
+  
+rec_3 %>% 
+  collect_predictions()
+  
+
+last_fit(split)
+
+
+```
 
 enerally, an ROC AUC value is between 0.5 and 1, with 1 being a perfect prediction model. If your value is between 0 and 0.5, then this implies that you have meaningful information in your model, but it is being applied incorrectly because doing the opposite of what the model predicts would result in an AUC >0.5.
