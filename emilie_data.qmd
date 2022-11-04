@@ -1,0 +1,116 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+Libraries
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(lubridate)
+
+```
+
+get the data..can i automate this better?
+
+```{r}
+install.packages("downloader")
+
+library(downloader)
+
+# download("https://stacks.stanford.edu/file/druid:yg821jf8611/yg821jf8611_nc_charlotte_2020_04_01.csv.zip", "download.zip", mode = "wb")
+# 
+# unzip("download.zip")
+# 
+# download("https://stacks.stanford.edu/file/druid:yg821jf8611/yg821jf8611_nc_fayetteville_2020_04_01.csv.zip", "download.zip", mode = "wb")
+# 
+# unzip("download.zip")
+
+
+
+# download("https://stacks.stanford.edu/file/druid:yg821jf8611/yg821jf8611_nc_statewide_2020_04_01.csv.zip", "download.zip", mode = "wb")
+# unzip("download.zip")
+
+nc_char <- read_csv("nc_charlotte_2020_04_01.csv")
+nc_fayet <- read_csv("nc_fayetteville_2020_04_01.csv")
+
+```
+
+look at the data!
+data dictionary is https://github.com/stanford-policylab/opp/blob/master/data_readme.md
+
+```{r}
+nc_fayet %>% glimpse()
+nc_fayet %>% count(county_name, sort=T)
+nc_fayet %>% count(arrest_made)
+nc_fayet %>% count(search_conducted, sort=T)
+```
+
+to model
+- arrest made based on": type, reason_for_stop (chr), subject_race, frisk_performed, search_conducted
+
+```{r}
+
+
+nc_fayet <- nc_fayet %>% mutate(arrest_made2 = factor(arrest_made)) 
+
+set.seed(2022)
+split <- initial_split(nc_fayet) #might want to strata later?
+train <- training(split)
+test <- testing(split)
+folds <- train %>% vfold_cv(2)
+
+split
+
+rec <- recipe(arrest_made ~ subject_race, train)  
+  
+
+#test the setup
+
+rec %>% prep() %>% juice()
+
+
+
+#fit
+
+
+rec_result <- rec %>% 
+  workflow(logistic_reg()) %>% 
+  fit_resamples(folds) 
+
+
+rec_result %>% collect_metrics()
+
+# this gets ROC_AUC of .54 which is pretty low
+
+
+rec <- recipe(arrest_made ~ subject_race + reason_for_stop, train ) 
+
+
+
+rec_result_2 <- rec %>% 
+  workflow(logistic_reg()) %>% 
+  fit_resamples(folds) 
+
+
+rec_result_2 %>% collect_metrics()
+#roc went to .702
+
+
+
+rec <- recipe(arrest_made ~ subject_race + reason_for_stop + frisk_performed + county_name,  train) 
+rec %>% 
+   workflow(logistic_reg()) %>% 
+     fit_resamples(folds) %>% collect_metrics()
+#roc is .726
+
+# wonder about weekday
+
+```
+
+
+enerally, an ROC AUC value is between 0.5 and 1, with 1 being a perfect prediction model. If your value is between 0 and 0.5, then this implies that you have meaningful information in your model, but it is being applied incorrectly because doing the opposite of what the model predicts would result in an AUC >0.5.
