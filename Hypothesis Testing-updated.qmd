@@ -26,16 +26,6 @@ These notes come mostly from LSWR and Modern Dive readings...
 
 We have an idea about the world and want to know if our data support it
 
-## types of logical reasoning
-
-Induction - from specific observations to broader generalizations
-
-Deduction - from general to specifics (top-down)
-
-![](https://danielmiessler.com/images/untitled.jpg)
-
-http://www.socialresearchmethods.net/kb/dedind.htm
-
 ## **hypotheses**
 
 -   Research hypotheses - a substantive & testable scientific claim.
@@ -48,53 +38,19 @@ http://www.socialresearchmethods.net/kb/dedind.htm
 we want to map our **research hypothesis** onto our **stats hypothesis**
 :::
 
-## example
+## not all hypotheses are proper research hypotheses
 
--   -my research hypothesis is that esp exists
+##### good ones:
 
--   my statistical hypothesis is that Ѳ!= .5
+-   ability to do stats is related to your height
 
-- Ѳ = `
+-   if you listen to classical music you will get smarter
 
-### A statistical hypothesis test is a test of the statistical hypothesis, *not* the research hypothesis
+##### not so good ones:
 
-## Figure out your **null hypothesis**: the trial of the Null Hypothesis
+-   love is a battlefield
 
-### The null hypothesis is the defendant, the researcher is the prosecutor, and the statistical test itself is the judge.
-
-#### Just like a criminal trial, there is a presumption of innocence: [*the null hypothesis is deemed to be true unless you, the researcher, can prove beyond a reasonable doubt that it is false.*]{.underline}
-
-#### But rules are set to protect the null hypothesis cause it doesn't have anyone on its side [and]{.underline} *you* are trying to prove it wrong. [Someone must protect it!]{.underline}
-
-## [example]{.underline}:
-
-##### Let's say my null is that brain size stays the same with a hominin species, so Ѳ = .5
-
-##### I then go about trying to show that this null hypothesis is wrong!
-
-##### We need to assume the null is true unless we can prove otherwise.
-
-| keep null     | reject null  |              |
-|---------------|--------------|--------------|
-| null is true  | correct      | type 1 error |
-| null is false | type 2 error | correct      |
-
-------------------------------------------------------------------------
-
-## WE Want to control the probability of a Type 1 error, which is labeled as α.
-
-### Why? if someone is innocent we don't want to send them to jail..
-
-### but we want to keep both α and β small
-
-| keep null     | reject null              |              |
-|---------------|--------------------------|--------------|
-| null is true  | 1 -α (correct retention) | α            |
-| null is false | β                        | 1- β (power) |
-
-## While we want to avoid type 2 errors, type 1 are worse so folks spend more time on that.
-
-## Test statistic and sampling dist
+### Remember: A statistical hypothesis test is a test of the statistical hypothesis, *not* the research hypothesis
 
 ### Let's imagine we want to test for ESP.
 
@@ -102,54 +58,118 @@ we want to map our **research hypothesis** onto our **stats hypothesis**
 
 ## - what would be the sci hypothesis and the statistical hypothesis
 
-## - What is the null?
-
 ## - what problems might you run into?
 
-null = no ESP. if null is true, what do we expect?
+## 
 
-50 people get right? or 57? 99? 8?
+-   my [*research hypothesis*]{.underline} is that ESP exists
 
-We start with a quantity *X* that we can calculate by looking at our data; after looking at the value of *X*, we make a decision about whether to believe that the null hypothesis is correct, or to reject the null hypothesis in favor of the alternative. This is the **test statistic**
+    many possible statistical hypotheses...
 
-What values of the test stat would cause us to reject the null?
+-   my [*statistical hypothesis*]{.underline} is that Ѳ = .5
 
-## We ask what the **sampling distribution of the test statistic** would be if the null hypothesis were actually true
+-   one alternative is Ѳ \> .5
 
-### in this case, this is a binomial!
+-   another alternative is Ѳ \< .5
 
-X \~ Binomial (Ѳ,N)
+-   still another alternative is Ѳ ≠ .5
 
-N = 100
+## the trial of the Null Hypothesis:
 
-for null, Ѳ = .5
+## null hypothesis is the *defendant*, the researcher is the *prosecutor*, and the statistical test itself is the *judge*.
+
+#### Just like a criminal trial, there is a presumption of innocence: [*the null hypothesis is deemed to be true unless you, the researcher, can prove beyond a reasonable doubt that it is false.*]{.underline}
+
+#### But rules are set to protect the null hypothesis cause it doesn't have anyone on its side [and]{.underline} *you* are trying to prove it wrong. [Someone must protect it!]{.underline}
+
+## [example]{.underline}:
+
+Let's say my null is that ESP doesn't exist....then in mathematical terms, Ѳ = .5
+
+We need to assume the null is true unless we can prove otherwise. I go about trying to show [that this null hypothesis is wrong]{.underline}! Goal = *minimize* errors
+
+|               | keep null    | reject null  |
+|---------------|--------------|--------------|
+| null is true  | correct      | type 1 error |
+| null is false | type 2 error | correct      |
+
+------------------------------------------------------------------------
+
+##### We Want to control the probability of a Type 1 error, which is labeled as *α* (called the *significance level*).
+
+Why? if someone is innocent we don't want to send them to jail!
+
+But we want to keep both α and β small
+
+|               | keep null                | reject null  |
+|---------------|--------------------------|--------------|
+| null is true  | 1 -α (correct retention) | α            |
+| null is false | β                        | 1- β (power) |
+
+## While we want to avoid type 2 errors, type 1 are worse so folks spend more time on that.
+
+## let's practice
+
+in a group come up with 1 or 2 different hypotheses related to anthropology. Think about the *scientific hypothesis*, the *statistical hypothesis*, what the *null* and *alternative hypotheses* are and how you might test?
+
+## Test statistic and sampling dist
+
+## 
+
+##### [null = no ESP.]{.underline}
+
+If null is true, what do we *expect*?
+
+`50 people get right? or 57? 99? 8?` we can all this value *X*
+
+[Steps:]{.underline}
+
+1.  We start with a quantity *X* that we can calculate by looking at our data.
+
+2.  After looking at the value of *X*, we make a decision about whether to believe that the null hypothesis is correct, or to reject the null hypothesis in favor of the alternative.
+
+3.  This value of *X* is the **test statistic**
+
+4.  so, what values of the test stat would cause us to reject the null?
+
+## We ask what the ***sampling distribution*** **of the test statistic** would be if the null hypothesis were actually true
+
+In this case, this is a binomial!
+
+> *X \~ Binomial (Ѳ,N)*
+
+N = \# of observations, 100
+
+Ѳ = probability of success, .5
 
 ------------------------------------------------------------------------
 
 ![](https://learningstatisticswithr.com/book/lsr_files/figure-html/samplingdist-1.png)
 
-???
+::: notes
+The sampling distribution for our test statistic X when the null hypothesis is true. For our ESP scenario, this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is\
+θ=.5, the sampling distribution says that the most likely value is 50 (our of 100) correct responses. Most of the probability mass lies between 40 and 60.
+:::
 
-:   The sampling distribution for our test statistic X when the null hypothesis is true. For our ESP scenario, this is a binomial distribution. Not surprisingly, since the null hypothesis says that the probability of a correct response is\
-    θ=.5, the sampling distribution says that the most likely value is 50 (our of 100) correct responses. Most of the probability mass lies between 40 and 60.
-
-------------------------------------------------------------------------
+## 
 
 ## Critical regions and critical values
 
 What values of the test statistic *X* should lead us to reject the null?
 
-### ***critical region*** corresponds to values of *X* that would lead us to reject null hypothesis
+### ***critical region*** corresponds to values of *X* that [would lead us to reject null hypothesis]{.underline}
 
-#### - *X* should be very big or very small in order to reject the null hypothesis.
+-   *X* should be very big or very small in order to reject the null hypothesis.
 
-### - If *α* = 05, the critical region must cover 5% of this sampling distribution.
+-   If *α* = .05, the critical region must cover [5% of this sampling distribution.]{.underline}
 
 ------------------------------------------------------------------------
 
 ![](https://learningstatisticswithr.com/book/lsr_files/figure-html/crit2-1.png)
 
+::: notes
 The critical region consists of the most extreme values, known as the tails of the distribution. The sampling dist describes the probability that we would obtain a particular value of X if the null hypothesis were actually true.
+:::
 
 ------------------------------------------------------------------------
 
@@ -163,7 +183,7 @@ In this example, if we got values between 41 to 59 we would not reject the null
 
 40 and 60 are sometimes known as the critical values
 
-### one-sided vs. two-sided test
+## one-sided vs. two-sided test
 
 ![](https://learningstatisticswithr.com/book/lsr_files/figure-html/crit1-1.png)
 
@@ -179,28 +199,27 @@ In this example, if we got values between 41 to 59 we would not reject the null
 
 In our example, p-value = .021
 
-## \### p can be defined as the smallest Type I error rate (α) that you have to be willing to tolerate if you want to reject the null hypothesis.
+## [p can be defined as the smallest Type I error rate (α) that you have to be willing to tolerate if you want to reject the null hypothesis.]{.underline}
 
-## p ≤ α then reject
+-   p ≤ α then reject
 
-## P \> α not reject
+-   P \> α not reject
 
-###or, we can define it like this:
+## or, we can define it like this:
 
-##The probability that we would have observed a test statistic that is at least as extreme as the one we actually did get. If the data are extremely implausible according to the null hypothesis, then the null hypothesis is probably wrong.
+::: callout-important
+The probability that we would have observed a test statistic that is at least as extreme as the one we actually did get. If the data are extremely implausible according to the null hypothesis, then the null hypothesis is probably wrong.
+:::
 
+## What is wrong is if you say p value is "the probability that the null hypothesis is true".
 
-
-##What is wrong is if you say p value is "the probability that the null hypothesis is true".
-
-## no no no no
+## 
 
 ### In frequentists view, a null is either *true or not*. There is no probability to assign. No way you can talk about a long run frequency for this statement.
 
 As Danielle Navarro puts it "to talk about"the probability of the null hypothesis" is as meaningless as "the colour of freedom". It doesn't have one!"
 
-
----
+------------------------------------------------------------------------
 
 #lets try in R
 
@@ -210,47 +229,69 @@ Our example is what is known as a *binomial test*. It is a pretty common one and
 binom.test( x =  62, n=100, p = .5)
 ```
 
-What does this mean?
+## What does this result mean?
 
 -   p-value = 0.02098
 -   alternative hypothesis: true probability of success is not equal to 0.5
 
----
-###What is your effect size?
+# Summing up:
 
-### We also want to minimize β. We don't want to **fail to reject** when the null actually is wrong!
+-   Statistical tests examine a statistical hypothesis
 
-### so, we minimize β (Stats folks talk about maximizing the power of the test, power = 1 - β)
+-   We compare a test statistic to a probability distribution
 
+-   <https://istats.shinyapps.io/power/>
 
-https://istats.shinyapps.io/power/
+## What is your effect size?
+
+\### We also want to minimize β. We don't want to fail to reject when the null actually is wrong!
+
+so, we minimize β (Stats folks talk about maximizing the power of the test, power = 1 - β)
 
 "In plain English, statistical power is the likelihood that a study will detect an effect when there is an effect there to be detected. If statistical power is high, the probability of making a Type II error, or concluding there is no effect when, in fact, there is one, goes down."
 
+https://istats.shinyapps.io/power/
+
 ## 
 
-![](images/effect_szie.png) The probability that we will reject the null hypothesis, plotted as a function of the true value of θ. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of θ is very different from the value that the null hypothesis specifies (i.e., θ " .5). Notice that when θ actually is equal to .5 (plotted as a black dot), the null hypothesis is in fact true: rejecting the null hypothesis in this instance would be a Type I error.
+\##
 
+The probability that we will reject the null hypothesis, plotted as a function of the true value of θ. Obviously, the test is more powerful (greater chance of correct rejection) if the true value of θ is very different from the value that the null hypothesis specifies (i.e., θ " .5). Notice that when θ actually is equal to .5 (plotted as a black dot), the null hypothesis is in fact true: rejecting the null hypothesis in this instance would be a Type I error.
 
 ## Effect size
- 
-a way to  quantifying how **similar** the
-true state of the world is to the null hypothesis. Or, how big is the  difference between the true population parameters, and the parameter values that are assumed by the null hypothesis?
 
-difference in ESP study between theta  = .51 and theta = .8
+a way to quantifying how similar the true state of the world is to the null hypothesis. Or, how big is the difference between the true population parameters, and the parameter values that are assumed by the null hypothesis?
+
+difference in ESP study between theta = .51 and theta = .8
 
 Why is this impt? null could be wrong but still not interesting
 
-![](images/effect_size_table.png)
+## 
 
 we can increase power by increasing sample size
 
+## types of logical reasoning
 
+Induction - from specific observations to broader generalizations
 
+Deduction - from general to specifics (top-down)
 
-## lets practice
+![](https://danielmiessler.com/images/untitled.jpg)
 
-in a group come up with 4 different hypos related to anthropology. think about the sci hypo, the stat hypo, what the null and alt hypo is, what the sampling dist is, and how you might test?
+http://www.socialresearchmethods.net/kb/dedind.htm
 
-------------------------------------------------------------------------
-
+|                                                                                                                                                                                                                                                                                     |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ###What is your effect size?                                                                                                                                                                                                                                                        |
+| \### We also want to minimize β. We don't want to **fail to reject** when the null actually is wrong!                                                                                                                                                                               |
+| \### so, we minimize β (Stats folks talk about maximizing the power of the test, power = 1 - β)                                                                                                                                                                                     |
+| https://istats.shinyapps.io/power/                                                                                                                                                                                                                                                  |
+| "In plain English, statistical power is the likelihood that a study will detect an effect when there is an effect there to be detected. If statistical power is high, the probability of making a Type II error, or concluding there is no effect when, in fact, there is one, goes |
+| \## Effect size                                                                                                                                                                                                                                                                     |
+| a way to quantifying how **similar** the true state of the world is to the null hypothesis. Or, how big is the difference between the true population parameters, and the parameter values that are assumed by the null hypothesis?                                                 |
+| difference in ESP study between theta = .51 and theta = .8                                                                                                                                                                                                                          |
+| Why is this impt? null could be wrong but still not interesting                                                                                                                                                                                                                     |
+| ![](images/effect_size_table.png)                                                                                                                                                                                                                                                   |
+| we can increase power by increasing sample size                                                                                                                                                                                                                                     |
+| \## lets practice                                                                                                                                                                                                                                                                   |
+| in a group come up with 4 different hypos related to anthropology. think about the sci hypo, the stat hypo, what the null and alt hypo is, what the sampling dist is, and how you might test?                                                                                       |

@@ -1,0 +1,371 @@
+---
+format:
+  revealjs:
+    slide-number: true
+    preview-links: true
+    slide-tone: false
+    chalkboard: true
+    theme: serif
+    code-fold: true
+    code-tools: true
+    code-link: true 
+editor: visual
+author: Marc Kissel
+institute: Appstate
+echo: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(moderndive)
+```
+
+# Regression
+
+Used for data modeling when we want to see relationship between the dependent variable *y* (outcome) & predictor/explanatory/independent variable *x*
+
+-   we will model the outcome variable *y* "as a function" of the explanatory/predictor variable *x*
+
+-   Use this to model **explanations** or **predictions**
+
+## Aims of regression
+
+make explicit the *relationship* between an **outcome** variable *y* and an **explanatory/predictor** variable *x*
+
+### [*y* as a function of *x*]{.underline}
+
+## Types of regression
+
+in linear regression *y* is numerical and *x* is either numerical or categorical
+
+-   *simple* linear regression: explanatory variable is numerical.
+
+-   Linear regression: explanatory variable will be categorical.
+
+    ::: callout-note
+    basic regression has one *x,* multiple regression has more than one *x*
+    :::
+
+## Example from [Modern Dive](https://moderndive.com/5-regression.html):
+
+### is 'Beauty' an effect on teacher score?
+
+```{r}
+evals <- read_csv("https://www.openintro.org/stat/data/evals.csv")
+```
+
+## We can start with EDA
+
+### Teaching score as a function of beauty score
+
+lets build this together
+
+```{r}
+#| echo: false
+#| eval: false
+
+
+
+evals <- read_csv("https://www.openintro.org/stat/data/evals.csv")
+
+ggplot(evals, aes(x = bty_avg, y = score)) +
+  geom_point() +
+  labs(x = "Beauty Score", y = "Teaching Score", 
+       title = "Relationship of teaching and beauty scores") +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+```{r}
+#| echo: false
+#| eval: false
+
+evals %>% group_by(bty_avg) %>% summarise(mean = mean(score))
+evals %>% summarise(correlation= cor(score, bty_avg))
+
+
+ggplot(evals, aes(x = bty_avg, y = score)) +
+  geom_point() +
+  labs(x = "Beauty Score", 
+       y = "Teaching Score",
+       title = "Scatterplot of relationship of teaching and beauty scores")
+
+
+ggplot(evals, aes(x = bty_avg, y = score)) +
+  geom_jitter() +
+  labs(x = "Beauty Score", y = "Teaching Score",
+       title = "Scatterplot of relationship of teaching and beauty scores")
+
+
+# add line
+
+ggplot(evals, aes(x = bty_avg, y = score)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Beauty Score", y = "Teaching Score",
+       title = "Scatterplot of relationship of teaching and beauty scores")
+```
+
+## quick data analysis
+
+Where does that blue line come from?
+
+A regression line is a *visual summary of the relationship between two numerical variables*
+
+> y = a + bx
+
+a = intercept coefficient, or what *y* is when *x* = 0
+
+b = slope coefficient, or what the increase in *y* is for every increase in *x*
+
+## 
+
+For some reason, in linear regression we use different symbols
+
+> [ŷ]{.smallcaps} = β~1~X~1~ + β~0~,
+
+ŷ = prediction that our line is making. i.e. an estimate of what y will be...
+
+β0 = intercept coefficient; what [ŷ is]{.smallcaps} when x=0.
+
+β1 is slope coefficient
+
+## fitting a linear model
+
+##### We can obtain the values of the intercept β0 and the slope for bty_avg β1 by outputting a linear regression table.
+
+##### The lm() function that "fits" the linear regression model is typically used as lm(y \~ x, data = data_frame_name)
+
+## 
+
+```{r}
+score_model <- lm(score ~ bty_avg, data = evals)
+# score_model
+#summary(score_model)
+#broom::tidy(score_model)
+# get_regression_table(score_model)
+```
+
+###### 
+
+R results...
+
+We can read the result as f*or every increase in a beauty unit of 1, there is an avg increase in score of .067*
+
+-   An instructor with a beauty score of 0 is predicted to have a teaching score of 3.88...Can someone have a beauty score of 0?
+
+-   the bty_avg tells us the relationship between outcome and explanatory variables
+
+## 
+
+Lets look at the 21st person in dataset
+
+```{r, echo = FALSE}
+#| echo: false
+#| eval: false
+ evals[21,]
+ 
+ 
+
+```
+
+## 
+
+![](https://d33wubrfki0l68.cloudfront.net/62258dea1e7242c52e2378e0b9e0b9a9be206192/7efa0/ismaykim_files/figure-html/numxplot5-1.png)
+
+#### red square = predicted value (y =b0+b1⋅x=3.88+0.067∗7.333= 4.369
+
+#### arrow = the residual (the 'lack of fit'). here it is 4.9-4.369=.53
+
+## there are a few ways to get the residuals:
+
+1.  
+
+```{r}
+regression_points <- get_regression_points(score_model) #from moderndive package
+regression_points
+
+```
+
+## residuals
+
+-   we want the residuals to be as small as possible
+
+-   "The estimated regression coefficients, β~0~ & β~1~ are those that minimise the sum of the squared residuals"
+
+-   How we find these numbers depends on the method we use...
+
+## looking at how good our model is
+
+```{r}
+summary(score_model)
+```
+
+## what does that whole mess mean?
+
+R^2^ is the coefficient of determination. It is the proportion of the *variance* in the **outcome variable** that can be accounted for by the **predictor**. So in this case, the fact that we have obtained R^2^ = .035 means that the predictor explains 3.5% of the variance in the outcome
+
+when R^2^ = 1, the regression model makes no errors in predicting the data.
+
+## What if our explanatory variable x is categorical?
+
+looking at gapminder dataset to see how life expectancy is differs between regions
+
+1.  A numerical outcome variable y (a country's life expectancy) and
+
+2.  A single categorical explanatory variable x (the continent that the country is a part of).
+
+## 
+
+Gapminder data EDA
+
+```{r}
+#| echo: false
+
+library(gapminder)
+gapminder2007 <- gapminder %>% filter(year == "2007")
+
+glimpse(gapminder2007)
+
+ggplot(gapminder2007, aes(x = lifeExp)) +
+  geom_histogram(binwidth = 5, color = "white") +
+  labs(x = "Life expectancy", y = "Number of countries",
+       title = "Histogram of distribution of worldwide life expectancies")
+```
+
+## 
+
+```{r}
+ggplot(gapminder2007, aes(x = lifeExp)) +
+  geom_histogram(binwidth = 5, color = "white") +
+  labs(x = "Life expectancy", y = "Number of countries",
+       title = "Histogram of distribution of worldwide life expectancies")
+```
+
+## What if we looked by continent:
+
+```{r, echo= FALSE}
+ggplot(gapminder2007, aes(x = lifeExp)) +
+  geom_histogram(binwidth = 5, color = "white") +
+  labs(x = "Life expectancy", 
+       y = "Number of countries",
+       title = "Histogram of distribution of worldwide life expectancies") + facet_wrap(~ continent, nrow = 2)
+```
+
+## 
+
+```{r}
+ggplot(gapminder2007, aes(x = continent, y = lifeExp)) +
+  geom_boxplot() +
+  labs(x = "Continent", y = "Life expectancy",
+       title = "Life expectancy by continent")
+```
+
+## 
+
+Let's compute the median and mean life expectancy for each continent
+
+we can see that continent is a *factor*.... explore the data
+
+```{r}
+ gapminder2007 %>%
+  group_by(continent) %>%
+  summarize(median = median(lifeExp), 
+            mean = mean(lifeExp))
+```
+
+## Another way to look at the results
+
+| **continent** | **mean** | **Difference compared to Africa** |
+|:--------------|---------:|----------------------------------:|
+| Africa        |     54.8 |                               0.0 |
+| Americas      |     73.6 |                              18.8 |
+| Asia          |     70.7 |                              15.9 |
+| Europe        |     77.6 |                              22.8 |
+| Oceania       |     80.7 |                              25.9 |
+
+## Categorical ..?
+
+Last time we used "simple" linear regression. Now, we can't. We don't have a 'best fit' line but rather *differences relative to a baseline for comparison*.
+
+```{r}
+lifeExp_model <- lm(lifeExp ~ continent, data = gapminder2007)
+#get_regression_table(lifeExp_model)
+broom::tidy(lifeExp_model)
+
+```
+
+### what is going on in this table
+
+### 
+
+### 1A(x)= dummy variable. it is 0 if country isn't in A and 1 if it is....
+
+''
+
+But if country is in America then...
+
+![](images/eq4.png)
+
+which is the mean life expectancy for countries in the Americas of 73.6 years. Note the "offset from the baseline for comparison" is +18.8 years.
+
+## 
+
+When x is a numerical explanatory variable the interpretation is of a "slope" coefficient, but when x is categorical the meaning is a little trickier. They are offsets relative to the baseline.
+
+## 
+
+What do fitted values yˆ and residuals y−yˆ correspond to when the explanatory variable x is categorical?
+
+```{r}
+regression_points <- get_regression_points(lifeExp_model, ID = "country")
+regression_points
+```
+
+# another example
+
+```{r, eval=FALSE}
+spotify_songs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-21/spotify_songs.csv')
+
+
+small <- spotify_songs %>% select(track_popularity, danceability:tempo)
+
+#fit <- glm(as.integer(as.factor(playlist_genre)) ~ ., data=small)
+#fit %>% broom::tidy()
+
+fit <- lm(track_popularity ~ ., data=small)
+
+library(broom)
+
+fit_sum <- fit %>% tidy(conf.int = TRUE)
+
+
+fit_sum %>% arrange(-estimate)
+
+fit_sum %>%  ggplot(aes(estimate, term)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
+
+
+fit_sum %>% filter(term != "(Intercept)") %>% 
+  mutate(term = fct_reorder(term, estimate)) %>% 
+  ggplot(aes(estimate, term)) +
+  geom_point(size = 2) +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_vline(xintercept = 0) +
+  labs(title = "what measurements affect popularity ") 
+
+
+fit_sum %>% filter(term != "(Intercept)") %>% 
+  mutate(term = fct_reorder(term, estimate),
+         above = case_when(estimate > 0 ~ "above",
+                           TRUE ~ "below")) %>% 
+  ggplot(aes(estimate, term, color=above)) +
+  geom_point(size = 2) +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_vline(xintercept = 0) + 
+  labs(title = "what measurements affect variability", 
+       subtitle = "looks like dance and acoustic is most likely to give positive") +
+  theme(legend.position = "none")
+```
